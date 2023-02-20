@@ -94,12 +94,7 @@ li {
   margin-right: 19px;
 }
 
-.circle_in_the_square {
-  width: 20px;
-  height: 20px;
-  background-color: var(--tertiary_color);
-  border-radius: 100%;
-}
+
 .shadow {
   box-shadow: 0px 0px 20px 6px rgba(255, 85, 89, 0.1);
 }
@@ -107,3 +102,17 @@ li {
 /* p {
   color: var(--primary_color);
 } */
+
+.primary_color {
+  background-color: var(--primary_color);
+
+}
+
+.secondary_color {
+  background-color: var(--secondary_color);
+
+}
+
+.tertiary_color {
+  background-color: var(--tertiary_color);
+}

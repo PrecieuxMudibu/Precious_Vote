@@ -4,3 +4,10 @@
     justify-content: center;
     align-items: center;
 }
+
+.circle_in_the_square {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+  }
+

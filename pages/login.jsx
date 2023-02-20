@@ -4,6 +4,7 @@ import logo from '../public/images/test.png';
 import login from '../styles/login.module.css';
 import { Icon } from '@iconify/react';
 import { Quality_Item } from "@/components/index";
+import Link from "next/link";
 
 export default function Login () {
 
@@ -34,7 +35,6 @@ export default function Login () {
                 <h1 className={login.header__title}>Content de vous revoir</h1>
             </header>
 
-            {/* <main className={login.main}> */}
             <main className={mainClassName}>
                 <form>
                     <label className="email_group">
@@ -55,7 +55,7 @@ export default function Login () {
 
                     <div className={login.other}>
                         <button className="button_primary">Se connecter</button>     
-                        <p>Vous n'avez de compte</p>
+                        <Link href='/register'><p>Vous n'avez de compte</p></Link> 
                     </div>
                 </form>
 
@@ -65,9 +65,9 @@ export default function Login () {
 
             <footer>
                 <ul className={login.qualities_group}>
-                    <Quality_Item quality="Fiabilité" />
-                    <Quality_Item quality="Simplicité" />
-                    <Quality_Item quality="Rapidité" />
+                    <Quality_Item quality="Fiabilité" color="primary_color"/>
+                    <Quality_Item quality="Simplicité" color="secondary_color" />
+                    <Quality_Item quality="Rapidité" color="tertiary_color" />
                         
 
                         
