@@ -23,11 +23,42 @@
   display: flex;  
   justify-content: space-between;
   color: var(--primary_color);
-
 }
 
 .header__nav > ul {
   width:426px;
   display: flex;
   justify-content: space-between;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.main > div {
+  position: relative;
+  right: 50px;
+}
+
+.section_text {
+  padding-bottom: 100px;
+  position: relative;
+  bottom: 20px;
+  right: 130px;
+}
+
+.section_text ul {
+  padding-left: 30px;
+  line-height: 30px;
+}
+
+.main li {
+  list-style: disc;
+}
+
+.main:last-child {
+  margin-top: 20px;
 }

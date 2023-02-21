@@ -49,17 +49,38 @@ export default function Home() {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/tarifs" className="link">
+                            <Link
+                                href="/tarifs"
+                                className={
+                                    router.pathname === '/tarifs'
+                                        ? 'link active'
+                                        : 'link'
+                                }
+                            >
                                 Tarifs
                             </Link>
                         </li>
                         <li>
-                            <Link href="/testimony" className="link">
+                            <Link
+                                href="/testimonies"
+                                className={
+                                    router.pathname === '/testimonies'
+                                        ? 'link active'
+                                        : 'link'
+                                }
+                            >
                                 Témoignages
                             </Link>
                         </li>
                         <li>
-                            <Link href="/contact" className="link">
+                            <Link
+                                href="/contact"
+                                className={
+                                    router.pathname === '/contact'
+                                        ? 'link active'
+                                        : 'link'
+                                }
+                            >
                                 Contact
                             </Link>
                         </li>
@@ -68,12 +89,13 @@ export default function Home() {
                     <button className="button_primary">Se connecter</button>
                 </nav>
             </header>
+
             <main className={styles.main}>
                 <div>
                     <Image src={left_image} alt="Fais ton choix" width={147} />
                 </div>
 
-                <section>
+                <section className={styles.section_text}>
                     <h1>Créez votre vote en ligne maintenant</h1>
                     <ul>
                         <li>Gestion simple des élections</li>
@@ -83,8 +105,9 @@ export default function Home() {
                             souris
                         </li>
                     </ul>
-                    <button>Commencer</button>
+                    <button className='button_primary'>Commencer</button>
                 </section>
+
                 <section>
                     <Image
                         src={make_your_choice}
