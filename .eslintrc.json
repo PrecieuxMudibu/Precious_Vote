@@ -1,5 +1,22 @@
 {
-  "extends": "next/core-web-vitals",
-  "react/no-unescaped-entities": ["enabled", { "forbid": "Array<string>" }]
-
+  "root": true,
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 13,
+    "sourceType": "module"
+  },
+  "extends": ["eslint:recommended", "prettier", "plugin:react/recommended"],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "rules": {
+    "no-console": "error",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/no-unescaped-entities": "off"
+  }
 }

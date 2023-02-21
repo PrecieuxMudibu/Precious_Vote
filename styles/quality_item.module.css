@@ -1,13 +1,11 @@
-
 .qualities_item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .circle_in_the_square {
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-  }
-
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+}
