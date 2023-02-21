@@ -3,9 +3,9 @@
 :root {
   --primary_color: #3d4147;
   --secondary_color: #ff5559;
+  --tertiary_color: #ffc700;
   --pink_light: #fffbec;
   --white: #ffffff;
-  --tertiary_color: #ffc700;
   --grey: #7d7f81;
   --grey_shadow: #f4f2eb;
   --sky_blue: #00e1ff;
@@ -13,6 +13,7 @@
   --font: 'Inter', sans-serif;
 
   --first_title_size: 30px;
+  --menu_size: 20px;
   --paragraph_size: 16px;
 
   --medium_weight: 500;
@@ -96,10 +97,6 @@ li {
   box-shadow: 0px 0px 20px 6px rgba(255, 85, 89, 0.1);
 }
 
-/* p {
-  color: var(--primary_color);
-} */
-
 .primary_color {
   background-color: var(--primary_color);
 }
@@ -110,4 +107,13 @@ li {
 
 .tertiary_color {
   background-color: var(--tertiary_color);
+}
+
+.link {
+  color: var(--primary_color);
+  text-decoration: none;
+}
+
+.active {
+  font-weight: var(--bold_weight);
 }

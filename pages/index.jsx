@@ -1,12 +1,14 @@
 import Head from 'next/head';
 import styles from '../styles/index.module.css';
-import Link from 'next/link';
 import Image from 'next/image';
 import logo from '../public/images/test.png';
 import make_your_choice from '../public/images/make_your_choice.png';
 import left_image from '../public/images/left_image.png';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+    const router = useRouter();
     return (
         <>
             <Head>
@@ -32,12 +34,39 @@ export default function Home() {
                     <p className={styles.header__text}>jevote</p>
                 </div>
 
-                <ul>
-                    <li>Tarifs</li>
-                    <li>Témoignages</li>
-                    <li>Contact</li>
-                    <button>Se connecter</button>
-                </ul>
+                <nav className={styles.header__nav}>
+                    <ul>
+                        <li>
+                            <Link
+                                href="/"
+                                className={
+                                    router.pathname === '/'
+                                        ? 'link active'
+                                        : 'link'
+                                }
+                            >
+                                A propos
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/tarifs" className="link">
+                                Tarifs
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/testimony" className="link">
+                                Témoignages
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/contact" className="link">
+                                Contact
+                            </Link>
+                        </li>
+                    </ul>
+
+                    <button className="button_primary">Se connecter</button>
+                </nav>
             </header>
             <main className={styles.main}>
                 <div>
@@ -45,7 +74,7 @@ export default function Home() {
                 </div>
 
                 <section>
-                    <h1>Crééez votre vote en ligne maintenant</h1>
+                    <h1>Créez votre vote en ligne maintenant</h1>
                     <ul>
                         <li>Gestion simple des élections</li>
                         <li>Sécurité et protection des données maximales</li>
