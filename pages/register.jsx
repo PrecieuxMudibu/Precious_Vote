@@ -1,13 +1,14 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import logo from '../public/images/test.png'
-import styles from '../styles/register.module.css'
-import { Icon } from '@iconify/react'
-import { Quality_Item } from '@/components/index'
-import Link from 'next/link'
+import Head from 'next/head';
+import Image from 'next/image';
+import logo from '../public/images/test.png';
+import styles from '../styles/register.module.css';
+import { Icon } from '@iconify/react';
+import { Quality_Item } from '@/components/index';
+import Link from 'next/link';
 
-export default function Register () {
-    const mainClassName = `${styles.main} shadow`
+export default function Register() {
+    const logo_group_class_name = `${styles.header_logo_group} link`;
+    const main_class_name = `${styles.main} shadow`;
 
     return (
         <>
@@ -22,20 +23,29 @@ export default function Register () {
 
                 <header className={styles.header}>
                     <div className={styles.header_logo_group}>
-                        <Image
+                        <Link href="/" className={logo_group_class_name}>
+                            <Image
+                                src={logo}
+                                alt="Picture of the author"
+                                width={40}
+                                height={40}
+                            />
+                            <p className={styles.header__text}>jevote</p>
+                        </Link>
+                        {/* <Image
                             src={logo}
                             alt="Picture of the author"
                             width={40}
                             height={40}
                         />
-                        <p className={styles.header__text}>jevote</p>
+                        <p className={styles.header__text}>jevote</p> */}
                     </div>
                     <h1 className={styles.header__title}>
                         Content de vous revoir
                     </h1>
                 </header>
 
-                <main className={mainClassName}>
+                <main className={main_class_name}>
                     <form>
                         <label className="email_group">
                             <span className="group_label">Votre nom</span>
@@ -88,7 +98,7 @@ export default function Register () {
                             <button className="button_primary">
                                 S'inscrire
                             </button>
-                            <Link href="/login">
+                            <Link href="/login" className="link">
                                 <p>Vous avez déjà un compte ?</p>
                             </Link>
                         </div>
@@ -113,5 +123,5 @@ export default function Register () {
                 </footer>
             </div>
         </>
-    )
+    );
 }

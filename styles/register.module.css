@@ -14,6 +14,7 @@
     font-size: 20px;
     color: var(--primary_color);
     font-weight: bold;
+    margin-left: 15px;
   }
   
   .header_logo_group {

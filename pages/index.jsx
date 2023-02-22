@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 export default function Home() {
+    const logo_group_class_name = `${styles.header_logo_group} link`;
     const router = useRouter();
     return (
         <>
@@ -25,13 +26,15 @@ export default function Home() {
             </Head>
             <header className={styles.header}>
                 <div className={styles.header_logo_group}>
-                    <Image
-                        src={logo}
-                        alt="Picture of the author"
-                        width={40}
-                        height={40}
-                    />
-                    <p className={styles.header__text}>jevote</p>
+                    <Link href="/" className={logo_group_class_name}>
+                        <Image
+                            src={logo}
+                            alt="Picture of the author"
+                            width={40}
+                            height={40}
+                        />
+                        <p className={styles.header__text}>jevote</p>
+                    </Link>
                 </div>
 
                 <nav className={styles.header__nav}>
@@ -85,8 +88,9 @@ export default function Home() {
                             </Link>
                         </li>
                     </ul>
-
-                    <button className="button_primary">Se connecter</button>
+                    <Link href="/login">
+                        <button className="button_primary">Se connecter</button>
+                    </Link>
                 </nav>
             </header>
 
@@ -105,7 +109,9 @@ export default function Home() {
                             souris
                         </li>
                     </ul>
-                    <button className='button_primary'>Commencer</button>
+                    <Link href="/">
+                        <button className="button_primary">Commencer</button>
+                    </Link>
                 </section>
 
                 <section>
