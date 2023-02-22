@@ -9,6 +9,7 @@ export default function Left_Section() {
     return (
             <nav>
                 <Logo />
+                
                 <ul>
                     <li>
                         <Link
