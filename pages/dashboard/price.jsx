@@ -11,8 +11,7 @@ export default function Price() {
                     <link rel="icon" href="/favicon.ico" />
                 </Head>
                 <main className={styles.main}>
-
-                <Left_Section />
+                    <Left_Section />
                 </main>
             </div>
         </>
