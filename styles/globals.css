@@ -13,12 +13,13 @@
   --font: 'Inter', sans-serif;
 
   --first_title_size: 30px;
+  --second_title_size: 22px;
   --menu_size: 20px;
   --paragraph_size: 16px;
 
   --medium_weight: 500;
   --bold_weight: bold;
-
+  
   --radius: 5px;
 }
 
@@ -38,7 +39,13 @@ body {
 
 h1 {
   color: var(--primary_color);
-  font-size: first_title_size;
+  font-size: var(--first_title_size);
+}
+
+h2 {
+  color: var(--primary_color);
+  font-size: var(--second_title_size);
+  font-weight: var(--medium_weight);
 }
 
 .group_label {
@@ -114,6 +121,30 @@ li {
   text-decoration: none;
 }
 
+.left_section_link {
+  color: var(--pink_light);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 14px 30px;
+}
+
+.left_section_link--active {
+  background-color: var(--pink_light);
+  border-radius: 40px;
+  color: var(--primary_color);
+}
+
+.left_section_link_icon {
+  color: var(--pink_light);
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.left_section_link_icon--active {
+  color: var(--primary_color);
+}
 .active {
   font-weight: var(--bold_weight);
 }

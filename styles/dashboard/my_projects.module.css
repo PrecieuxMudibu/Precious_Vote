@@ -1,0 +1,21 @@
+.page {
+    height: 100vh;
+    
+}
+
+.main {
+    display: flex;
+}
+
+.main > nav {
+    height: 100vh;
+    background-color: var(--primary_color);
+    color: var(--white);
+    width:234px;
+    padding: 50px 0 80px 0;
+    border-radius: 0 40px 40px 0;
+}
+
+.main > nav > ul {
+    margin: 60px 0 180px 0;
+}
