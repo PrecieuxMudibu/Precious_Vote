@@ -6,15 +6,12 @@ import { useRouter } from 'next/router';
 
 export default function Logo() {
     const router = useRouter();
-    // router.pathname === '/dashboard/my_projects'
-    //                                 ? 'left_section_link left_section_link--active'
-    //                                 : 'left_section_link'
+    const dashboard_regex = /\/dashboard\/[a-z_]+/;
 
-    // `${styles.header_logo_group} link`;
-    const logo_group_class_name =
-        router.pathname === '/dashboard/my_projects'
-            ? `left_section_logo`
-            : styles.header_logo_group;
+    // Test if the route.pathname begin with "/dashboard/" and have another letter after that
+    const logo_group_class_name = dashboard_regex.test(router.pathname)
+        ? `left_section_logo`
+        : styles.header_logo_group;
 
     return (
         <Link href="/" className={logo_group_class_name}>

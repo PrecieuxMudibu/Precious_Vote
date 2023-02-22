@@ -42,7 +42,6 @@ export default function Left_Section() {
                     >
                         <Icon
                             icon="ic:baseline-attach-money"
-                            // className="left_section_link_icon left_section_link_icon--active"
                             className={
                                 router.pathname === '/dashboard/price'
                                     ? 'left_section_link_icon left_section_link_icon--active'
