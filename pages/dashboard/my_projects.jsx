@@ -3,6 +3,7 @@ import styles from '../../styles/dashboard/my_projects.module.css';
 import logo from '../../public/images/test.png';
 import Image from 'next/image';
 import Left_Section from '../../components/left_section';
+import { Icon } from '@iconify/react';
 
 export default function My_Projects() {
     return (
@@ -15,7 +16,17 @@ export default function My_Projects() {
                 <Left_Section />
 
                 <section>
-                    <h1>Vos projets</h1>
+                    <div className={styles.title_and_search_bar}>
+                        <h1>Vos projets</h1>
+                        <div>
+                            <Icon icon="ic:outline-search" className="icon" />
+                            <input
+                                type="email"
+                                placeholder="Recherchez votre projet ici"
+                            />
+                        </div>
+                    </div>
+
                     <div>
                         <div className="election_card">
                             <div>
