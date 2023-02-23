@@ -1,10 +1,23 @@
 import Logo from './logo';
 import Link from 'next/link';
+// import styles from '../styles/left_section.module.css';
 import { useRouter } from 'next/router';
 import { Icon } from '@iconify/react';
 
 export default function Left_Section() {
     const router = useRouter();
+
+    function link_get_active_class_name_if_router_path_name(route) {
+        if (router.pathname === route) {
+            return 'left_section_link left_section_link--active';
+        } else return 'left_section_link';
+    }
+
+    function icon_get_active_class_name_if_router_path_name(route) {
+        if (router.pathname === route) {
+            return 'left_section_link_icon left_section_link_icon--active';
+        } else return 'left_section_link_icon';
+    }
 
     return (
         <nav>
@@ -14,19 +27,15 @@ export default function Left_Section() {
                 <li>
                     <Link
                         href="/dashboard/my_projects"
-                        className={
-                            router.pathname === '/dashboard/my_projects'
-                                ? 'left_section_link left_section_link--active'
-                                : 'left_section_link'
-                        }
+                        className={link_get_active_class_name_if_router_path_name(
+                            '/dashboard/my_projects'
+                        )}
                     >
                         <Icon
                             icon="fluent:vote-24-filled"
-                            className={
-                                router.pathname === '/dashboard/my_projects'
-                                    ? 'left_section_link_icon left_section_link_icon--active'
-                                    : 'left_section_link_icon'
-                            }
+                            className={icon_get_active_class_name_if_router_path_name(
+                                '/dashboard/my_projects'
+                            )}
                         />
                         Election
                     </Link>
@@ -34,19 +43,15 @@ export default function Left_Section() {
                 <li>
                     <Link
                         href="/dashboard/price"
-                        className={
-                            router.pathname === '/dashboard/price'
-                                ? 'left_section_link left_section_link--active'
-                                : 'left_section_link'
-                        }
+                        className={link_get_active_class_name_if_router_path_name(
+                            '/dashboard/price'
+                        )}
                     >
                         <Icon
                             icon="ic:baseline-attach-money"
-                            className={
-                                router.pathname === '/dashboard/price'
-                                    ? 'left_section_link_icon left_section_link_icon--active'
-                                    : 'left_section_link_icon'
-                            }
+                            className={icon_get_active_class_name_if_router_path_name(
+                                '/dashboard/price'
+                            )}
                         />
                         Prix
                     </Link>
@@ -54,15 +59,15 @@ export default function Left_Section() {
                 <li>
                     <Link
                         href="/dashboard/profile"
-                        className="left_section_link"
+                        className={link_get_active_class_name_if_router_path_name(
+                            '/dashboard/profile'
+                        )}
                     >
                         <Icon
                             icon="gg:profile"
-                            className={
-                                router.pathname === '/dashboard/profile'
-                                    ? 'left_section_link_icon left_section_link_icon--active'
-                                    : 'left_section_link_icon'
-                            }
+                            className={icon_get_active_class_name_if_router_path_name(
+                                '/dashboard/profile'
+                            )}
                         />
                         Profil
                     </Link>
