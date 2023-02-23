@@ -14,7 +14,9 @@ export default function Election_Card() {
             />
 
             <div className={styles.election_card__details}>
-                <h2 className={styles.election_card__name}>Comité G1 Economie ISC</h2>
+                <h2 className={styles.election_card__name}>
+                    Comité G1 Economie ISC
+                </h2>
                 <div className={styles.election_card__date}>
                     <p>Début</p>
                     <p>Fin</p>

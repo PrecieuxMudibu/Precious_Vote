@@ -3,6 +3,7 @@ import styles from '../../styles/dashboard/my_projects.module.css';
 import Left_Section from '../../components/left_section';
 import { Icon } from '@iconify/react';
 import Election_Card from '../../components/election_card';
+import Create_Election_Card from '../../components/create_election_card';
 
 export default function My_Projects() {
     return (
@@ -27,6 +28,10 @@ export default function My_Projects() {
                     </div>
 
                     <div className={styles.elections_group}>
+                        <Create_Election_Card />
+                        <Election_Card />
+                        <Election_Card />
+                        <Election_Card />
                         <Election_Card />
                         <Election_Card />
                         <Election_Card />
