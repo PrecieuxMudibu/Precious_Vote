@@ -124,30 +124,6 @@ li {
 }
 
 
-.left_section_link {
-  color: var(--pink_light);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  padding: 14px 30px;
-}
-
-.left_section_link--active {
-  background-color: var(--pink_light);
-  border-radius: 40px;
-  color: var(--primary_color);
-}
-
-.left_section_link_icon {
-  color: var(--pink_light);
-  width: 25px;
-  height: 25px;
-  margin-right: 10px;
-}
-
-.left_section_link_icon--active {
-  color: var(--primary_color);
-}
 .active {
   font-weight: var(--bold_weight);
 }

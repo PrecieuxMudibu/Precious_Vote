@@ -1,22 +1,22 @@
 import Logo from './logo';
 import Link from 'next/link';
-// import styles from '../styles/left_section.module.css';
+import styles from '../styles/left_section.module.css';
 import { useRouter } from 'next/router';
 import { Icon } from '@iconify/react';
 
 export default function Left_Section() {
-    const router = useRouter();
-
     function link_get_active_class_name_if_router_path_name(route) {
+        const router = useRouter();
         if (router.pathname === route) {
-            return 'left_section_link left_section_link--active';
-        } else return 'left_section_link';
+            return `${styles.left_section_link} ${styles.left_section_link_active}`;
+        } else return styles.left_section_link;
     }
 
     function icon_get_active_class_name_if_router_path_name(route) {
+        const router = useRouter();
         if (router.pathname === route) {
-            return 'left_section_link_icon left_section_link_icon--active';
-        } else return 'left_section_link_icon';
+            return `${styles.left_section_link_icon} ${styles.left_section_link_icon_active}`;
+        } else return styles.left_section_link_icon;
     }
 
     return (
@@ -74,10 +74,10 @@ export default function Left_Section() {
                 </li>
             </ul>
 
-            <Link href="/" className="left_section_link">
+            <Link href="/" className={styles.left_section_link}>
                 <Icon
                     icon="ic:round-logout"
-                    className="left_section_link_icon"
+                    className={styles.left_section_link_icon}
                 />
                 Déconnexion
             </Link>
