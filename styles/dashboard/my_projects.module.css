@@ -7,23 +7,9 @@
     display: flex;
 }
 
-.main > nav {
-    height: 100vh;
-    background-color: var(--primary_color);
-    color: var(--white);
-    width:18%;
-    padding: 50px 0 80px 0;
-    border-radius: 0 40px 40px 0;
-}
-
-.main > nav > ul {
-    margin: 60px 0 180px 0;
-}
-
 .main > section {
     width: 82%;
     padding: 40px 50px;
-
 }
 
 .title_and_search_bar {
@@ -37,7 +23,6 @@
     align-items: center;
     border: 1px solid rgb(255, 85, 89, .1);
     width: 535px;
-
     background-color: var(--white);
     border-radius: var(--radius);
     height: 55px;

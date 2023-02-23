@@ -20,7 +20,7 @@ export default function Left_Section() {
     }
 
     return (
-        <nav>
+        <nav className={styles.nav}>
             <Logo />
 
             <ul>
