@@ -6,7 +6,7 @@
     background-color: var(--white);
     border-radius: 15px;
     cursor: pointer;
-
+    border: 1px solid rgb(255, 85, 89, .1);
 }
 
 .election_card__details {
@@ -21,7 +21,7 @@
 }
 
 .election_card__date > p {
-    margin: 8px 0;
+    margin: 6px 0;
 }
 
 .election_status {

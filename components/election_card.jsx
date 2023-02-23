@@ -18,8 +18,8 @@ export default function Election_Card() {
                     Comité G1 Economie ISC
                 </h2>
                 <div className={styles.election_card__date}>
-                    <p>Début</p>
-                    <p>Fin</p>
+                    <p>Début : 19/11/2023</p>
+                    <p>Fin : 20/11/2023</p>
                 </div>
             </div>
 

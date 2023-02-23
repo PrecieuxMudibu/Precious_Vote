@@ -54,6 +54,6 @@
     display: grid;
     grid-template-columns: repeat(2, 48%);
     gap: 4%;
-    /* height: 72vh; */
+    height: 50vh;
     overflow-y: scroll;
 }

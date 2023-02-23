@@ -27,8 +27,9 @@ export default function My_Projects() {
                         </div>
                     </div>
 
+                    <Create_Election_Card />
+                    
                     <div className={styles.elections_group}>
-                        <Create_Election_Card />
                         <Election_Card />
                         <Election_Card />
                         <Election_Card />
