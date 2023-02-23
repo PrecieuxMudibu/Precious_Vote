@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import styles from '../../styles/dashboard/my_projects.module.css';
-import logo from '../../public/images/test.png';
-import Image from 'next/image';
 import Left_Section from '../../components/left_section';
 import { Icon } from '@iconify/react';
+import Election_Card from '../../components/election_card';
 
 export default function My_Projects() {
     return (
@@ -27,25 +26,16 @@ export default function My_Projects() {
                         </div>
                     </div>
 
-                    <div>
-                        <div className="election_card">
-                            <div>
-                                <Image
-                                    src={logo}
-                                    alt="Picture of the author"
-                                    width={40}
-                                    height={40}
-                                />
-                            </div>
-
-                            <div>
-                                <h2>Comité G1 Economie ISC</h2>
-                                <p>Début</p>
-                                <p>Fin</p>
-                            </div>
-
-                            <div></div>
-                        </div>
+                    <div className={styles.elections_group}>
+                        <Election_Card />
+                        <Election_Card />
+                        <Election_Card />
+                        <Election_Card />
+                        <Election_Card />
+                        <Election_Card />
+                        <Election_Card />
+                        <Election_Card />
+                        <Election_Card />
                     </div>
                 </section>
             </main>

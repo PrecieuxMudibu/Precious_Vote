@@ -47,3 +47,13 @@
 .title_and_search_bar > div > input {
     width: 100%;
 }
+
+
+
+.elections_group {
+    display: grid;
+    grid-template-columns: repeat(2, 48%);
+    gap: 4%;
+    height: 72vh;
+    overflow-y: scroll;
+}
