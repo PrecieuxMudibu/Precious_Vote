@@ -128,12 +128,7 @@ li {
   font-weight: var(--bold_weight);
 }
 
-.left_section_logo {
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 .left_section_logo > p {
   margin-left: 15px;
   color: var(--pink_light);

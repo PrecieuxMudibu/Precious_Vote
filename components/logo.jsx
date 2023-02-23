@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '../public/images/test.png';
-import styles from '../styles/login.module.css';
+import styles from '../styles/logo.module.css';
 import { useRouter } from 'next/router';
 
 export default function Logo() {
@@ -10,7 +10,7 @@ export default function Logo() {
 
     // Test if the route.pathname begin with "/dashboard/" and have another letter after that
     const logo_group_class_name = dashboard_regex.test(router.pathname)
-        ? `left_section_logo`
+        ? styles.left_section_logo
         : styles.header_logo_group;
 
     return (
