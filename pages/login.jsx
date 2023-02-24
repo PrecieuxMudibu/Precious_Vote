@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/login.module.css';
 import { Icon } from '@iconify/react';
-import { Quality_Item } from '@/components/index';
+import { Quality_Item } from '../components/index';
 import Link from 'next/link';
 import Logo from '../components/logo';
 

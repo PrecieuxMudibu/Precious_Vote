@@ -50,10 +50,26 @@ h2 {
   font-weight: var(--medium_weight);
 }
 
+
 .group_label {
   font-size: paragraph_size;
   color: var(--grey);
   font-weight: bold;
+}
+
+.input_group {
+  display: flex;
+  padding: 15px 17px;
+  border: 1px solid var(--primary_color);
+  border-radius: var(--radius);
+  margin: 15px 0 30px 0;
+  background-color: var(--white);
+
+}
+
+.input_group > input, textarea {
+  margin-left: 15px;
+  width: 100%;
 }
 
 .icon {
@@ -62,11 +78,15 @@ h2 {
   height: 25px;
 }
 
-input {
+input, textarea {
   font-size: var(--paragraph_size);
   font-weight: var(--medium_weight);
   border: none;
   outline: none;
+}
+
+textarea {
+  height: 150px;
 }
 
 input::placeholder {

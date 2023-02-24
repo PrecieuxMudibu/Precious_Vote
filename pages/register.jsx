@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Logo from '../components/logo';
 import styles from '../styles/register.module.css';
 import { Icon } from '@iconify/react';
-import { Quality_Item } from '@/components/index';
+import { Quality_Item } from '../components/index';
 import Link from 'next/link';
 
 export default function Register() {
@@ -29,7 +29,7 @@ export default function Register() {
                 <form>
                     <label className="email_group">
                         <span className="group_label">Votre nom</span>
-                        <div className={styles.input_group}>
+                        <div className="input_group">
                             <Icon icon="ic:round-email" className="icon" />
                             <input
                                 type="email"
@@ -40,7 +40,7 @@ export default function Register() {
 
                     <label className="password_group">
                         <span className="group_label">Votre email</span>
-                        <div className={styles.input_group}>
+                        <div className="input_group">
                             <Icon icon="jam:padlock-f" className="icon" />
                             <input
                                 type="password"
@@ -51,7 +51,7 @@ export default function Register() {
 
                     <label className="password_group">
                         <span className="group_label">Votre mot de passe</span>
-                        <div className={styles.input_group}>
+                        <div className="input_group">
                             <Icon icon="jam:padlock-f" className="icon" />
                             <input
                                 type="password"
@@ -63,7 +63,7 @@ export default function Register() {
                         <span className="group_label">
                             Confirmation de votre mot de passe
                         </span>
-                        <div className={styles.input_group}>
+                        <div className="input_group">
                             <Icon icon="jam:padlock-f" className="icon" />
                             <input
                                 type="password"

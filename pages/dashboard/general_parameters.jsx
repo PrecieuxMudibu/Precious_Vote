@@ -16,17 +16,71 @@ export default function My_Projects() {
                 <section>
                     <h1>Nouveau projet : Comité G1 Math-Info</h1>
                     <h2>Paramètres généraux</h2>
-                    <div>
-                        <label className="email_group">
-                            <span className="group_label">Votre email</span>
-                            <div className={styles.input_group}>
-                                <Icon icon="ic:round-email" className="icon" />
-                                <input
-                                    type="email"
-                                    placeholder="placide@gmail.com"
-                                />
-                            </div>
-                        </label>
+
+                    <div className={styles.columns}>
+                        <div>
+                            <label className="email_group">
+                                <span className="group_label">
+                                    Nom de votre élection
+                                </span>
+                                <div className="input_group">
+                                    <Icon
+                                        icon="ic:round-drive-file-rename-outline"
+                                        className="icon"
+                                    />
+                                    <input
+                                        type="text"
+                                        placeholder="placide@gmail.com"
+                                    />
+                                </div>
+                            </label>
+
+                            <label className="email_group">
+                                <span className="group_label">Description</span>
+                                <div className="input_group">
+                                    <Icon
+                                        icon="fluent:text-description-24-filled"
+                                        className="icon"
+                                    />
+                                    <textarea name="description"></textarea>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div>
+                            <label className="email_group">
+                                <span className="group_label">Début</span>
+                                <div className="input_group">
+                                    <Icon
+                                        icon="material-symbols:calendar-month"
+                                        className="icon"
+                                    />
+                                    <input
+                                        type="email"
+                                        placeholder="placide@gmail.com"
+                                    />
+                                </div>
+                            </label>
+
+                            <label className="email_group">
+                                <span className="group_label">Fin</span>
+                                <div className="input_group">
+                                    <Icon
+                                        icon="material-symbols:calendar-month"
+                                        className="icon"
+                                    />
+                                    <input
+                                        type="email"
+                                        placeholder="placide@gmail.com"
+                                    />
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div className={styles.buttons_group}>
+                        <button className="button_primary">Précédent</button>
+                        <button className="button_primary">Suivant</button>
                     </div>
                 </section>
             </main>
