@@ -26,9 +26,9 @@ export default function Login() {
 
             <main className={main_class_name}>
                 <form>
-                    <label className="email_group">
-                        <span className="group_label">Votre email</span>
-                        <div className={styles.input_group}>
+                    <label>
+                        <span>Votre email</span>
+                        <div className="input_group">
                             <Icon icon="ic:round-email" className="icon" />
                             <input
                                 type="email"
@@ -37,9 +37,9 @@ export default function Login() {
                         </div>
                     </label>
 
-                    <label className="password_group">
-                        <span className="group_label">Votre mot passe</span>
-                        <div className={styles.input_group}>
+                    <label>
+                        <span>Votre mot passe</span>
+                        <div className="input_group">
                             <Icon icon="jam:padlock-f" className="icon" />
                             <input
                                 type="password"

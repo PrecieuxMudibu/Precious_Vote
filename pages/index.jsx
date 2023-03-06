@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 export default function Home() {
     const logo_group_class_name = `${styles.header_logo_group} link`;
     const router = useRouter();
-    
+
     return (
         <>
             <Head>

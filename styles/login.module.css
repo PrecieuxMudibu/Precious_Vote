@@ -20,19 +20,6 @@
   border-radius: var(--radius);
 }
 
-.input_group {
-  display: flex;
-  padding: 15px 17px;
-  border: 1px solid var(--primary_color);
-  border-radius: var(--radius);
-  margin: 15px 0 30px 0;
-}
-
-.input_group > input {
-  margin-left: 15px;
-  width: 100%;
-}
-
 .other {
   display: flex;
   justify-content: space-between;

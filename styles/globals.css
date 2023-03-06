@@ -51,7 +51,7 @@ h2 {
 }
 
 
-.group_label {
+label > span {
   font-size: paragraph_size;
   color: var(--grey);
   font-weight: bold;
@@ -67,9 +67,10 @@ h2 {
 
 }
 
-.input_group > input, textarea {
+.input_group > input, textarea, select {
   margin-left: 15px;
   width: 100%;
+  background-color: var(--white);
 }
 
 .icon {
@@ -78,7 +79,7 @@ h2 {
   height: 25px;
 }
 
-input, textarea {
+input, textarea, select {
   font-size: var(--paragraph_size);
   font-weight: var(--medium_weight);
   border: none;
