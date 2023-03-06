@@ -28,7 +28,6 @@
 .qualities_group {
   margin: 40px auto auto;
   width: 534px;
-  border: Apx solid red;
   display: flex;
   justify-content: space-between;
 }

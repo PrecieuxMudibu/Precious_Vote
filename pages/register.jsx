@@ -27,8 +27,8 @@ export default function Register() {
 
             <main className={main_class_name}>
                 <form>
-                    <label className="email_group">
-                        <span className="group_label">Votre nom</span>
+                    <label>
+                        <span>Votre nom</span>
                         <div className="input_group">
                             <Icon icon="ic:round-email" className="icon" />
                             <input
@@ -38,8 +38,8 @@ export default function Register() {
                         </div>
                     </label>
 
-                    <label className="password_group">
-                        <span className="group_label">Votre email</span>
+                    <label>
+                        <span>Votre email</span>
                         <div className="input_group">
                             <Icon icon="jam:padlock-f" className="icon" />
                             <input
@@ -49,8 +49,8 @@ export default function Register() {
                         </div>
                     </label>
 
-                    <label className="password_group">
-                        <span className="group_label">Votre mot de passe</span>
+                    <label>
+                        <span>Votre mot de passe</span>
                         <div className="input_group">
                             <Icon icon="jam:padlock-f" className="icon" />
                             <input
@@ -59,10 +59,8 @@ export default function Register() {
                             />
                         </div>
                     </label>
-                    <label className="password_group">
-                        <span className="group_label">
-                            Confirmation de votre mot de passe
-                        </span>
+                    <label>
+                        <span>Confirmation de votre mot de passe</span>
                         <div className="input_group">
                             <Icon icon="jam:padlock-f" className="icon" />
                             <input
