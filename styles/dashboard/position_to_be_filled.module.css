@@ -1,0 +1,29 @@
+.page {
+    height: 100vh;  
+}
+
+.main {
+    display: flex;
+}
+
+.main > section {
+    width: 82%;
+    padding: 40px 50px;
+    
+}
+
+.number_of_post > div {
+    width: 140px;
+}
+
+
+.list_of_posts {
+    display: grid;
+    grid-template-columns: repeat(2, 48%);
+    gap: 4%;
+}
+
+.buttons_group {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import styles from '../../styles/dashboard/general_parameters.module.css';
+import styles from '../../styles/dashboard/position_to_be_filled.module.css';
 import { Left_Section } from '../../components/index';
 import { Icon } from '@iconify/react';
 
@@ -16,13 +16,31 @@ export default function Position_To_Be_Filled() {
                 <section>
                     <h1>Nouveau projet : Comité G1 Math-Info</h1>
                     <h2>Etape 2 : Postes à pourvoir</h2>
-
-                    <p>
-                        Vous souhaitez organiser des élections pour combien de
-                        postes ?
-                    </p>
-
                     <div>
+                        <p>
+                            Vous souhaitez organiser des élections pour combien
+                            de postes ?
+                        </p>
+
+                        <label className={styles.number_of_post}>
+                            <div className="input_group">
+                                <Icon
+                                    icon="material-symbols:confirmation-number"
+                                    className="icon"
+                                />
+                                <select
+                                    name="pays"
+                                    id="pays"
+                                >
+                                    <option value="france">1</option>
+                                    <option value="espagne">2</option>
+                                    <option value="espagne">3</option>
+                                </select>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div className={styles.list_of_posts}>
                         <label>
                             <span>Poste 1</span>
                             <div className="input_group">
@@ -33,19 +51,48 @@ export default function Position_To_Be_Filled() {
                                 <select name="pays" id="pays">
                                     <option value="france">France</option>
                                     <option value="espagne">Espagne</option>
-                                    <option value="italie">Italie</option>
-                                    <option value="royaume-uni">
-                                        Royaume-Uni
-                                    </option>
-                                    <option value="royaume-uni">
-                                        Equateur
-                                    </option>
-                                    <option value="canada">Canada</option>
-                                    <option value="etats-unis">
-                                        États-Unis
-                                    </option>
-                                    <option value="chine">Chine</option>
-                                    <option value="japon">Japon</option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <label>
+                            <span>Poste 2</span>
+                            <div className="input_group">
+                                <Icon
+                                    icon="eos-icons:role-binding"
+                                    className="icon"
+                                />
+                                <select name="pays" id="pays">
+                                    <option value="france">France</option>
+                                    <option value="espagne">Espagne</option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <label>
+                            <span>Poste 3</span>
+                            <div className="input_group">
+                                <Icon
+                                    icon="eos-icons:role-binding"
+                                    className="icon"
+                                />
+                                <select name="pays" id="pays">
+                                    <option value="france">France</option>
+                                    <option value="espagne">Espagne</option>
+                                </select>
+                            </div>
+                        </label>
+
+                        <label>
+                            <span>Poste 4</span>
+                            <div className="input_group">
+                                <Icon
+                                    icon="eos-icons:role-binding"
+                                    className="icon"
+                                />
+                                <select name="pays" id="pays">
+                                    <option value="france">France</option>
+                                    <option value="espagne">Espagne</option>
                                 </select>
                             </div>
                         </label>
