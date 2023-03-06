@@ -31,8 +31,6 @@
     border-radius: var(--radius);
   }
   
-
-  
   .other {
     display: flex;
     justify-content: space-between;

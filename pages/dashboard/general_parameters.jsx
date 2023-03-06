@@ -19,10 +19,8 @@ export default function My_Projects() {
 
                     <div className={styles.columns}>
                         <div>
-                            <label className="email_group">
-                                <span className="group_label">
-                                    Nom de votre élection
-                                </span>
+                            <label>
+                                <span>Nom de votre élection</span>
                                 <div className="input_group">
                                     <Icon
                                         icon="ic:round-drive-file-rename-outline"
@@ -35,8 +33,8 @@ export default function My_Projects() {
                                 </div>
                             </label>
 
-                            <label className="email_group">
-                                <span className="group_label">Description</span>
+                            <label>
+                                <span>Description</span>
                                 <div className="input_group">
                                     <Icon
                                         icon="fluent:text-description-24-filled"
@@ -48,8 +46,8 @@ export default function My_Projects() {
                         </div>
 
                         <div>
-                            <label className="email_group">
-                                <span className="group_label">Début</span>
+                            <label>
+                                <span>Début</span>
                                 <div className="input_group">
                                     <Icon
                                         icon="material-symbols:calendar-month"
@@ -62,8 +60,8 @@ export default function My_Projects() {
                                 </div>
                             </label>
 
-                            <label className="email_group">
-                                <span className="group_label">Fin</span>
+                            <label>
+                                <span>Fin</span>
                                 <div className="input_group">
                                     <Icon
                                         icon="material-symbols:calendar-month"
