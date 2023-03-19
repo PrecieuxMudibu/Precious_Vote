@@ -28,10 +28,7 @@ export default function Position_To_Be_Filled() {
                                     icon="material-symbols:confirmation-number"
                                     className="icon"
                                 />
-                                <select
-                                    name="pays"
-                                    id="pays"
-                                >
+                                <select name="pays" id="pays">
                                     <option value="france">1</option>
                                     <option value="espagne">2</option>
                                     <option value="espagne">3</option>

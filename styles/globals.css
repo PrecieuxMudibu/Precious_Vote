@@ -105,6 +105,17 @@ input::placeholder {
   cursor: pointer;
 }
 
+.button_secondary {
+  border: 1px solid var(--primary_color);
+  padding: 18px 39px;
+  font-size: var(--paragraph_size);
+  color: var(--primary_color);
+  font-weight: var(--bold_weight);
+  border-radius: var(--radius);
+  background-color: var(--white);
+  cursor: pointer;
+}
+
 ul {
   padding: 0;
 }
@@ -154,3 +165,14 @@ li {
   margin-left: 15px;
   color: var(--pink_light);
 }
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+table {
+  padding: 20px;
+}
+
+
