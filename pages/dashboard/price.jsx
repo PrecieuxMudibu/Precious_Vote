@@ -1,19 +1,9 @@
-import styles from '../../styles/dashboard/my_projects.module.css';
-import Head from 'next/head';
-import Left_Section from '../../components/left_section';
+import { Dashboard_Layout } from '../../components';
 
 export default function Price() {
     return (
-        <>
-            <div className={styles.page}>
-                <Head>
-                    <title>Login</title>
-                    <link rel="icon" href="/favicon.ico" />
-                </Head>
-                <main className={styles.main}>
-                    <Left_Section />
-                </main>
-            </div>
-        </>
+        <Dashboard_Layout page_title="Tarifs">
+            <h1>Tarifs</h1>
+        </Dashboard_Layout>
     );
 }

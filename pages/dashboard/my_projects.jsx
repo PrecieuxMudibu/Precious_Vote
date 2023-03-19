@@ -1,7 +1,10 @@
 import styles from '../../styles/dashboard/my_projects.module.css';
-import { Election_Card, Create_Election_Card } from '../../components/index';
+import {
+    Election_Card,
+    Create_Election_Card,
+    Dashboard_Layout,
+} from '../../components/index';
 import { Icon } from '@iconify/react';
-import Dashboard_Layout from '../../components/layouts/dashboard_layout';
 
 export default function My_Projects() {
     return (
