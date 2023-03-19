@@ -22,7 +22,7 @@ export default function Add_Candidates() {
                         Etape 3 : Rajoutez des candidats “Chef de promotion”
                     </h2>
 
-                    <div className="flex">
+                    <div className={styles.upload_and_list_section}>
                         <div>
                             <div className={styles.upload_file_section}>
                                 <Icon
@@ -49,7 +49,6 @@ export default function Add_Candidates() {
                                 <div>Nom</div>
                             </div>
 
-                            <Item number={1} picture={candidat_image} first_name="Belle Grace" name="Tshilanda"/>
                             <Item number={1} picture={candidat_image} first_name="Belle Grace" name="Tshilanda"/>
                             <Item number={1} picture={candidat_image} first_name="Belle Grace" name="Tshilanda"/>
                             <Item number={1} picture={candidat_image} first_name="Belle Grace" name="Tshilanda"/>

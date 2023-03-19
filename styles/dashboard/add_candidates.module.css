@@ -9,7 +9,12 @@
 .main > section {
     width: 82%;
     padding: 40px 50px;
-    
+}
+
+.upload_and_list_section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
 }
 
 .upload_file_section {
@@ -33,17 +38,8 @@
 }
 
 
-
-
-.buttons_group {
-    display: flex;
-    justify-content: space-between;
-}
-
-
-
 .list_of_candidates {
-    width: 60%;
+    width: 65%;
     background-color: var(--white);
     padding: 20px;
     border: 1px solid rgb(255, 85, 89, .1);
@@ -65,3 +61,9 @@
     text-align: left;
     width: 100%;
 }
+
+.buttons_group {
+    display: flex;
+    justify-content: space-between;
+}
+
