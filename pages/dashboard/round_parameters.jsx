@@ -2,6 +2,8 @@ import styles from '../../styles/dashboard/round_parameters.module.css';
 import { Dashboard_Layout } from '../../components/index';
 import { Icon } from '@iconify/react';
 import Modal_Layout from '../../components/layouts/modal_layout';
+import Image from 'next/image';
+import airtel_money from '../../public/images/mobile_money/airtel_money.png';
 
 export default function Round_Parameters() {
     return (
@@ -52,7 +54,67 @@ export default function Round_Parameters() {
                 </div>
 
                 <Modal_Layout>
-                    <h1>HELLO</h1>
+                    <h1>Paiement</h1>
+                    <p>Vous aller devoir payer 2$</p>
+
+                    <div className={styles.mobile_money_card_container}>
+                        <div className={styles.mobile_money_card}>
+                            <div className={styles.yyy}>
+                                <input
+                                    type="radio"
+                                    name="age"
+                                    value="moins15"
+                                    id="moins15"
+                                />
+                            </div>
+
+                            <div className={styles.yyy}>
+                                <Image src={airtel_money} height={125} />
+                            </div>
+                        </div>
+                        <div className={styles.mobile_money_card}>
+                            <div className={styles.yyy}>
+                                <input
+                                    type="radio"
+                                    name="age"
+                                    value="moins15"
+                                    id="moins15"
+                                />
+                            </div>
+
+                            <div className={styles.yyy}>
+                                <Image src={airtel_money} height={125} />
+                            </div>
+                        </div>
+                        <div className={styles.mobile_money_card}>
+                            <div className={styles.yyy}>
+                                <input
+                                    type="radio"
+                                    name="age"
+                                    value="moins15"
+                                    id="moins15"
+                                />
+                            </div>
+
+                            <div className={styles.yyy}>
+                                <Image src={airtel_money} height={125} />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.phone_number}>
+                        <span>
+                            Veuillez renseigner votre numéro de téléphone
+                        </span>
+                        <div className="input_group">
+                            <Icon
+                                icon="eos-icons:role-binding"
+                                className="icon"
+                            />
+                            <input name="phone_number" id="phone_number" />
+                        </div>
+                    </div>
+                    <button className="button_primary">Valider</button>
                 </Modal_Layout>
                 {/* <div
                     className="modal fade"

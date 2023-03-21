@@ -32,13 +32,5 @@ export default function Dashboard_Layout({ children, page_title }) {
                 ></script>
             </div>
         </>
-        // <UserContext.Provider value={{ user, setUser }}>
-        //     <div className="container">
-        //         <Navbar />
-        //         {children}
-        //         <div className="footer">ENSET &copy; 2022</div>
-        //     </div>
-        //     *
-        // </UserContext.Provider>
     );
 }

@@ -1,20 +1,24 @@
+import styles from '../../styles/layouts/modal_layout.module.css';
+import { Icon } from '@iconify/react';
+
 export default function Modal_Layout({ children }) {
     return (
         <div
-            className="modal fade"
+            className={`modal fade`}
             id="addClientModal"
             aria-labelledby="addClientModalLabel"
             aria-hidden="true"
         >
-            <div className="modal-dialog">
-                <div className="modal-content">
-                    <div className="modal-header">
+            <div className={`${styles} modal-dialog`}>
+                <div className={`modal-content ${styles.modal_container}`}>
+                    <div>
                         <button
                             type="button"
-                            className="btn-close"
                             data-bs-dismiss="modal"
                             aria-label="Close"
-                        ></button>
+                        >
+                            <Icon icon="ic:twotone-close" />
+                        </button>
                     </div>
                     <div className="modal-body">{children}</div>
                 </div>

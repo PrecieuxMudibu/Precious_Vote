@@ -1,3 +1,35 @@
 .two_rounds_or_not_question > div {
     width: 140px;
 }
+
+.phone_number {
+    width: 50%;
+    margin-top: 40px;
+    /* width: 100%; */
+}
+
+.mobile_money_card_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mobile_money_card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--white);
+    width: 218px;
+    height: 161px;
+    border: 1px solid var(--primary_color);
+    border-radius: 15px;
+    padding: 0 25px;
+}
+
+.mobile_money_card div > input[type="radio"] {
+    appearance: none; 
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary_color);
+    position: relative;
+}
