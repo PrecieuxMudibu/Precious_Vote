@@ -8,3 +8,8 @@
     padding: 0 70px;
     
 }
+
+.button_container {
+    display: flex;
+    justify-content: flex-start;
+}

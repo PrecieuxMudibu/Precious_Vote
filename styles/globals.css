@@ -12,6 +12,7 @@
   --grey: #7d7f81;
   --grey_shadow: #f4f2eb;
   --sky_blue: #00e1ff;
+  --success: #7CA745;
 
   --font: 'Inter', sans-serif;
 
@@ -174,6 +175,10 @@ li {
 
 table {
   padding: 20px;
+}
+
+.success {
+    background-color: var(--success);
 }
 
 

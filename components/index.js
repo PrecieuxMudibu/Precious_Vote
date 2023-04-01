@@ -5,6 +5,7 @@ import Left_Section from './left_section';
 import Logo from './logo';
 import Item from './item';
 import Dashboard_Layout from './layouts/dashboard_layout';
+import Success_Message from './success_message';
 
 export {
     Quality_Item,
@@ -13,5 +14,6 @@ export {
     Left_Section,
     Logo,
     Item,
-    Dashboard_Layout
+    Dashboard_Layout,
+    Success_Message
 };

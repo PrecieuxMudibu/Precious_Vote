@@ -11,7 +11,7 @@ export default function Modal_Layout({ children }) {
         >
             <div className={`${styles} modal-dialog`}>
                 <div className={`modal-content ${styles.modal_container}`}>
-                    <div>
+                    <div className={styles.button_container}>
                         <button
                             type="button"
                             data-bs-dismiss="modal"

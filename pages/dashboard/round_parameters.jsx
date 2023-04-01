@@ -1,9 +1,10 @@
 import styles from '../../styles/dashboard/round_parameters.module.css';
-import { Dashboard_Layout } from '../../components/index';
+import { Dashboard_Layout, Success_Message } from '../../components/index';
 import { Icon } from '@iconify/react';
 import Modal_Layout from '../../components/layouts/modal_layout';
 import Image from 'next/image';
 import airtel_money from '../../public/images/mobile_money/airtel_money.png';
+import m_pesa from '../../public/images/mobile_money/m_pesa.png';
 
 export default function Round_Parameters() {
     return (
@@ -83,7 +84,7 @@ export default function Round_Parameters() {
                             </div>
 
                             <div className={styles.yyy}>
-                                <Image src={airtel_money} height={125} />
+                                <Image src={m_pesa} height={125} />
                             </div>
                         </div>
                         <div className={styles.mobile_money_card}>
@@ -97,7 +98,7 @@ export default function Round_Parameters() {
                             </div>
 
                             <div className={styles.yyy}>
-                                <Image src={airtel_money} height={125} />
+                                <Image src={m_pesa} height={125} />
                             </div>
                         </div>
                     </div>
@@ -115,39 +116,8 @@ export default function Round_Parameters() {
                         </div>
                     </div>
                     <button className="button_primary">Valider</button>
+                    <Success_Message />
                 </Modal_Layout>
-                {/* <div
-                    className="modal fade"
-                    id="addClientModal"
-                    aria-labelledby="addClientModalLabel"
-                    aria-hidden="true"
-                >
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h1
-                                    className="modal-title fs-5"
-                                    id="addClientModalLabel"
-                                >
-                                    Add Client
-                                </h1>
-                                <button
-                                    type="button"
-                                    className="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                ></button>
-                            </div>
-                            <div className="modal-body">
-                                <form>
-                                    <div className="mb-3">
-                                        <h1>Hello</h1>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
             </section>
         </Dashboard_Layout>
     );
