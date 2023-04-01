@@ -1,5 +1,9 @@
 import styles from '../../styles/dashboard/round_parameters.module.css';
-import { Dashboard_Layout, Failed_Message, Success_Message } from '../../components/index';
+import {
+    Dashboard_Layout,
+    Failed_Message,
+    Success_Message,
+} from '../../components/index';
 import { Icon } from '@iconify/react';
 import Modal_Layout from '../../components/layouts/modal_layout';
 import Image from 'next/image';
