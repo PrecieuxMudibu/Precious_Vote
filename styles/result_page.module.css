@@ -1,0 +1,36 @@
+.result {
+    padding: 20px;
+    background-color: var(--white);
+    border: 1px solid var(--primary_color);
+    border-radius: 15px;
+}
+
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(3, 31.3%);
+    gap: 3%;
+}
+
+.filter {
+    width: 100%;
+}
+
+
+.thead {
+    color: var(--primary_color);
+    display: grid;
+    grid-template-columns: repeat(6, 5% 8% 20% 20% 20% 22%);
+    gap: 1%;
+}
+
+.thead  div {
+    font-weight: var(--bold_weight);
+    text-align: left;
+    width: 100%;
+}
+
+.buttons_group {
+    display: flex;
+    justify-content: space-between;
+}
