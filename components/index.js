@@ -7,6 +7,7 @@ import Item from './item';
 import Dashboard_Layout from './layouts/dashboard_layout';
 import Success_Message from './success_message';
 import Failed_Message from './failed_message';
+import Header from './header';
 
 export {
     Quality_Item,
@@ -17,5 +18,6 @@ export {
     Item,
     Dashboard_Layout,
     Success_Message,
-    Failed_Message
+    Failed_Message,
+    Header
 };
