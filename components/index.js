@@ -9,9 +9,11 @@ import Success_Message from './success_message';
 import Failed_Message from './failed_message';
 import Header from './header';
 import Footer from './footer';
+import Candidate_Card from './candidate_card';
 
 export {
     Quality_Item,
+    Candidate_Card,
     Create_Election_Card,
     Election_Card,
     Left_Section,
