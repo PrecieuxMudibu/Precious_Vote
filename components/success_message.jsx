@@ -17,7 +17,9 @@ export default function Success_Message() {
                 08/03/2023
             </p>
 
-            <button className="button_primary success">Valider</button>
+            <button className="button_primary success">
+                Revenir à l'accueil
+            </button>
         </div>
     );
 }
