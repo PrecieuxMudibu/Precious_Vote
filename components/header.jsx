@@ -18,6 +18,7 @@ export default function Header() {
                         alt="Picture of the author"
                         width={40}
                         height={40}
+                        className={styles.header_logo}
                     />
                     <p className={styles.header__text}>jevote</p>
                 </Link>
