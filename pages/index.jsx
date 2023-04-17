@@ -5,8 +5,18 @@ import make_your_choice from '../public/images/make_your_choice.png';
 import left_image from '../public/images/left_image.png';
 import Link from 'next/link';
 import { Header } from '../components';
+import { useEffect } from 'react';
+import { route_for_register } from '../public/routes';
 
 export default function Home() {
+
+    // const [test, setTest] =useState(process.env.NEXT_PUBLIC_API)
+    
+    useEffect(()=>{
+        // eslint-disable-next-line no-console
+        console.log('ROUTE URL',route_for_register)
+
+    }, [])
     return (
         <>
             <Head>
@@ -39,7 +49,7 @@ export default function Home() {
                             souris
                         </li>
                     </ul>
-                    <Link href="/">
+                    <Link href="/login">
                         <button className="button_primary">Commencer</button>
                     </Link>
                 </section>

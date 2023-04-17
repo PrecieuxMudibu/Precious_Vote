@@ -4,9 +4,13 @@ import { Icon } from '@iconify/react';
 import { Quality_Item } from '../components/index';
 import Link from 'next/link';
 import Logo from '../components/logo';
+import { applicationContext } from './_app';
+import { useContext } from 'react';
 
 export default function Login() {
     const main_class_name = `${styles.main} shadow`;
+    const { connectedUser, setConnectedUser } = useContext(applicationContext);
+
     return (
         <div className={styles.page}>
             <Head>
