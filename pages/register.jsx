@@ -12,7 +12,9 @@ import { applicationContext } from './_app';
 import { useContext } from 'react';
 
 export default function Register() {
-    const [user, setUser] = useState({});
+    const [user, set_user] = useState({});
+    const main_class_name = `${styles.main} shadow`;
+
     const { setConnectedUser } = useContext(applicationContext);
 
     const { push } = useRouter();
@@ -28,7 +30,6 @@ export default function Register() {
             axios
                 .post(route_for_register, user)
                 .then((response) => {
-                    console.log('response>>>', response);
                     localStorage.setItem(
                         'vote_app_token',
                         response.data.user.token
@@ -49,7 +50,7 @@ export default function Register() {
 
     function onChange(e) {
         const { name, value } = e.target;
-        setUser({ ...user, [name]: value });
+        set_user({ ...user, [name]: value });
     }
 
     return (
@@ -71,8 +72,7 @@ export default function Register() {
                 </h1>
             </header>
 
-            <main>
-                {/* <main className={main_class_name}> */}
+            <main className={main_class_name}>
                 <form>
                     <label>
                         <span>Votre nom</span>
@@ -82,7 +82,7 @@ export default function Register() {
                                 onChange={onChange}
                                 name="name"
                                 type="text"
-                                placeholder="placide@gmail.com"
+                                placeholder="Placide Bishiya"
                             />
                         </div>
                     </label>
@@ -108,7 +108,7 @@ export default function Register() {
                                 onChange={onChange}
                                 name="password"
                                 type="password"
-                                placeholder="placide@gmail.com"
+                                placeholder="m0tdepa$$eSup€R$Ecre7"
                             />
                         </div>
                     </label>
@@ -120,7 +120,7 @@ export default function Register() {
                                 onChange={onChange}
                                 name="confirm_password"
                                 type="password"
-                                placeholder="placide@gmail.com"
+                                placeholder="m0tdepa$$eSup€R$Ecre7"
                             />
                         </div>
                     </label>
