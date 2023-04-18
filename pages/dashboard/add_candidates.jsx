@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import candidat_image from '../../public/images/test.png';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { applicationContext } from '../_app';
 import styles from '../../styles/dashboard/add_candidates.module.css';
 import { Item, Dashboard_Layout } from '../../components/index';
@@ -17,13 +17,13 @@ export default function Add_Candidates() {
 
     function change_post(action) {
         if (action == 'next') {
-            if (number_of_post < election_to_create.candidates.length) {
+            if (number_of_post < election_to_create.candidates.length-1) {
                 set_number_of_post(number_of_post + 1);
-            }
+            } 
         }
 
         if (action == 'previous') {
-            if (number_of_post >= election_to_create.candidates.length) {
+            if (number_of_post >= election_to_create.candidates.length-1) {
                 set_number_of_post(number_of_post - 1);
             }
         }
@@ -40,13 +40,25 @@ export default function Add_Candidates() {
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
         console.log(jsonData);
         setCandidats([...jsonData]);
+
+        let election_to_create_copy = election_to_create;
+        election_to_create_copy.candidates[number_of_post].people = jsonData;
+
+        set_election_to_create({ ...election_to_create_copy });
     }
+
+    useEffect(() => {
+        console.log('election_to_create>>>', election_to_create);
+    }, [election_to_create]);
 
     return (
         <Dashboard_Layout page_title="Ajoutez des candidats">
             <section>
                 <h1>Nouveau projet : Comité G1 Math-Info</h1>
-                <h2>Etape 3 : Rajoutez des candidats “{election_to_create.candidates[number_of_post].post}”</h2>
+                <h2>
+                    Etape 3 : Rajoutez des candidats “
+                    {election_to_create.candidates[number_of_post].post}”
+                </h2>
 
                 <div className={styles.upload_and_list_section}>
                     <div>
@@ -122,7 +134,7 @@ export default function Add_Candidates() {
                             className="pointer"
                             onClick={() => change_post('previous')}
                         />
-                        Poste {number_of_post +1}
+                        Poste {number_of_post + 1}
                         <Icon
                             icon="ooui:previous-rtl"
                             className="pointer"
