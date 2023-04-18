@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import styles from '../styles/item.module.css';
 
 export default function Item({ number, picture, first_name, name }) {
@@ -6,7 +5,7 @@ export default function Item({ number, picture, first_name, name }) {
         <div className={styles.candidate_row}>
             <div>{number}</div>
             <div>
-                <Image src={picture} alt={`candidat `} width={55} height={55} />
+                <img src={`${picture}`} className={styles.image} alt={first_name} />
             </div>
             <div>{first_name}</div>
             <div>{name}</div>

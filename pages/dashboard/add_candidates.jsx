@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import candidat_image from '../../public/images/test.png';
 import { useContext, useEffect } from 'react';
 import { applicationContext } from '../_app';
 import styles from '../../styles/dashboard/add_candidates.module.css';
@@ -104,17 +103,19 @@ export default function Add_Candidates() {
                             <div>Nom</div>
                         </div>
 
-                        {election_to_create.candidates[
-                            number_of_post
-                        ].people.map((candidate, index) => (
-                            <Item
-                                key={index}
-                                number={index}
-                                picture={candidate.image}
-                                first_name={candidate.first_name}
-                                name={candidate.name}
-                            />
-                        ))}
+                        {election_to_create.candidates[number_of_post].people
+                            ? election_to_create.candidates[
+                                  number_of_post
+                              ].people.map((candidate, index) => (
+                                  <Item
+                                      key={index}
+                                      number={index}
+                                      picture={candidate.picture}
+                                      first_name={candidate.first_name}
+                                      name={candidate.name}
+                                  />
+                              ))
+                            : null}
                     </div>
                 </div>
 

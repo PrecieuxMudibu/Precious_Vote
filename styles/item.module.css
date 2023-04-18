@@ -10,3 +10,9 @@
 .candidate_row > div {
     margin: auto 0;
 }
+
+.image {
+    height: 70px;
+    width: 70px;
+    border-radius: var(--radius);
+}
