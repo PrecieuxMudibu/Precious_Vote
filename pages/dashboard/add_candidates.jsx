@@ -13,6 +13,7 @@ import { useRef } from 'react';
 export default function Add_Candidates() {
     const { election_to_create, set_election_to_create } =
         useContext(applicationContext);
+
     const [candidats, setCandidats] = useState([]);
     const [number_of_post, set_number_of_post] = useState(0);
 
@@ -49,6 +50,14 @@ export default function Add_Candidates() {
 
         set_election_to_create({ ...election_to_create_copy });
     }
+
+    useEffect(() => {
+        console.log('election_to_create-->', election_to_create);
+        console.log(
+            'e.people',
+            election_to_create.candidates[number_of_post].people
+        );
+    }, [election_to_create]);
 
     useEffect(() => {
         console.log('election_to_create>>>', election_to_create);
@@ -94,20 +103,20 @@ export default function Add_Candidates() {
                             <div>Prénom</div>
                             <div>Nom</div>
                         </div>
-                        {console.log(
-                            election_to_create.candidates[number_of_post].people
-                        )}
-                        {/* {election_to_create.candidates[number_of_post].people.map((candidate) => {
+
+                        {election_to_create.candidates[
+                            number_of_post
+                        ].people.map((candidate, index) => (
                             <Item
-                                number={1}
+                                key={index}
+                                number={index}
                                 picture={candidate.image}
                                 first_name={candidate.first_name}
                                 name={candidate.name}
-                            />;
-                        })} */}
+                            />
+                        ))}
                     </div>
                 </div>
-                {/* <div className={styles.list_of_posts}></div> */}
 
                 <div className={styles.buttons_group}>
                     <Link href="/dashboard/position_to_be_filled">

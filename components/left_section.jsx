@@ -82,7 +82,7 @@ export default function Left_Section() {
                 </li>
             </ul>
 
-            <button onClick={() => logout()}>
+            <button onClick={() => logout()} className={styles.button_logout}>
                 <Icon
                     icon="ic:round-logout"
                     className={styles.left_section_link_icon}

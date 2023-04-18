@@ -35,3 +35,10 @@
   .left_section_link_icon_active {
     color: var(--primary_color);
   }
+
+  .button_logout {
+    background: none;
+    border: none;
+    color:var(--pink_light);
+    padding: 14px 30px;
+  }

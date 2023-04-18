@@ -13,6 +13,7 @@ export default function General_Parameters() {
         const { name, value } = e.target;
         set_election_to_create({ ...election_to_create, [name]: value });
     }
+
     return (
         <Dashboard_Layout page_title="Paramètres généraux">
             <section>
