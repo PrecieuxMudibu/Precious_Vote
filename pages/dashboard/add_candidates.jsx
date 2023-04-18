@@ -8,6 +8,7 @@ import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import * as XLSX from 'xlsx';
 import Link from 'next/link';
+import { useRef } from 'react';
 
 export default function Add_Candidates() {
     const { election_to_create, set_election_to_create } =
@@ -15,15 +16,17 @@ export default function Add_Candidates() {
     const [candidats, setCandidats] = useState([]);
     const [number_of_post, set_number_of_post] = useState(0);
 
+    const inputFile = useRef();
+
     function change_post(action) {
         if (action == 'next') {
-            if (number_of_post < election_to_create.candidates.length-1) {
+            if (number_of_post < election_to_create.candidates.length - 1) {
                 set_number_of_post(number_of_post + 1);
-            } 
+            }
         }
 
         if (action == 'previous') {
-            if (number_of_post >= election_to_create.candidates.length-1) {
+            if (number_of_post >= election_to_create.candidates.length - 1) {
                 set_number_of_post(number_of_post - 1);
             }
         }
@@ -54,7 +57,7 @@ export default function Add_Candidates() {
     return (
         <Dashboard_Layout page_title="Ajoutez des candidats">
             <section>
-                <h1>Nouveau projet : Comité G1 Math-Info</h1>
+                <h1>Nouveau projet : {election_to_create.name}</h1>
                 <h2>
                     Etape 3 : Rajoutez des candidats “
                     {election_to_create.candidates[number_of_post].post}”
@@ -68,10 +71,18 @@ export default function Add_Candidates() {
                                 className={styles.upload_file_icon}
                             />
                             <p>Sélectionner un fichier Excel au format XLSX</p>
-                            <button className="button_secondary">
+                            <button
+                                onClick={() => inputFile.current.click()}
+                                className="button_secondary"
+                            >
                                 Choisir un fichier
                             </button>
-                            <input type="file" onInput={(e) => handleFile(e)} />
+                            <input
+                                className="hidden"
+                                ref={inputFile}
+                                type="file"
+                                onInput={(e) => handleFile(e)}
+                            />
                         </div>
                         <p>Télécharger un fichier exemple en cliquant ici.</p>
                     </div>
@@ -83,43 +94,17 @@ export default function Add_Candidates() {
                             <div>Prénom</div>
                             <div>Nom</div>
                         </div>
-
-                        <Item
-                            number={1}
-                            picture={candidat_image}
-                            first_name="Belle Grace"
-                            name="Tshilanda"
-                        />
-                        <Item
-                            number={1}
-                            picture={candidat_image}
-                            first_name="Belle Grace"
-                            name="Tshilanda"
-                        />
-                        <Item
-                            number={1}
-                            picture={candidat_image}
-                            first_name="Belle Grace"
-                            name="Tshilanda"
-                        />
-                        <Item
-                            number={1}
-                            picture={candidat_image}
-                            first_name="Belle Grace"
-                            name="Tshilanda"
-                        />
-                        <Item
-                            number={1}
-                            picture={candidat_image}
-                            first_name="Belle Grace"
-                            name="Tshilanda"
-                        />
-                        <Item
-                            number={1}
-                            picture={candidat_image}
-                            first_name="Belle Grace"
-                            name="Tshilanda"
-                        />
+                        {console.log(
+                            election_to_create.candidates[number_of_post].people
+                        )}
+                        {/* {election_to_create.candidates[number_of_post].people.map((candidate) => {
+                            <Item
+                                number={1}
+                                picture={candidate.image}
+                                first_name={candidate.first_name}
+                                name={candidate.name}
+                            />;
+                        })} */}
                     </div>
                 </div>
                 {/* <div className={styles.list_of_posts}></div> */}

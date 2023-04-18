@@ -17,7 +17,8 @@ export default function Register() {
 
     const { push } = useRouter();
 
-    function register() {
+    function register(e) {
+        e.preventDefault();
         if (
             user.name != '' &&
             user.email != '' &&
@@ -26,8 +27,9 @@ export default function Register() {
             axios
                 .post(route_for_register, user)
                 .then((response) => {
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem('_id', response.data.id);
+                    console.log(response)
+                    localStorage.setItem('vote_app_token', response.data.user.token);
+                    localStorage.setItem('vote_app_user_id', response.data.user._id);
                     setConnectedUser({ ...response.data.user });
                     push(`/dashboard/my_projects`);
                 })
@@ -118,7 +120,7 @@ export default function Register() {
 
                     <div className={styles.other}>
                         <button
-                            onClick={() => register()}
+                            onClick={(e) => register(e)}
                             className="button_primary"
                         >
                             S'inscrire
