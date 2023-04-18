@@ -1,4 +1,6 @@
-/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-prototype-builtins */
+import { saveAs } from 'file-saver';
 import { useContext, useEffect } from 'react';
 import { applicationContext } from '../_app';
 import styles from '../../styles/dashboard/add_candidates.module.css';
@@ -8,13 +10,25 @@ import { useState } from 'react';
 import * as XLSX from 'xlsx';
 import Link from 'next/link';
 import { useRef } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Add_Candidates() {
     const { election_to_create, set_election_to_create } =
         useContext(applicationContext);
 
-    const [candidats, setCandidats] = useState([]);
+    const [file, set_file] = useState(null);
+    const [election_contains_posts, set_election_contains_posts] =
+        useState(false);
+    const [candidates, set_candidates] = useState([]);
     const [number_of_post, set_number_of_post] = useState(0);
+
+    const { push } = useRouter();
+
+    useEffect(() => {
+        if (election_to_create.candidates[0].post != '') {
+            set_election_contains_posts(true);
+        }
+    }, [election_to_create]);
 
     const inputFile = useRef();
 
@@ -32,36 +46,59 @@ export default function Add_Candidates() {
         }
     }
 
-    async function handleFile(e) {
-        console.log(candidats);
+    async function handle_file(e) {
+        if (election_contains_posts) {
+            const file = e.target.files[0];
+            const data = await file.arrayBuffer();
+            const workbook = XLSX.read(data);
+            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+            const jsonData = XLSX.utils.sheet_to_json(worksheet);
+            set_candidates([...jsonData]);
 
-        console.log('reading input file:');
-        const file = e.target.files[0];
-        const data = await file.arrayBuffer();
-        const workbook = XLSX.read(data);
-        const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-        const jsonData = XLSX.utils.sheet_to_json(worksheet);
-        console.log(jsonData);
-        setCandidats([...jsonData]);
+            let election_to_create_copy = election_to_create;
+            election_to_create_copy.candidates[number_of_post].people =
+                jsonData;
 
-        let election_to_create_copy = election_to_create;
-        election_to_create_copy.candidates[number_of_post].people = jsonData;
+            let candidates_verified = [];
+            for (
+                let i = 0;
+                i <
+                election_to_create_copy.candidates[number_of_post].people
+                    .length;
+                i++
+            ) {
+                let current_candidate =
+                    election_to_create_copy.candidates[number_of_post].people[
+                        i
+                    ];
 
-        set_election_to_create({ ...election_to_create_copy });
+                if (
+                    current_candidate.hasOwnProperty('first_name') &&
+                    current_candidate.hasOwnProperty('name')
+                ) {
+                    candidates_verified.push({
+                        first_name: current_candidate.first_name,
+                        name: current_candidate.name,
+                        image: current_candidate.image
+                            ? current_candidate.image
+                            : 'https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png',
+                    });
+                }
+            }
+            set_election_to_create({ ...candidates_verified });
+        } else {
+            push(`/dashboard/my_projects`);
+        }
     }
 
-    useEffect(() => {
-        console.log('election_to_create-->', election_to_create);
-        console.log(
-            'e.people',
-            election_to_create.candidates[number_of_post].people
-        );
-    }, [election_to_create]);
-
-    useEffect(() => {
-        console.log('election_to_create>>>', election_to_create);
-    }, [election_to_create]);
-
+    function download_template_file() {
+        fetch('/candidates_post_1.xlsx')
+            .then((res) => res.blob())
+            .then((blob) => {
+                set_file(blob);
+                saveAs(blob, 'candidates_template.xlsx');
+            });
+    }
     return (
         <Dashboard_Layout page_title="Ajoutez des candidats">
             <section>
@@ -89,10 +126,18 @@ export default function Add_Candidates() {
                                 className="hidden"
                                 ref={inputFile}
                                 type="file"
-                                onInput={(e) => handleFile(e)}
+                                onInput={(e) => handle_file(e)}
                             />
                         </div>
-                        <p>Télécharger un fichier exemple en cliquant ici.</p>
+                        <p>
+                            <span>
+                                Télécharger un fichier exemple en cliquant{' '}
+                            </span>
+                            <span onClick={() => download_template_file()}>
+                                ici
+                            </span>
+                            .
+                        </p>
                     </div>
 
                     <div className={styles.list_of_candidates}>
@@ -124,17 +169,21 @@ export default function Add_Candidates() {
                         <button className="button_primary">Précédent</button>
                     </Link>
                     <div>
-                        <Icon
-                            icon="ooui:previous-ltr"
-                            className="pointer"
-                            onClick={() => change_post('previous')}
-                        />
-                        Poste {number_of_post + 1}
-                        <Icon
-                            icon="ooui:previous-rtl"
-                            className="pointer"
-                            onClick={() => change_post('next')}
-                        />
+                        {election_contains_posts ? (
+                            <>
+                                <Icon
+                                    icon="ooui:previous-ltr"
+                                    className="pointer"
+                                    onClick={() => change_post('previous')}
+                                />
+                                Poste {number_of_post + 1}
+                                <Icon
+                                    icon="ooui:previous-rtl"
+                                    className="pointer"
+                                    onClick={() => change_post('next')}
+                                />
+                            </>
+                        ) : null}
                     </div>
                     <Link href="/dashboard/add_electors">
                         <button className="button_primary">Suivant</button>
