@@ -3,6 +3,7 @@ import { Dashboard_Layout } from '../../components/index';
 import { Icon } from '@iconify/react';
 import { useContext } from 'react';
 import { applicationContext } from '../_app';
+import Link from 'next/link';
 
 export default function General_Parameters() {
     const { election_to_create, set_election_to_create } =
@@ -15,8 +16,8 @@ export default function General_Parameters() {
     return (
         <Dashboard_Layout page_title="Paramètres généraux">
             <section>
-                <h1>Nouveau projet : Comité G1 Math-Info</h1>
-                <h2>Paramètres généraux</h2>
+                <h1>Nouveau projet : {election_to_create.name}</h1>
+                <h2>Etape 1 : Paramètres généraux</h2>
 
                 <div className={styles}>
                     <div className={styles.left_bloc}>
@@ -29,9 +30,10 @@ export default function General_Parameters() {
                                 />
                                 <input
                                     onChange={onChange}
+                                    value={election_to_create.name}
                                     name="name"
                                     type="text"
-                                    placeholder="placide@gmail.com"
+                                    placeholder="Election du comité de G1 Math-Info"
                                 />
                             </div>
                         </label>
@@ -43,7 +45,10 @@ export default function General_Parameters() {
                                     icon="fluent:text-description-24-filled"
                                     className="icon"
                                 />
-                                <textarea onChange={onChange} name="description"></textarea>
+                                <textarea
+                                    onChange={onChange}
+                                    name="description"
+                                ></textarea>
                             </div>
                         </label>
                     </div>
@@ -80,8 +85,10 @@ export default function General_Parameters() {
                 </div>
 
                 <div className={styles.buttons_group}>
-                    <button className="button_primary">Précédent</button>
-                    <button className="button_primary">Suivant</button>
+                    {/* <button className="button_primary">Précédent</button> */}
+                    <Link href="/dashboard/position_to_be_filled">
+                        <button className="button_primary">Suivant</button>
+                    </Link>
                 </div>
             </section>
         </Dashboard_Layout>

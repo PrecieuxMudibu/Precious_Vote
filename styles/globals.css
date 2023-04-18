@@ -195,5 +195,6 @@ table {
 
 .pointer {
   cursor: pointer;
+  margin: 0 15px;
 }
 

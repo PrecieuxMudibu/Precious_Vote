@@ -1,13 +1,33 @@
 /* eslint-disable no-console */
 import candidat_image from '../../public/images/test.png';
+import { useContext } from 'react';
+import { applicationContext } from '../_app';
 import styles from '../../styles/dashboard/add_candidates.module.css';
 import { Item, Dashboard_Layout } from '../../components/index';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import * as XLSX from 'xlsx';
+import Link from 'next/link';
 
 export default function Add_Candidates() {
+    const { election_to_create, set_election_to_create } =
+        useContext(applicationContext);
     const [candidats, setCandidats] = useState([]);
+    const [number_of_post, set_number_of_post] = useState(0);
+
+    function change_post(action) {
+        if (action == 'next') {
+            if (number_of_post < election_to_create.candidates.length) {
+                set_number_of_post(number_of_post + 1);
+            }
+        }
+
+        if (action == 'previous') {
+            if (number_of_post >= election_to_create.candidates.length) {
+                set_number_of_post(number_of_post - 1);
+            }
+        }
+    }
 
     async function handleFile(e) {
         console.log(candidats);
@@ -26,7 +46,7 @@ export default function Add_Candidates() {
         <Dashboard_Layout page_title="Ajoutez des candidats">
             <section>
                 <h1>Nouveau projet : Comité G1 Math-Info</h1>
-                <h2>Etape 3 : Rajoutez des candidats “Chef de promotion”</h2>
+                <h2>Etape 3 : Rajoutez des candidats “{election_to_create.candidates[number_of_post].post}”</h2>
 
                 <div className={styles.upload_and_list_section}>
                     <div>
@@ -93,8 +113,25 @@ export default function Add_Candidates() {
                 {/* <div className={styles.list_of_posts}></div> */}
 
                 <div className={styles.buttons_group}>
-                    <button className="button_primary">Précédent</button>
-                    <button className="button_primary">Suivant</button>
+                    <Link href="/dashboard/position_to_be_filled">
+                        <button className="button_primary">Précédent</button>
+                    </Link>
+                    <div>
+                        <Icon
+                            icon="ooui:previous-ltr"
+                            className="pointer"
+                            onClick={() => change_post('previous')}
+                        />
+                        Poste {number_of_post +1}
+                        <Icon
+                            icon="ooui:previous-rtl"
+                            className="pointer"
+                            onClick={() => change_post('next')}
+                        />
+                    </div>
+                    <Link href="/dashboard/add_electors">
+                        <button className="button_primary">Suivant</button>
+                    </Link>
                 </div>
             </section>
         </Dashboard_Layout>

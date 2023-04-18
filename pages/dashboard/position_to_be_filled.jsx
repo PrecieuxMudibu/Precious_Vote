@@ -3,6 +3,7 @@ import { Dashboard_Layout } from '../../components/index';
 import { Icon } from '@iconify/react';
 import { useContext } from 'react';
 import { applicationContext } from '../_app';
+import Link from 'next/link';
 
 export default function Position_To_Be_Filled() {
     const { election_to_create, set_election_to_create } =
@@ -48,7 +49,7 @@ export default function Position_To_Be_Filled() {
     return (
         <Dashboard_Layout page_title="Poste à pourvoir">
             <section>
-                <h1>Nouveau projet : Comité G1 Math-Info</h1>
+                <h1>Nouveau projet : {election_to_create.name}</h1>
                 <h2>Etape 2 : Postes à pourvoir</h2>
 
                 <div className={styles.list_of_posts}>
@@ -86,8 +87,12 @@ export default function Position_To_Be_Filled() {
                 </button>
 
                 <div className={styles.buttons_group}>
-                    <button className="button_primary">Précédent</button>
-                    <button className="button_primary">Suivant</button>
+                    <Link href="/dashboard/general_parameters">
+                        <button className="button_primary">Précédent</button>
+                    </Link>
+                    <Link href="/dashboard/add_candidates">
+                        <button className="button_primary">Suivant</button>
+                    </Link>
                 </div>
             </section>
         </Dashboard_Layout>
