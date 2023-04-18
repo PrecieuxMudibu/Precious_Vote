@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import { Icon } from '@iconify/react';
 
 export default function Left_Section() {
+    const { push } = useRouter();
+
     function link_get_active_class_name_if_router_path_name(route) {
         const router = useRouter();
         if (router.pathname === route) {
@@ -17,6 +19,12 @@ export default function Left_Section() {
         if (router.pathname === route) {
             return `${styles.left_section_link_icon} ${styles.left_section_link_icon_active}`;
         } else return styles.left_section_link_icon;
+    }
+
+    function logout() {
+        localStorage.removeItem('vote_app_token');
+        localStorage.removeItem('vote_app_user_id');
+        push(`/login`);
     }
 
     return (
@@ -74,13 +82,13 @@ export default function Left_Section() {
                 </li>
             </ul>
 
-            <Link href="/" className={styles.left_section_link}>
+            <button onClick={() => logout()}>
                 <Icon
                     icon="ic:round-logout"
                     className={styles.left_section_link_icon}
                 />
                 Déconnexion
-            </Link>
+            </button>
         </nav>
     );
 }

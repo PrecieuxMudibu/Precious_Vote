@@ -19,6 +19,7 @@ export default function Register() {
 
     function register(e) {
         e.preventDefault();
+
         if (
             user.name != '' &&
             user.email != '' &&
@@ -27,9 +28,15 @@ export default function Register() {
             axios
                 .post(route_for_register, user)
                 .then((response) => {
-                    console.log(response)
-                    localStorage.setItem('vote_app_token', response.data.user.token);
-                    localStorage.setItem('vote_app_user_id', response.data.user._id);
+                    console.log('response>>>', response);
+                    localStorage.setItem(
+                        'vote_app_token',
+                        response.data.user.token
+                    );
+                    localStorage.setItem(
+                        'vote_app_user_id',
+                        response.data.user._id
+                    );
                     setConnectedUser({ ...response.data.user });
                     push(`/dashboard/my_projects`);
                 })
