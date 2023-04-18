@@ -26,7 +26,6 @@ export default function Register() {
             axios
                 .post(route_for_register, user)
                 .then((response) => {
-                    // console.log('response 11>>>>>', response);
                     localStorage.setItem('token', response.data.token);
                     localStorage.setItem('_id', response.data.id);
                     setConnectedUser({ ...response.data.user });

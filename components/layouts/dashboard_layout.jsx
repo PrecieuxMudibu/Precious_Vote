@@ -17,6 +17,7 @@ export default function Dashboard_Layout({ children, page_title }) {
                     ></link>
                 </Head>
                 <main className={styles.main}>
+                    
                     <Left_Section />
                     {children}
                 </main>

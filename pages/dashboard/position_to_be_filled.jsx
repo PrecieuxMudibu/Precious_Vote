@@ -1,91 +1,89 @@
 import styles from '../../styles/dashboard/position_to_be_filled.module.css';
 import { Dashboard_Layout } from '../../components/index';
 import { Icon } from '@iconify/react';
+import { useContext } from 'react';
+import { applicationContext } from '../_app';
 
 export default function Position_To_Be_Filled() {
+    const { election_to_create, set_election_to_create } =
+        useContext(applicationContext);
+
+    function add_a_post() {
+        if (election_to_create.candidates.length < 4) {
+            let newPost = {
+                post: '',
+                people: [],
+            };
+
+            set_election_to_create((election_to_create) => {
+                return {
+                    ...election_to_create,
+                    candidates: [...election_to_create.candidates, newPost],
+                };
+            });
+        }
+    }
+
+    function delete_post(index) {
+        let election_to_create_candidates_copy = [
+            ...election_to_create.candidates,
+        ];
+        election_to_create_candidates_copy.splice(index, 1);
+
+        set_election_to_create((election_to_create) => {
+            return {
+                ...election_to_create,
+                candidates: [...election_to_create_candidates_copy],
+            };
+        });
+    }
+
+    function handle_change_post(e, index) {
+        let election_to_create_copy = election_to_create;
+        election_to_create_copy.candidates[index].post = e.target.value;
+
+        set_election_to_create({ ...election_to_create_copy });
+    }
+
     return (
         <Dashboard_Layout page_title="Poste à pourvoir">
             <section>
                 <h1>Nouveau projet : Comité G1 Math-Info</h1>
                 <h2>Etape 2 : Postes à pourvoir</h2>
-                <div>
-                    <p>
-                        Vous souhaitez organiser des élections pour combien de
-                        postes ?
-                    </p>
-
-                    <label className={styles.number_of_post}>
-                        <div className="input_group">
-                            <Icon
-                                icon="material-symbols:confirmation-number"
-                                className="icon"
-                            />
-                            <select name="pays" id="pays">
-                                <option value="france">1</option>
-                                <option value="espagne">2</option>
-                                <option value="espagne">3</option>
-                            </select>
-                        </div>
-                    </label>
-                </div>
 
                 <div className={styles.list_of_posts}>
-                    <label>
-                        <span>Poste 1</span>
-                        <div className="input_group">
-                            <Icon
-                                icon="eos-icons:role-binding"
-                                className="icon"
-                            />
-                            <select name="pays" id="pays">
-                                <option value="france">France</option>
-                                <option value="espagne">Espagne</option>
-                            </select>
-                        </div>
-                    </label>
-
-                    <label>
-                        <span>Poste 2</span>
-                        <div className="input_group">
-                            <Icon
-                                icon="eos-icons:role-binding"
-                                className="icon"
-                            />
-                            <select name="pays" id="pays">
-                                <option value="france">France</option>
-                                <option value="espagne">Espagne</option>
-                            </select>
-                        </div>
-                    </label>
-
-                    <label>
-                        <span>Poste 3</span>
-                        <div className="input_group">
-                            <Icon
-                                icon="eos-icons:role-binding"
-                                className="icon"
-                            />
-                            <select name="pays" id="pays">
-                                <option value="france">France</option>
-                                <option value="espagne">Espagne</option>
-                            </select>
-                        </div>
-                    </label>
-
-                    <label>
-                        <span>Poste 4</span>
-                        <div className="input_group">
-                            <Icon
-                                icon="eos-icons:role-binding"
-                                className="icon"
-                            />
-                            <select name="pays" id="pays">
-                                <option value="france">France</option>
-                                <option value="espagne">Espagne</option>
-                            </select>
-                        </div>
-                    </label>
+                    {election_to_create.candidates.map((post, index) => (
+                        <label key={index}>
+                            <span>Poste {index + 1} </span>
+                            <span>
+                                <Icon
+                                    icon="material-symbols:delete-outline-rounded"
+                                    className="icon pointer"
+                                    onClick={() => delete_post(index)}
+                                />
+                            </span>
+                            <div className="input_group">
+                                <Icon
+                                    icon="eos-icons:role-binding"
+                                    className="icon"
+                                />
+                                <input
+                                    onChange={(e) =>
+                                        handle_change_post(e, index)
+                                    }
+                                    name="name"
+                                    type="text"
+                                    placeholder="Président"
+                                    value={post.post}
+                                />
+                            </div>
+                        </label>
+                    ))}
                 </div>
+
+                <button onClick={add_a_post} className={styles.add_post_button}>
+                    <Icon icon="ic:outline-plus" /> Ajoutez un poste
+                </button>
 
                 <div className={styles.buttons_group}>
                     <button className="button_primary">Précédent</button>

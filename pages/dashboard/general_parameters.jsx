@@ -1,16 +1,25 @@
 import styles from '../../styles/dashboard/general_parameters.module.css';
 import { Dashboard_Layout } from '../../components/index';
 import { Icon } from '@iconify/react';
+import { useContext } from 'react';
+import { applicationContext } from '../_app';
 
 export default function General_Parameters() {
+    const { election_to_create, set_election_to_create } =
+        useContext(applicationContext);
+
+    function onChange(e) {
+        const { name, value } = e.target;
+        set_election_to_create({ ...election_to_create, [name]: value });
+    }
     return (
         <Dashboard_Layout page_title="Paramètres généraux">
             <section>
                 <h1>Nouveau projet : Comité G1 Math-Info</h1>
                 <h2>Paramètres généraux</h2>
 
-                <div className={styles.columns}>
-                    <div>
+                <div className={styles}>
+                    <div className={styles.left_bloc}>
                         <label>
                             <span>Nom de votre élection</span>
                             <div className="input_group">
@@ -19,6 +28,8 @@ export default function General_Parameters() {
                                     className="icon"
                                 />
                                 <input
+                                    onChange={onChange}
+                                    name="name"
                                     type="text"
                                     placeholder="placide@gmail.com"
                                 />
@@ -32,14 +43,14 @@ export default function General_Parameters() {
                                     icon="fluent:text-description-24-filled"
                                     className="icon"
                                 />
-                                <textarea name="description"></textarea>
+                                <textarea onChange={onChange} name="description"></textarea>
                             </div>
                         </label>
                     </div>
 
-                    <div>
+                    {/* <div>
                         <label>
-                            <span>Début</span>
+                            <span>Candidat pour le second round</span>
                             <div className="input_group">
                                 <Icon
                                     icon="material-symbols:calendar-month"
@@ -65,7 +76,7 @@ export default function General_Parameters() {
                                 />
                             </div>
                         </label>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className={styles.buttons_group}>

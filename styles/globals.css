@@ -47,6 +47,8 @@ h1 {
 }
 
 h2 {
+  margin: 10px 0;
+
   color: var(--primary_color);
   font-size: var(--second_title_size);
   font-weight: var(--medium_weight);
@@ -59,9 +61,14 @@ label > span {
   font-weight: bold;
 }
 
+label {
+  width: 100%;
+}
+
 .input_group {
   display: flex;
   padding: 15px 17px;
+  width: 100%;
   border: 1px solid var(--primary_color);
   border-radius: var(--radius);
   margin: 15px 0 30px 0;
@@ -184,5 +191,9 @@ table {
 
 .failed {
   background-color: var(--secondary_color);
+}
+
+.pointer {
+  cursor: pointer;
 }
 
