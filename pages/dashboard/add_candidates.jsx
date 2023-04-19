@@ -24,15 +24,6 @@ export default function Add_Candidates() {
 
     const { push } = useRouter();
 
-    useEffect(() => {
-        // if (election_to_create.candidates[0].post != '') {
-        //     set_election_contains_posts(true);
-        // }
-        console.log('election_to_create>>', election_to_create);
-        // console.log('POST>>', election_to_create.candidates[number_of_post]);
-        // console.log('number_of_post>>', number_of_post);
-    }, [election_to_create]);
-
     const inputFile = useRef();
 
     function change_post(action) {
@@ -50,15 +41,17 @@ export default function Add_Candidates() {
     }
 
     async function handle_file(e) {
+        alert('Hello');
         const file = e.target.files[0];
         const data = await file.arrayBuffer();
         const workbook = XLSX.read(data);
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
-        set_candidates([...jsonData]);
+        // set_candidates([...jsonData]);
 
         let election_to_create_copy = election_to_create;
         election_to_create_copy.candidates[number_of_post] = {
+            ...election_to_create_copy.candidates[number_of_post],
             people: jsonData,
         };
 
@@ -85,7 +78,13 @@ export default function Add_Candidates() {
                 });
             }
         }
-        set_election_to_create({ ...candidates_verified });
+
+        election_to_create_copy.candidates[number_of_post] = {
+            ...election_to_create_copy.candidates[number_of_post],
+            people: candidates_verified,
+        };
+
+        set_election_to_create({ ...election_to_create_copy });
     }
 
     function download_template_file() {
@@ -149,17 +148,19 @@ export default function Add_Candidates() {
                         </div>
 
                         {/* {election_to_create.candidates[number_of_post]?.people  election_to_create.candidates */}
-                        {election_to_create.candidates[
-                            number_of_post
-                        ].people.map((candidate, index) => (
-                            <Item
-                                key={index}
-                                number={index}
-                                picture={candidate.picture}
-                                first_name={candidate.first_name}
-                                name={candidate.name}
-                            />
-                        ))}
+                        {election_to_create
+                            ? election_to_create.candidates[
+                                  number_of_post
+                              ].people.map((candidate, index) => (
+                                  <Item
+                                      key={index}
+                                      number={index}
+                                      picture={candidate.picture}
+                                      first_name={candidate.first_name}
+                                      name={candidate.name}
+                                  />
+                              ))
+                            : null}
                     </div>
                 </div>
 
@@ -168,21 +169,17 @@ export default function Add_Candidates() {
                         <button className="button_primary">Précédent</button>
                     </Link>
                     <div>
-                        {election_contains_posts ? (
-                            <>
-                                <Icon
-                                    icon="ooui:previous-ltr"
-                                    className="pointer"
-                                    onClick={() => change_post('previous')}
-                                />
-                                Poste {number_of_post + 1}
-                                <Icon
-                                    icon="ooui:previous-rtl"
-                                    className="pointer"
-                                    onClick={() => change_post('next')}
-                                />
-                            </>
-                        ) : null}
+                        <Icon
+                            icon="ooui:previous-ltr"
+                            className="pointer"
+                            onClick={() => change_post('previous')}
+                        />
+                        Poste {number_of_post + 1}
+                        <Icon
+                            icon="ooui:previous-rtl"
+                            className="pointer"
+                            onClick={() => change_post('next')}
+                        />
                     </div>
                     <Link href="/dashboard/add_electors">
                         <button className="button_primary">Suivant</button>
