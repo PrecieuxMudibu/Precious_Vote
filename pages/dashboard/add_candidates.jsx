@@ -25,9 +25,12 @@ export default function Add_Candidates() {
     const { push } = useRouter();
 
     useEffect(() => {
-        if (election_to_create.candidates[0].post != '') {
-            set_election_contains_posts(true);
-        }
+        // if (election_to_create.candidates[0].post != '') {
+        //     set_election_contains_posts(true);
+        // }
+        console.log('election_to_create>>', election_to_create);
+        // console.log('POST>>', election_to_create.candidates[number_of_post]);
+        // console.log('number_of_post>>', number_of_post);
     }, [election_to_create]);
 
     const inputFile = useRef();
@@ -47,48 +50,42 @@ export default function Add_Candidates() {
     }
 
     async function handle_file(e) {
-        if (election_contains_posts) {
-            const file = e.target.files[0];
-            const data = await file.arrayBuffer();
-            const workbook = XLSX.read(data);
-            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-            const jsonData = XLSX.utils.sheet_to_json(worksheet);
-            set_candidates([...jsonData]);
+        const file = e.target.files[0];
+        const data = await file.arrayBuffer();
+        const workbook = XLSX.read(data);
+        const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+        const jsonData = XLSX.utils.sheet_to_json(worksheet);
+        set_candidates([...jsonData]);
 
-            let election_to_create_copy = election_to_create;
-            election_to_create_copy.candidates[number_of_post].people =
-                jsonData;
+        let election_to_create_copy = election_to_create;
+        election_to_create_copy.candidates[number_of_post] = {
+            people: jsonData,
+        };
 
-            let candidates_verified = [];
-            for (
-                let i = 0;
-                i <
-                election_to_create_copy.candidates[number_of_post].people
-                    .length;
-                i++
+        let candidates_verified = [];
+        for (
+            let i = 0;
+            i <
+            election_to_create_copy.candidates[number_of_post].people.length;
+            i++
+        ) {
+            let current_candidate =
+                election_to_create_copy.candidates[number_of_post].people[i];
+
+            if (
+                current_candidate.hasOwnProperty('first_name') &&
+                current_candidate.hasOwnProperty('name')
             ) {
-                let current_candidate =
-                    election_to_create_copy.candidates[number_of_post].people[
-                        i
-                    ];
-
-                if (
-                    current_candidate.hasOwnProperty('first_name') &&
-                    current_candidate.hasOwnProperty('name')
-                ) {
-                    candidates_verified.push({
-                        first_name: current_candidate.first_name,
-                        name: current_candidate.name,
-                        image: current_candidate.image
-                            ? current_candidate.image
-                            : 'https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png',
-                    });
-                }
+                candidates_verified.push({
+                    first_name: current_candidate.first_name,
+                    name: current_candidate.name,
+                    image: current_candidate.image
+                        ? current_candidate.image
+                        : 'https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png',
+                });
             }
-            set_election_to_create({ ...candidates_verified });
-        } else {
-            push(`/dashboard/my_projects`);
         }
+        set_election_to_create({ ...candidates_verified });
     }
 
     function download_template_file() {
@@ -105,7 +102,10 @@ export default function Add_Candidates() {
                 <h1>Nouveau projet : {election_to_create.name}</h1>
                 <h2>
                     Etape 3 : Rajoutez des candidats “
-                    {election_to_create.candidates[number_of_post].post}”
+                    {election_to_create?.candidates
+                        ? election_to_create?.candidates[number_of_post]?.post
+                        : null}
+                    ”
                 </h2>
 
                 <div className={styles.upload_and_list_section}>
@@ -148,19 +148,18 @@ export default function Add_Candidates() {
                             <div>Nom</div>
                         </div>
 
-                        {election_to_create.candidates[number_of_post].people
-                            ? election_to_create.candidates[
-                                  number_of_post
-                              ].people.map((candidate, index) => (
-                                  <Item
-                                      key={index}
-                                      number={index}
-                                      picture={candidate.picture}
-                                      first_name={candidate.first_name}
-                                      name={candidate.name}
-                                  />
-                              ))
-                            : null}
+                        {/* {election_to_create.candidates[number_of_post]?.people  election_to_create.candidates */}
+                        {election_to_create.candidates[
+                            number_of_post
+                        ].people.map((candidate, index) => (
+                            <Item
+                                key={index}
+                                number={index}
+                                picture={candidate.picture}
+                                first_name={candidate.first_name}
+                                name={candidate.name}
+                            />
+                        ))}
                     </div>
                 </div>
 

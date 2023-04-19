@@ -1,5 +1,5 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-prototype-builtins */
-import candidat_image from '../../public/images/test.png';
 import styles from '../../styles/dashboard/add_candidates.module.css';
 import { Item, Dashboard_Layout } from '../../components/index';
 import { saveAs } from 'file-saver';
@@ -18,7 +18,6 @@ export default function Add_Candidates() {
     const [election_contains_posts, set_election_contains_posts] =
         useState(false);
     const [candidates, set_candidates] = useState([]);
-    const [number_of_post, set_number_of_post] = useState(0);
 
     const { push } = useRouter();
 
@@ -67,15 +66,12 @@ export default function Add_Candidates() {
         }
     }
 
-    useEffect(() => {
-        console.log('election_to_create>>>', election_to_create);
-    }, [election_to_create]);
     function download_template_file() {
-        fetch('/candidates_post_1.xlsx')
+        fetch('/electors.xlsx')
             .then((res) => res.blob())
             .then((blob) => {
                 set_file(blob);
-                saveAs(blob, 'candidates_template.xlsx');
+                saveAs(blob, 'electors_template.xlsx');
             });
     }
     return (
@@ -105,7 +101,15 @@ export default function Add_Candidates() {
                                 onInput={(e) => handle_file(e)}
                             />
                         </div>
-                        <p>Télécharger un fichier exemple en cliquant ici.</p>
+                        <p>
+                            <span>
+                                Télécharger un fichier exemple en cliquant{' '}
+                            </span>
+                            <span onClick={() => download_template_file()}>
+                                ici
+                            </span>
+                            .
+                        </p>
                     </div>
 
                     <div className={styles.list_of_candidates}>
@@ -121,7 +125,6 @@ export default function Add_Candidates() {
                                       <Item
                                           key={index}
                                           number={index}
-                                          //   picture={elector.picture}
                                           first_name={elector.first_name}
                                           name={elector.name}
                                       />
