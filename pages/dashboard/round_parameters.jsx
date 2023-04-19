@@ -1,3 +1,5 @@
+import { route_for_create_election } from '../../public/routes';
+import axios from 'axios';
 import styles from '../../styles/dashboard/round_parameters.module.css';
 import {
     Dashboard_Layout,
@@ -42,6 +44,17 @@ export default function Round_Parameters() {
         console.log('election_to_create>>>>', election_to_create);
     }, [election_to_create]);
 
+    function create_election() {
+        axios
+            .post(route_for_create_election, election_to_create)
+            .then((response) => {
+                console.log('response>>>', response);
+            })
+            .catch((error) => {
+                // eslint-disable-next-line no-console
+                console.log('error--->>>', error);
+            });
+    }
     return (
         <Dashboard_Layout page_title="Tours">
             <section>
@@ -110,13 +123,20 @@ export default function Round_Parameters() {
                 <div className={styles.buttons_group}>
                     <button className="button_primary">Précédent</button>
                     <button
+                        className="button_primary"
+                        onClick={() => create_election()}
+                    >
+                        Soumettre
+                    </button>
+
+                    {/* <button
                         type="button"
                         className="button_primary"
                         data-bs-toggle="modal"
                         data-bs-target="#addClientModal"
                     >
                         Finaliser
-                    </button>
+                    </button> */}
                 </div>
 
                 <Modal_Layout>
