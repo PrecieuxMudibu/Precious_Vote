@@ -77,8 +77,8 @@ export default function Add_Candidates() {
     return (
         <Dashboard_Layout page_title="Ajoutez des électeurs">
             <section>
-                <h1>Nouveau projet : Comité G1 Math-Info</h1>
-                <h2>Etape 3 : Rajoutez des candidats “Chef de promotion”</h2>
+                <h1>Nouveau projet : {election_to_create.name}</h1>
+                <h2>Etape 3 : Rajoutez des électeurs</h2>
 
                 <div className={styles.upload_and_list_section}>
                     <div>

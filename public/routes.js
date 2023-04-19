@@ -6,3 +6,4 @@ export const route_for_get_user = `${process.env.NEXT_PUBLIC_API}/api/get_user`
 export const route_for_get_posts_for_an_election = `${process.env.NEXT_PUBLIC_API}/api/get_posts_for_an_election`
 export const route_for_get_rounds_for_a_post = `${process.env.NEXT_PUBLIC_API}/api/get_rounds_for_a_post`
 export const route_for_start_round = `${process.env.NEXT_PUBLIC_API}/api/start_round`
+export const route_for_get_candidates_for_the_round = `${process.env.NEXT_PUBLIC_API}/api/get_candidates_for_the_round`

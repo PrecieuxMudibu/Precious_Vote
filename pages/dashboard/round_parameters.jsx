@@ -12,7 +12,7 @@ import Image from 'next/image';
 import airtel_money from '../../public/images/mobile_money/airtel_money.png';
 import m_pesa from '../../public/images/mobile_money/m_pesa.png';
 import { applicationContext } from '../_app';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
 export default function Round_Parameters() {
     const { election_to_create, connectedUser, set_election_to_create } =
@@ -55,13 +55,10 @@ export default function Round_Parameters() {
             });
     }
 
-    useEffect(() => {
-        console.log('election_to_create>>>', election_to_create);
-    }, [election_to_create]);
     return (
         <Dashboard_Layout page_title="Tours">
             <section>
-                <h1>Nouveau projet : Comité G1 Math-Info</h1>
+                <h1>Nouveau projet : {election_to_create.name}</h1>
                 <h2>Etape 2 : Des élections à plusieurs tours</h2>
                 <div>
                     <label>

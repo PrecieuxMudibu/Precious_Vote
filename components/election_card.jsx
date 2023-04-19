@@ -12,6 +12,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 export default function Election_Card({ election }) {
+    // eslint-disable-next-line no-unused-vars
     const [election_posts_and_rounds, set_election_posts_and_rounds] = useState(
         []
     );
@@ -33,6 +34,7 @@ export default function Election_Card({ election }) {
                 console.log('error--->>>', error);
             });
     }
+
     async function start_a_round(id) {
         return await axios
             .put(`${route_for_start_round}/${id}`)
@@ -46,20 +48,20 @@ export default function Election_Card({ election }) {
         let post_and_rounds = [];
         const posts = await get_posts_of_election(election._id);
 
-        // GET THE POST FOR ALL ROUNDS
+        // GET THE ROUNDS FOR ALL POST
         for (let i = 0; i < posts.length; i++) {
-            const rounds = await get_rounds_for_a_post(posts[0]._id);
+            const rounds = await get_rounds_for_a_post(posts[i]._id);
             post_and_rounds.push({
                 post: posts[i],
                 ...rounds,
             });
         }
 
-        // START ALL FIRST ROUNDS
+        // START THE FIRST ROUNDS OF ALL POSTS
         for (let i = 0; i < post_and_rounds.length; i++) {
             const round_id = post_and_rounds[i].rounds[0]._id;
             let response = await start_a_round(round_id);
-            console.log('response>>>', response);
+            console.log('response>>>' + i, response);
 
             // console.log('response>>>', response_1);
             // if (post_and_rounds[i].rounds[1] != undefined) {

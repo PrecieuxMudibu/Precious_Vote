@@ -26,10 +26,6 @@ export default function My_Projects() {
             });
     }, [connectedUser]);
 
-    useEffect(() => {
-        console.log('elections>>>', elections);
-    }, [elections]);
-
     return (
         <Dashboard_Layout page_title="Mes projets">
             <section>
