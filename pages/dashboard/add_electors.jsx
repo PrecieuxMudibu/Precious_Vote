@@ -11,7 +11,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function Add_Candidates() {
-    const { election_to_create, set_election_to_create } =
+    const { election_to_create, set_election_to_create, connect } =
         useContext(applicationContext);
 
     const [file, set_file] = useState(null);

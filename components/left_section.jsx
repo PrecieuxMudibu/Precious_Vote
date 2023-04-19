@@ -1,11 +1,38 @@
+/* eslint-disable no-console */
 import Logo from './logo';
 import Link from 'next/link';
 import styles from '../styles/left_section.module.css';
 import { useRouter } from 'next/router';
 import { Icon } from '@iconify/react';
+import { useContext, useEffect } from 'react';
+import { applicationContext } from '../pages/_app';
+import axios from 'axios';
+import { route_for_get_user } from '../public/routes';
 
 export default function Left_Section() {
     const { push } = useRouter();
+
+    const { setConnectedUser, connectedUser } = useContext(applicationContext);
+
+    useEffect(() => {
+        setConnectedUser({ _id: localStorage.getItem('vote_app_user_id') });
+
+        axios({
+            method: 'get',
+            url: `${route_for_get_user}/${connectedUser._id}`,
+            //   headers: {
+            //     Authorization: token,
+            //   },
+        })
+            .then((response) => {
+                setConnectedUser({ ...response.data.user });
+            })
+            .catch((error) => console.error(error));
+    }, [connectedUser._id]);
+
+    useEffect(() => {
+        console.log('connectedUser-------', connectedUser);
+    }, [connectedUser]);
 
     function link_get_active_class_name_if_router_path_name(route) {
         const router = useRouter();

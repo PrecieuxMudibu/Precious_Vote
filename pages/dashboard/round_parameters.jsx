@@ -15,7 +15,7 @@ import { applicationContext } from '../_app';
 import { useContext, useEffect } from 'react';
 
 export default function Round_Parameters() {
-    const { election_to_create, set_election_to_create } =
+    const { election_to_create, connectedUser, set_election_to_create } =
         useContext(applicationContext);
 
     function onChange(e) {
@@ -24,12 +24,14 @@ export default function Round_Parameters() {
         if (name == 'first_round_eligibility_criteria')
             set_election_to_create({
                 ...election_to_create,
+                user_id: connectedUser._id,
                 [name]: parseInt(value),
             });
 
         if (name == 'candidates_for_the_second_round')
             set_election_to_create({
                 ...election_to_create,
+                user_id: connectedUser._id,
                 [name]: parseInt(value),
             });
 
@@ -40,14 +42,11 @@ export default function Round_Parameters() {
             });
     }
 
-    useEffect(() => {
-        console.log('election_to_create>>>>', election_to_create);
-    }, [election_to_create]);
-
     function create_election() {
         axios
             .post(route_for_create_election, election_to_create)
             .then((response) => {
+                // eslint-disable-next-line no-console
                 console.log('response>>>', response);
             })
             .catch((error) => {
@@ -55,6 +54,10 @@ export default function Round_Parameters() {
                 console.log('error--->>>', error);
             });
     }
+
+    useEffect(() => {
+        console.log('election_to_create>>>', election_to_create);
+    }, [election_to_create]);
     return (
         <Dashboard_Layout page_title="Tours">
             <section>
