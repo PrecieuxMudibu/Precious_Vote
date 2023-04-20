@@ -12,11 +12,18 @@ import Image from 'next/image';
 import airtel_money from '../../public/images/mobile_money/airtel_money.png';
 import m_pesa from '../../public/images/mobile_money/m_pesa.png';
 import { applicationContext } from '../_app';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Round_Parameters() {
     const { election_to_create, connectedUser, set_election_to_create } =
         useContext(applicationContext);
+
+    const [open, set_open] = useState(false);
+    const [response_after_query, set_response_after_query] = useState('');
+    const close_modal = () => set_open(false);
+    const open_modal = () => set_open(true);
+    const { push } = useRouter();
 
     function onChange(e) {
         const { name, value } = e.target;
@@ -42,11 +49,17 @@ export default function Round_Parameters() {
             });
     }
 
+    useEffect(() => {
+        console.log('response_after_query>>>', response_after_query);
+    }, [response_after_query]);
+
     function create_election() {
         axios
             .post(route_for_create_election, election_to_create)
             .then((response) => {
-                console.log('response>>>', response);
+                set_response_after_query(response);
+                open_modal();
+                setTimeout(() => push(`/dashboard/my_projects`), 10000);
             })
             .catch((error) => {
                 console.log('error--->>>', error);
@@ -137,8 +150,8 @@ export default function Round_Parameters() {
                     </button> */}
                 </div>
 
-                <Modal_Layout>
-                    <h1>Paiement</h1>
+                <Modal_Layout open={open} close_modal={close_modal}>
+                    {/* <h1>Paiement</h1>
                     <p>Vous aller devoir payer 2$</p>
 
                     <div className={styles.mobile_money_card_container}>
@@ -198,9 +211,15 @@ export default function Round_Parameters() {
                             <input name="phone_number" id="phone_number" />
                         </div>
                     </div>
-                    <button className="button_primary">Valider</button>
-                    <Success_Message />
-                    <Failed_Message />
+                    <button className="button_primary">Valider</button> */}
+                    {response_after_query.status == 201 ? (
+                        <Success_Message
+                            action="Création de l'élection réussie"
+                            message={response_after_query.data.message}
+                        />
+                    ) : (
+                        <Failed_Message />
+                    )}
                 </Modal_Layout>
             </section>
         </Dashboard_Layout>
