@@ -41,7 +41,6 @@ export default function Add_Candidates() {
     }
 
     async function handle_file(e) {
-        alert('Hello');
         const file = e.target.files[0];
         const data = await file.arrayBuffer();
         const workbook = XLSX.read(data);
@@ -72,8 +71,8 @@ export default function Add_Candidates() {
                 candidates_verified.push({
                     first_name: current_candidate.first_name,
                     name: current_candidate.name,
-                    image: current_candidate.image
-                        ? current_candidate.image
+                    picture: current_candidate.picture
+                        ? current_candidate.picture
                         : 'https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png',
                 });
             }
@@ -95,6 +94,10 @@ export default function Add_Candidates() {
                 saveAs(blob, 'candidates_template.xlsx');
             });
     }
+
+    useEffect(() => {
+        console.log('election_to_create>>>', election_to_create);
+    }, [election_to_create]);
     return (
         <Dashboard_Layout page_title="Ajoutez des candidats">
             <section>
