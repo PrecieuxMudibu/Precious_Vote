@@ -44,11 +44,11 @@ body {
 h1 {
   color: var(--primary_color);
   font-size: var(--first_title_size);
+  margin-bottom: 30px;
 }
 
 h2 {
-  margin: 10px 0;
-
+  margin-bottom: 20px;
   color: var(--primary_color);
   font-size: var(--second_title_size);
   font-weight: var(--medium_weight);

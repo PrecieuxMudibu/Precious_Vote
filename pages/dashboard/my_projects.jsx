@@ -31,13 +31,13 @@ export default function My_Projects() {
             <section>
                 <div className={styles.title_and_search_bar}>
                     <h1>Vos projets</h1>
-                    <div>
+                    {/* <div>
                         <Icon icon="ic:outline-search" className="icon" />
                         <input
                             type="email"
                             placeholder="Recherchez votre projet ici"
                         />
-                    </div>
+                    </div> */}
                 </div>
                 <Create_Election_Card />
 

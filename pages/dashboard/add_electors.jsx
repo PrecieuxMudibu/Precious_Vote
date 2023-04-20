@@ -105,7 +105,7 @@ export default function Add_Candidates() {
                             <span>
                                 Télécharger un fichier exemple en cliquant{' '}
                             </span>
-                            <span onClick={() => download_template_file()}>
+                            <span className={styles.download_template_file_text} onClick={() => download_template_file()}>
                                 ici
                             </span>
                             .

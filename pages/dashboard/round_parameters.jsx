@@ -46,11 +46,9 @@ export default function Round_Parameters() {
         axios
             .post(route_for_create_election, election_to_create)
             .then((response) => {
-                // eslint-disable-next-line no-console
                 console.log('response>>>', response);
             })
             .catch((error) => {
-                // eslint-disable-next-line no-console
                 console.log('error--->>>', error);
             });
     }

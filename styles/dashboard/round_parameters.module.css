@@ -63,3 +63,9 @@
     width: 334px;
     text-align: center;
 }
+
+.buttons_group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
