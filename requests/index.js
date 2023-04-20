@@ -1,11 +1,20 @@
 /* eslint-disable no-console */
 import axios from "axios";
-import { route_for_get_posts_for_an_election, route_for_get_rounds_for_a_post, route_for_start_round } from "../public/routes";
+import { route_for_get_an_election, route_for_get_posts_for_an_election, route_for_get_rounds_for_a_post, route_for_start_round, } from "../public/routes";
 
 export async function get_posts_of_election(id) {
     return await axios
         .get(`${route_for_get_posts_for_an_election}/${id}`)
         .then((response) => response.data.posts)
+        .catch((error) => {
+            console.log('error--->>>', error);
+        });
+}
+
+export async function get_an_election(id) {
+    return await axios
+        .get(`${route_for_get_an_election}/${id}`)
+        .then((response) => response.data.election)
         .catch((error) => {
             console.log('error--->>>', error);
         });
