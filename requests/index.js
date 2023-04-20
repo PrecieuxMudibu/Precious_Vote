@@ -7,7 +7,7 @@ export async function get_posts_of_election(id) {
         .get(`${route_for_get_posts_for_an_election}/${id}`)
         .then((response) => response.data.posts)
         .catch((error) => {
-            console.log('error--->>>', error);
+            console.log(error);
         });
 }
 
@@ -16,7 +16,7 @@ export async function get_an_election(id) {
         .get(`${route_for_get_an_election}/${id}`)
         .then((response) => response.data.election)
         .catch((error) => {
-            console.log('error--->>>', error);
+            console.log(error);
         });
 }
 
@@ -25,7 +25,7 @@ export async function get_rounds_for_a_post(id) {
         .get(`${route_for_get_rounds_for_a_post}/${id}`)
         .then((response) => response.data)
         .catch((error) => {
-            console.log('error--->>>', error);
+            console.log(error);
         });
 }
 
@@ -34,7 +34,7 @@ export async function start_a_round(id) {
         .put(`${route_for_start_round}/${id}`)
         .then((response) => response.data)
         .catch((error) => {
-            console.log('error--response->>>', error);
+            console.log(error);
         });
 }
 
@@ -43,6 +43,6 @@ export async function vote_candidate(data) {
         .put(route_for_vote_candidate, data)
         .then((response) => response.data)
         .catch((error) => {
-            console.log('error--response->>>', error);
+            console.log(error);
         });
 }
