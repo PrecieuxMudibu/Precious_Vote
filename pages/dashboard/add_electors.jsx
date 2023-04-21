@@ -74,6 +74,11 @@ export default function Add_Candidates() {
                 saveAs(blob, 'electors_template.xlsx');
             });
     }
+
+    useEffect(() => {
+        console.log(election_to_create);
+    }, [election_to_create]);
+    
     return (
         <Dashboard_Layout page_title="Ajoutez des électeurs">
             <section>

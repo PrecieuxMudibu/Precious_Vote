@@ -1,7 +1,7 @@
 import styles from '../../styles/dashboard/general_parameters.module.css';
 import { Dashboard_Layout } from '../../components/index';
 import { Icon } from '@iconify/react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { applicationContext } from '../_app';
 import Link from 'next/link';
 
@@ -13,6 +13,10 @@ export default function General_Parameters() {
         const { name, value } = e.target;
         set_election_to_create({ ...election_to_create, [name]: value });
     }
+
+    useEffect(() => {
+        console.log(election_to_create);
+    }, [election_to_create]);
 
     return (
         <Dashboard_Layout page_title="Paramètres généraux">
@@ -47,6 +51,7 @@ export default function General_Parameters() {
                                     className="icon"
                                 />
                                 <textarea
+                                value={election_to_create.description}
                                     onChange={onChange}
                                     name="description"
                                 ></textarea>

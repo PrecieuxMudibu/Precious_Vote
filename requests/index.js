@@ -11,6 +11,8 @@ export async function get_posts_of_election(id) {
         });
 }
 
+
+
 export async function get_an_election(id) {
     return await axios
         .get(`${route_for_get_an_election}/${id}`)

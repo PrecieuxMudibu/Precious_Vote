@@ -1,13 +1,17 @@
 import styles from '../../styles/dashboard/position_to_be_filled.module.css';
 import { Dashboard_Layout } from '../../components/index';
 import { Icon } from '@iconify/react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { applicationContext } from '../_app';
 import Link from 'next/link';
 
 export default function Position_To_Be_Filled() {
     const { election_to_create, set_election_to_create } =
         useContext(applicationContext);
+
+        useEffect(() => {
+            console.log(election_to_create);
+        }, [election_to_create]);
 
     function add_a_post() {
         if (election_to_create.candidates.length < 4) {

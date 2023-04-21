@@ -56,6 +56,7 @@ export default function Round_Parameters() {
             election_to_create.hasOwnProperty('user_id') &&
             election_to_create.hasOwnProperty('name') &&
             election_to_create.hasOwnProperty('tariff') &&
+            election_to_create.hasOwnProperty('electors') &&
             election_to_create.hasOwnProperty(
                 'first_round_eligibility_criteria'
             ) &&
@@ -79,8 +80,12 @@ export default function Round_Parameters() {
         } else {
             set_response_after_query({ status: 404 });
             open_modal();
-        }
+        }  
     }
+
+    useEffect(() => {
+        console.log(election_to_create);
+    }, [election_to_create]);
 
     return (
         <Dashboard_Layout page_title="Tours">
