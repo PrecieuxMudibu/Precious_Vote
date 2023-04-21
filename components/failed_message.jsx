@@ -14,9 +14,9 @@ export default function Failed_Message({ action, message }) {
             </div>
             <p>{message}</p>
 
-            <button className="button_primary failed">
+            {/* <button className="button_primary failed">
                 Revenir à l'accueil
-            </button>
+            </button> */}
         </div>
     );
 }

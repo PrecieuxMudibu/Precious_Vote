@@ -1,13 +1,14 @@
-import styles from '../../styles/dashboard/my_projects.module.css';
+import styles from '../../../styles/dashboard/my_projects.module.css';
 import axios from 'axios';
-import { route_for_get_election_of_the_user } from '../../public/routes';
+import { route_for_get_election_of_the_user } from '../../../public/routes';
 import {
     Election_Card,
     Create_Election_Card,
     Dashboard_Layout,
-} from '../../components/index';
+} from '../../../components/index';
 import { useContext, useEffect, useState } from 'react';
-import { applicationContext } from '../_app';
+import { applicationContext } from '../../_app';
+import Link from 'next/link';
 
 export default function My_Projects() {
     const { connectedUser } = useContext(applicationContext);
@@ -42,7 +43,12 @@ export default function My_Projects() {
 
                 <div className={styles.elections_group}>
                     {elections.map((election, index) => (
-                        <Election_Card election={election} key={index} />
+                        <Link className='link'
+                            key={index}
+                            href={`/dashboard/my_projects/${election._id}`}
+                        >
+                            <Election_Card election={election} />
+                        </Link>
                     ))}
                 </div>
             </section>

@@ -9,9 +9,6 @@ import {
 } from '../../components/index';
 import { Icon } from '@iconify/react';
 import Modal_Layout from '../../components/layouts/modal_layout';
-import Image from 'next/image';
-import airtel_money from '../../public/images/mobile_money/airtel_money.png';
-import m_pesa from '../../public/images/mobile_money/m_pesa.png';
 import { applicationContext } from '../_app';
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
