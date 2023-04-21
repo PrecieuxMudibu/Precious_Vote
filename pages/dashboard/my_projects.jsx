@@ -6,7 +6,6 @@ import {
     Create_Election_Card,
     Dashboard_Layout,
 } from '../../components/index';
-import { Icon } from '@iconify/react';
 import { useContext, useEffect, useState } from 'react';
 import { applicationContext } from '../_app';
 

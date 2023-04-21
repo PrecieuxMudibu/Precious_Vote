@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import candidate_default_image from '../public/images/candidate.jpg';
+import { useState } from 'react';
 import styles from '../styles/candidate_card.module.css';
 import Modal_Layout from './layouts/modal_layout';
 import { Icon } from '@iconify/react';

@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import styles from '../styles/dashboard/success_message.module.css';
 
 import { Icon } from '@iconify/react';

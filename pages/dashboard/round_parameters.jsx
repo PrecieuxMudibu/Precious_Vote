@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 import { route_for_create_election } from '../../public/routes';
 import axios from 'axios';
 import styles from '../../styles/dashboard/round_parameters.module.css';
@@ -54,16 +55,34 @@ export default function Round_Parameters() {
     }, [response_after_query]);
 
     function create_election() {
-        axios
-            .post(route_for_create_election, election_to_create)
-            .then((response) => {
-                set_response_after_query(response);
-                open_modal();
-                setTimeout(() => push(`/dashboard/my_projects`), 10000);
-            })
-            .catch((error) => {
-                console.log('error--->>>', error);
-            });
+        if (
+            election_to_create.hasOwnProperty('user_id') &&
+            election_to_create.hasOwnProperty('name') &&
+            election_to_create.hasOwnProperty('tariff') &&
+            election_to_create.hasOwnProperty(
+                'first_round_eligibility_criteria'
+            ) &&
+            election_to_create.hasOwnProperty('description') &&
+            election_to_create.hasOwnProperty(
+                'candidates_for_the_second_round'
+            ) &&
+            election_to_create.hasOwnProperty('status') &&
+            election_to_create.hasOwnProperty('two_rounds')
+        ) {
+            axios
+                .post(route_for_create_election, election_to_create)
+                .then((response) => {
+                    set_response_after_query(response);
+                    open_modal();
+                    setTimeout(() => push(`/dashboard/my_projects`), 10000);
+                })
+                .catch((error) => {
+                    console.log('error--->>>', error);
+                });
+        } else {
+            set_response_after_query({ status: 404 });
+            open_modal();
+        }
     }
 
     return (
@@ -218,7 +237,10 @@ export default function Round_Parameters() {
                             message={response_after_query.data.message}
                         />
                     ) : (
-                        <Failed_Message />
+                        <Failed_Message
+                            action="Echec dans la création de l'élection"
+                            message="Quelque chose s'est mal passé. Soyez sûr d'avoir rempli tous les champs."
+                        />
                     )}
                 </Modal_Layout>
             </section>
