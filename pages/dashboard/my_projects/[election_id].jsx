@@ -45,7 +45,10 @@ export default function Election() {
                         <h3 className={styles.card_title}>Poste à pourvoir</h3>
                         <p className={styles.card_paragraph}>5</p>
                     </div>
-                    <div className={styles.card} onClick={() => open_modal_rounds()}>
+                    <div
+                        className={styles.card}
+                        onClick={() => open_modal_rounds()}
+                    >
                         <h3 className={styles.card_title}>Poste à pourvoir</h3>
                         <p className={styles.card_paragraph}>5</p>
                     </div>
