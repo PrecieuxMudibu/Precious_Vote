@@ -1,0 +1,64 @@
+.upload_and_list_section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.upload_file_section {
+    width: 100%;
+    height: 263px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    background-color: var(--white);
+    margin-bottom: 10px;
+    border: 1px dashed var(--primary_color);
+}
+
+.upload_file_section > p {
+    text-align: center;
+    width: 214px;
+}
+
+.upload_file_icon {
+    font-size: 74px;
+}
+
+
+.list_of_candidates {
+    width: 65%;
+    background-color: var(--white);
+    padding: 20px;
+    border: 1px dashed var(--primary_color);
+    border-radius: 15px;
+    height: 50vh;
+    overflow-y: scroll;
+   
+}
+
+.thead {
+    color: var(--primary_color);
+    display: grid;
+    grid-template-columns: repeat(4, 9% 12% 35% 35%);
+    gap: 2%;
+}
+
+.thead  div {
+    font-weight: var(--bold_weight);
+    text-align: left;
+    width: 100%;
+}
+
+.buttons_group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.download_template_file_text {
+    text-decoration: underline;
+    cursor: pointer;
+}
+

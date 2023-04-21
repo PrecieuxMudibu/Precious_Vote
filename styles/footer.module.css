@@ -1,0 +1,13 @@
+.footer {
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
+  background-color: var(--primary_color);
+}
+
+.footer > p {
+  width: 545px;
+  color: var(--pink_light);
+  text-align: center;
+  line-height: 1.5;
+}

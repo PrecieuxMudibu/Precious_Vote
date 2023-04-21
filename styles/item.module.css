@@ -1,0 +1,18 @@
+.candidate_row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 9% 12% 35% 35%);
+    gap: 2%;
+    margin: 10px 0;
+    padding: auto 0;
+}
+
+.candidate_row > div {
+    margin: auto 0;
+}
+
+.image {
+    height: 70px;
+    width: 70px;
+    border-radius: var(--radius);
+}

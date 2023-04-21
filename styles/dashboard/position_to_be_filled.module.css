@@ -1,0 +1,23 @@
+.number_of_post > div {
+    width: 140px;
+}
+
+.list_of_posts {
+    margin: 30px 0 0 0 ;
+    display: grid;
+    grid-template-columns: repeat(2, 48%);
+    gap: 4%;
+    height: 45vh;
+}
+
+.buttons_group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add_post_button  {
+    margin: 15px 0;
+
+    border: none;
+    background: none;
+}

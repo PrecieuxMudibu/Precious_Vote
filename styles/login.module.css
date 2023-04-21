@@ -1,88 +1,57 @@
 .page {
-    position: relative;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.header__text {
-    font-size: 20px;
-    color:var(--primary_color);
-    font-weight: bold;
-}
-
-.header_logo_group {
-    display: flex;
-    align-items: center;
-}
 
 .main {
-    width: 620px;
-    margin: 0 auto;
-    padding: 35px 43px;
-    background-color: var(--white);
-    box-shadow: 0px 0px 20px 6px rgba(255, 85, 89, 0.1);
-    border-radius: var(--radius);
-}
-
-
-.input_group {
-    display: flex;
-    padding: 15px 17px;
-    border: 1px solid var(--primary_color);
-    border-radius: var(--radius);
-    margin: 15px 0 30px 0;
-}
-
-.input_group > input {
-    margin-left: 15px;
-    width: 100%;
+  width: 620px;
+  margin: 0 auto;
+  padding: 35px 43px;
+  background-color: var(--white);
+  box-shadow: 0px 0px 20px 6px rgba(255, 85, 89, 0.1);
+  border-radius: var(--radius);
 }
 
 .other {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .qualities_group {
-    margin: 40px auto auto;
-    width: 534px;
-    border: Apx solid red;
-    display: flex;
-    justify-content: space-between;
+  margin: 40px auto auto;
+  width: 534px;
+  display: flex;
+  justify-content: space-between;
 }
 
-
 .circles {
-    position: absolute;
-
+  position: absolute;
 }
 
 .top_circle {
-    position: absolute;
-    top: -35%;
-    left: -13%;
-    background-color: var(--tertiary_color);
-    height: 345px;
-    width: 345px;
-    border-radius: 100%;
+  position: absolute;
+  top: -35%;
+  left: -13%;
+  background-color: var(--tertiary_color);
+  height: 345px;
+  width: 345px;
+  border-radius: 100%;
 }
 
 .bottom_circle {
-    position: absolute;
-    bottom: -35%;
-    right: -13%;
-    background-color: var(--secondary_color);
-    height: 345px;
-    width: 345px;
-    border-radius: 100%;
+  position: absolute;
+  bottom: -35%;
+  right: -13%;
+  background-color: var(--secondary_color);
+  height: 345px;
+  width: 345px;
+  border-radius: 100%;
 }
