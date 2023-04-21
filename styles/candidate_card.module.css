@@ -1,0 +1,26 @@
+.candidate_card {
+    border: 1px solid var(--primary_color);
+    padding: 15px;
+    width: 240px;
+    background-color: var(--pink_light);
+    margin-bottom: 65px;
+}
+
+.candidate_card, .candidate_image {
+    border-radius: 15px;
+
+}
+
+.candidate_card > h2 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.candidate_card > button {
+    width: 100%;
+}
+
+.image {
+    width: 210px;
+    height :172px;
+}

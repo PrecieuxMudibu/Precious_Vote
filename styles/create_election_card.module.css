@@ -1,0 +1,41 @@
+.create_election_card {
+    width: 48%;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    height: 108px;
+    background-color: var(--white);
+    border-radius: 15px;
+    cursor: pointer;
+    border: 1px solid rgb(255, 85, 89, .1);
+    margin-bottom: 30px;
+}
+
+.plus_sign {
+    width: 85px;
+    height: 85px;
+    background-color:#D9D9D9 ;
+    position: relative;
+    border-radius: 10px;
+    margin-right: 28px;
+}
+
+.vertical_bar {
+    width: 10px;
+    height: 90%;
+    background-color: var(--grey_shadow);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.horizontal_bar {
+    background-color: var(--grey_shadow);
+    width: 90%;
+    height: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
