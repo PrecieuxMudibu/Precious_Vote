@@ -7,8 +7,8 @@ import { route_for_vote_candidate } from '../public/routes';
 
 export default function Candidate_Card({
     candidate,
-    post_number,
-    set_post_number,
+    // post_number,
+    // set_post_number,
 }) {
     const [open, set_open] = useState(false);
     const [token_for_vote, set_token_for_vote] = useState(false);
