@@ -64,7 +64,6 @@ export default function Round_Parameters() {
             election_to_create.hasOwnProperty(
                 'candidates_for_the_second_round'
             ) &&
-            election_to_create.hasOwnProperty('status') &&
             election_to_create.hasOwnProperty('two_rounds')
         ) {
             axios
@@ -80,7 +79,7 @@ export default function Round_Parameters() {
         } else {
             set_response_after_query({ status: 404 });
             open_modal();
-        }  
+        }
     }
 
     useEffect(() => {
@@ -105,7 +104,9 @@ export default function Round_Parameters() {
                             />
                             <input
                                 onChange={onChange}
-                                // value={election_to_create.name}
+                                value={
+                                    election_to_create.first_round_eligibility_criteria
+                                }
                                 name="first_round_eligibility_criteria"
                                 type="number"
                                 placeholder="Election du comité de G1 Math-Info"
@@ -125,7 +126,9 @@ export default function Round_Parameters() {
                             />
                             <input
                                 onChange={onChange}
-                                // value={election_to_create.name}
+                                value={
+                                    election_to_create.candidates_for_the_second_round
+                                }
                                 name="candidates_for_the_second_round"
                                 type="number"
                                 placeholder="Election du comité de G1 Math-Info"
@@ -144,6 +147,11 @@ export default function Round_Parameters() {
                                 onChange={onChange}
                                 name="two_rounds"
                                 id="two_rounds"
+                                value={
+                                    election_to_create.two_rounds
+                                        ? 'Oui'
+                                        : 'Non'
+                                }
                             >
                                 <option value="Oui">Oui</option>
                                 <option value="Non">Non</option>
