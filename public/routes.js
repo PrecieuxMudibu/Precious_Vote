@@ -11,3 +11,4 @@ export const route_for_get_candidates_for_the_round = `${process.env.NEXT_PUBLIC
 export const route_for_get_an_election = `${process.env.NEXT_PUBLIC_API}/api/get_an_election`
 export const route_for_vote_candidate = `${process.env.NEXT_PUBLIC_API}/api/vote_candidate`
 export  const route_for_get_electors = `${process.env.NEXT_PUBLIC_API}/api/get_electors`
+export  const route_for_send_email = `${process.env.NEXT_PUBLIC_API}/api/send_email`

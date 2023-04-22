@@ -60,7 +60,7 @@ export default function Candidate_Card({
             </div>
 
             <Modal_Layout open={open} close_modal={close_modal}>
-                <label>
+                <label className={styles.modal_sub_container}>
                     <div className={styles.candidate_card}>
                         <img
                             src={
@@ -91,11 +91,10 @@ export default function Candidate_Card({
                             placeholder="Election du comité de G1 Math-Info"
                         />
                     </div>
+                    <button className="button_primary" onClick={vote_candidate}>
+                        Valider
+                    </button>
                 </label>
-
-                <button className="button_primary" onClick={vote_candidate}>
-                    Valider
-                </button>
             </Modal_Layout>
         </>
     );

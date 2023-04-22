@@ -12,8 +12,10 @@ import {
     get_electors,
     get_posts_of_election,
     get_rounds_for_a_post,
+    send_email,
     start_a_round,
 } from '../../../requests';
+import Link from 'next/link';
 
 export default function Election() {
     const { query } = useRouter();
@@ -70,9 +72,6 @@ export default function Election() {
     }
     useEffect(() => {
         get_post_and_rounds();
-        console.log('posts ICI', posts);
-        console.log('electors ICI', electors);
-        // get_post_and_rounds();
     }, [posts, electors]);
 
     useEffect(() => {
@@ -86,6 +85,22 @@ export default function Election() {
             let response = await start_a_round(round_id);
             console.log('response>>>' + i, response);
         }
+
+        // SEND NOTIFICATION MAIL TO ALL ELECTORS OF THE ELECTION
+        for (let i = 0; i < electors.length; i++) {
+            const current_elector = {
+                first_name: electors[i].first_name,
+                name: electors[i].name,
+                email: electors[i].email,
+                token_for_vote: electors[i].token_for_vote,
+            };
+            let response = await send_email({
+                election_id: election_id,
+                elector: current_elector,
+            });
+            console.log('response>>>' + i, response);
+        }
+
         // If the rounds are closed , display "Terminé"
         get_post_and_rounds();
     }
@@ -151,21 +166,16 @@ export default function Election() {
                     ) : election_posts_and_rounds[0]?.rounds[0].status ==
                       'In progress' ? (
                         <button
-                        className="button_primary"
-                        onClick={() => close_round()}
-                    >
-                        Arrêter
-                    </button>
+                            className="button_primary"
+                            onClick={() => close_round()}
+                        >
+                            Arrêter
+                        </button>
                     ) : (
-                        <p>Terminé </p>
+                        <Link href={`../../result_page/${election_id}`}>
+                            <p className="pointer">Résultats </p>
+                        </Link>
                     )}
-
-                    {/* <button
-                        className="button_primary"
-                        onClick={() => close_round()}
-                    >
-                        Arrêter
-                    </button> */}
                 </div>
                 <div className={styles.cards}>
                     <div
@@ -173,7 +183,7 @@ export default function Election() {
                         onClick={() => open_modal_post()}
                     >
                         <h3 className={styles.card_title}>Poste à pourvoir</h3>
-                        <p className={styles.card_paragraph}>{posts.length}</p>
+                        <p className={styles.card_paragraph}>{posts?.length}</p>
                     </div>
 
                     <div
@@ -182,7 +192,7 @@ export default function Election() {
                     >
                         <h3 className={styles.card_title}>Electeurs</h3>
                         <p className={styles.card_paragraph}>
-                            {electors.length}
+                            {electors?.length}
                         </p>
                     </div>
 

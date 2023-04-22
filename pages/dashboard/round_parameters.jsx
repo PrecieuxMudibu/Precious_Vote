@@ -71,7 +71,11 @@ export default function Round_Parameters() {
                 .then((response) => {
                     set_response_after_query(response);
                     open_modal();
-                    setTimeout(() => push(`/dashboard/my_projects`), 10000);
+                    set_election_to_create({
+                        candidates: [{ post: '', people: [] }],
+                        tariff: 'Free',
+                    });
+                    setTimeout(() => push(`/dashboard/my_projects`), 6000);
                 })
                 .catch((error) => {
                     console.log('error--->>>', error);
