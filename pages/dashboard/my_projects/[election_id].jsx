@@ -94,11 +94,11 @@ export default function Election() {
                 email: electors[i].email,
                 token_for_vote: electors[i].token_for_vote,
             };
+            // eslint-disable-next-line no-unused-vars
             let response = await send_email({
                 election_id: election_id,
                 elector: current_elector,
             });
-            console.log('response>>>' + i, response);
         }
 
         // If the rounds are closed , display "Terminé"
