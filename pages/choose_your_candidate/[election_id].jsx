@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import {
     get_an_election,
+    get_candidates_for_the_round,
     get_posts_of_election,
     get_rounds_for_a_post,
 } from '../../requests';
@@ -18,6 +19,7 @@ export default function Choose_Candidate() {
     const [election, set_election] = useState({});
     const [candidates, set_candidates] = useState([]);
 
+    // GET POST OF THE ELECTION
     const [posts, set_posts] = useState([]);
     async function get_posts() {
         set_posts(await get_posts_of_election(election_id));
@@ -26,22 +28,34 @@ export default function Choose_Candidate() {
         get_posts();
     }, [election_id]);
 
+    // GET ROUNDS OF THE POSTS
     const [rounds, set_rounds] = useState();
     async function get_rounds() {
         const current_post = posts ? posts[post_index] : null;
         set_rounds(await get_rounds_for_a_post(current_post?._id));
     }
     useEffect(() => {
-        // get_rounds_for_a_post
         get_rounds();
         console.log('POST>>>', posts);
         console.log('POSTS INDEX>>>', posts ? posts[post_index] : null);
     }, [posts, post_index]);
 
+    // GET CANDIDATES OF THE ROUNDS
+    async function get_candidates() {
+        // set_rounds(await get_rounds_for_a_post(current_post?._id));
+
+        set_candidates(
+            await get_candidates_for_the_round(rounds ? rounds[0]?._id : null)
+        );
+    }
+    useEffect(() => {
+        get_candidates();
+    }, [rounds,posts, post_index]);
+
     useEffect(() => {
         // get_rounds_for_a_post
-        console.log('ROUNDS>>>', rounds);
-    }, [rounds]);
+        console.log('candidates>>>', candidates);
+    }, [candidates]);
     return (
         <Layout>
             <h1>{election?.name}</h1>
