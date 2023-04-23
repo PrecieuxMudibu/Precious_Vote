@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import logo from '../../../public/images/test.png';
 import { Dashboard_Layout } from '../../../components';
 import { useRouter } from 'next/router';

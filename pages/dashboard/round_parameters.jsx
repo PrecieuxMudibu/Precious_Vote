@@ -6,12 +6,16 @@ import {
     Dashboard_Layout,
     Failed_Message,
     Success_Message,
+    Small_Loader,
 } from '../../components/index';
 import { Icon } from '@iconify/react';
 import Modal_Layout from '../../components/layouts/modal_layout';
 import { applicationContext } from '../_app';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
+// import { Small_Loader } from '../../../components/index';
+// import Small_Loader from '../../components/index';
 
 export default function Round_Parameters() {
     const { election_to_create, connectedUser, set_election_to_create } =
@@ -22,6 +26,7 @@ export default function Round_Parameters() {
     const close_modal = () => set_open(false);
     const open_modal = () => set_open(true);
     const { push } = useRouter();
+    const [show_loader, set_show_loader] = useState(false);
 
     function onChange(e) {
         const { name, value } = e.target;
@@ -47,11 +52,8 @@ export default function Round_Parameters() {
             });
     }
 
-    useEffect(() => {
-        console.log('response_after_query>>>', response_after_query);
-    }, [response_after_query]);
-
     function create_election() {
+        set_show_loader(true);
         if (
             election_to_create.hasOwnProperty('user_id') &&
             election_to_create.hasOwnProperty('name') &&
@@ -84,17 +86,9 @@ export default function Round_Parameters() {
             set_response_after_query({ status: 404 });
             open_modal();
         }
+        set_show_loader(false);
     }
 
-    useEffect(() => {
-        console.log(election_to_create);
-    }, [election_to_create]);
-
-
-    useEffect(()=>{
-        console.log('connectedUser', connectedUser);
-        
-    },[])
     return (
         <Dashboard_Layout page_title="Tours">
             <section>
@@ -170,13 +164,22 @@ export default function Round_Parameters() {
                 </div>
 
                 <div className={styles.buttons_group}>
-                    <button className="button_primary">Précédent</button>
-                    <button
-                        className="button_primary"
-                        onClick={() => create_election()}
-                    >
-                        Soumettre
-                    </button>
+                    <Link href="/dashboard/add_electors" className='link'>
+                        <button className="button_primary">Précédent</button>
+                    </Link>
+
+                    {show_loader ? (
+                        <button className="button_primary">
+                            <Small_Loader color="white" />
+                        </button>
+                    ) : (
+                        <button
+                            className="button_primary"
+                            onClick={() => create_election()}
+                        >
+                            Soumettre
+                        </button>
+                    )}
 
                     {/* <button
                         type="button"
@@ -189,67 +192,6 @@ export default function Round_Parameters() {
                 </div>
 
                 <Modal_Layout open={open} close_modal={close_modal}>
-                    {/* <h1>Paiement</h1>
-                    <p>Vous aller devoir payer 2$</p>
-
-                    <div className={styles.mobile_money_card_container}>
-                        <div className={styles.mobile_money_card}>
-                            <div className={styles.yyy}>
-                                <input
-                                    type="radio"
-                                    name="age"
-                                    value="moins15"
-                                    id="moins15"
-                                />
-                            </div>
-
-                            <div className={styles.yyy}>
-                                <Image src={airtel_money} height={125} />
-                            </div>
-                        </div>
-                        <div className={styles.mobile_money_card}>
-                            <div className={styles.yyy}>
-                                <input
-                                    type="radio"
-                                    name="age"
-                                    value="moins15"
-                                    id="moins15"
-                                />
-                            </div>
-
-                            <div className={styles.yyy}>
-                                <Image src={m_pesa} height={125} />
-                            </div>
-                        </div>
-                        <div className={styles.mobile_money_card}>
-                            <div className={styles.yyy}>
-                                <input
-                                    type="radio"
-                                    name="age"
-                                    value="moins15"
-                                    id="moins15"
-                                />
-                            </div>
-
-                            <div className={styles.yyy}>
-                                <Image src={m_pesa} height={125} />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className={styles.phone_number}>
-                        <span>
-                            Veuillez renseigner votre numéro de téléphone
-                        </span>
-                        <div className="input_group">
-                            <Icon
-                                icon="eos-icons:role-binding"
-                                className="icon"
-                            />
-                            <input name="phone_number" id="phone_number" />
-                        </div>
-                    </div>
-                    <button className="button_primary">Valider</button> */}
                     {response_after_query.status == 201 ? (
                         <Success_Message
                             action="Création de l'élection réussie"
