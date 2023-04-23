@@ -90,6 +90,11 @@ export default function Round_Parameters() {
         console.log(election_to_create);
     }, [election_to_create]);
 
+
+    useEffect(()=>{
+        console.log('connectedUser', connectedUser);
+        
+    },[])
     return (
         <Dashboard_Layout page_title="Tours">
             <section>

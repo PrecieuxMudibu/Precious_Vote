@@ -15,7 +15,11 @@ export default function Left_Section() {
     const { setConnectedUser, connectedUser } = useContext(applicationContext);
 
     useEffect(() => {
-        setConnectedUser({ _id: localStorage.getItem('vote_app_user_id') });
+        setConnectedUser({
+            ...connectedUser,
+            _id: localStorage.getItem('vote_app_user_id'),
+            token: localStorage.getItem('vote_app_token'),
+        });
 
         axios({
             method: 'get',
@@ -25,14 +29,15 @@ export default function Left_Section() {
             //   },
         })
             .then((response) => {
-                setConnectedUser({ ...response.data.user });
+                console.log('TEST');
+                setConnectedUser({
+                    ...response.data.user,
+                    _id: localStorage.getItem('vote_app_user_id'),
+                    token: localStorage.getItem('vote_app_token'),
+                });
             })
             .catch((error) => console.error(error));
     }, [connectedUser._id]);
-
-    useEffect(() => {
-        console.log('connectedUser-------', connectedUser);
-    }, [connectedUser]);
 
     function link_get_active_class_name_if_router_path_name(route) {
         const router = useRouter();

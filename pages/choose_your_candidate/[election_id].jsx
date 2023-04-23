@@ -16,8 +16,17 @@ export default function Choose_Candidate() {
     const { query } = useRouter();
     const { election_id } = query;
     const [post_index, set_post_index] = useState(0);
-    const [election, set_election] = useState({});
     const [candidates, set_candidates] = useState([]);
+
+    const [election, set_election] = useState({});
+    async function get_election_info() {
+        let response = await get_an_election(election_id);
+        console.log('response', response);
+        set_election(await get_an_election(election_id));
+    }
+    useEffect(() => {
+        get_election_info();
+    },[election_id]);
 
     // GET POST OF THE ELECTION
     const [posts, set_posts] = useState([]);
@@ -94,12 +103,8 @@ export default function Choose_Candidate() {
             ) : null}
 
             <div className={styles.candidates}>
-                
                 {candidates?.map((candidate, index) => (
-                    <Candidate_Card
-                        candidate={candidate}
-                        key={index}
-                    />
+                    <Candidate_Card candidate={candidate} key={index} />
                 ))}
             </div>
         </Layout>

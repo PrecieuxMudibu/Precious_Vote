@@ -5,6 +5,7 @@ import { Result_Item } from '../../components';
 import { useRouter } from 'next/router';
 import {
     get_an_election,
+    get_electors,
     get_posts_of_election,
     get_rounds_for_a_post,
 } from '../../requests';
@@ -25,6 +26,10 @@ export default function Result_Page() {
     const [election_post_and_rounds, set_election_post_and_rounds] = useState(
         []
     );
+    const [electors, set_electors] = useState([]);
+    async function get_electors_of_election() {
+        set_electors(await get_electors(election_id));
+    }
 
     async function get_candidates_for_the_round(id) {
         return await axios
@@ -74,6 +79,7 @@ export default function Result_Page() {
     }, [election_post_and_rounds, current_post_selected]);
 
     useEffect(() => {
+        get_electors_of_election();
         get_candidates();
     }, [election_id, round_selected]);
 
@@ -157,6 +163,7 @@ export default function Result_Page() {
                         key={index}
                         index={index}
                         candidate={candidate}
+                        percentage={((candidate.voices * 100) / electors.length).toFixed(2)}
                     />
                 ))}
             </div>
