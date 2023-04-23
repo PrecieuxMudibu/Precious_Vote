@@ -80,38 +80,6 @@ export default function Left_Section() {
                         <span>Election</span>
                     </Link>
                 </li>
-                <li>
-                    <Link
-                        href="/dashboard/price"
-                        className={link_get_active_class_name_if_router_path_name(
-                            '/dashboard/price'
-                        )}
-                    >
-                        <Icon
-                            icon="ic:baseline-attach-money"
-                            className={icon_get_active_class_name_if_router_path_name(
-                                '/dashboard/price'
-                            )}
-                        />
-                        <span>Prix</span>
-                    </Link>
-                </li>
-                <li>
-                    <Link
-                        href="/dashboard/profile"
-                        className={link_get_active_class_name_if_router_path_name(
-                            '/dashboard/profile'
-                        )}
-                    >
-                        <Icon
-                            icon="gg:profile"
-                            className={icon_get_active_class_name_if_router_path_name(
-                                '/dashboard/profile'
-                            )}
-                        />
-                        <span>Profil</span>
-                    </Link>
-                </li>
             </ul>
 
             <button onClick={() => logout()} className={styles.button_logout}>
