@@ -78,7 +78,7 @@ export default function Add_Candidates() {
     useEffect(() => {
         console.log(election_to_create);
     }, [election_to_create]);
-    
+
     return (
         <Dashboard_Layout page_title="Ajoutez des électeurs">
             <section>
@@ -110,7 +110,10 @@ export default function Add_Candidates() {
                             <span>
                                 Télécharger un fichier exemple en cliquant{' '}
                             </span>
-                            <span className={styles.download_template_file_text} onClick={() => download_template_file()}>
+                            <span
+                                className={styles.download_template_file_text}
+                                onClick={() => download_template_file()}
+                            >
                                 ici
                             </span>
                             .
@@ -120,7 +123,9 @@ export default function Add_Candidates() {
                     <div className={styles.list_of_candidates}>
                         <div className={styles.thead}>
                             <div>N°</div>
-                            <div>Photo</div>
+                            <div>
+                                <span>Photo</span>
+                            </div>
                             <div>Prénom</div>
                             <div>Nom</div>
                         </div>
@@ -140,10 +145,10 @@ export default function Add_Candidates() {
                 </div>
 
                 <div className={styles.buttons_group}>
-                    <Link href="/dashboard/add_candidates" className='link'>
+                    <Link href="/dashboard/add_candidates" className="link">
                         <button className="button_primary">Précédent</button>
                     </Link>
-                    <Link href="/dashboard/round_parameters" className='link'>
+                    <Link href="/dashboard/round_parameters" className="link">
                         <button className="button_primary">Suivant</button>
                     </Link>
                 </div>
