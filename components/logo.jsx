@@ -1,8 +1,7 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import logo from '../public/images/test.png';
 import styles from '../styles/logo.module.css';
 import { useRouter } from 'next/router';
+import { Icon } from '@iconify/react';
 
 export default function Logo() {
     const router = useRouter();
@@ -15,13 +14,11 @@ export default function Logo() {
 
     return (
         <Link href="/" className={logo_group_class_name}>
-            <Image
-                src={logo}
-                alt="Picture of the author"
-                width={55}
-                height={55}
+            <Icon
+                className={styles.left_section_logo_icon}
+                icon="fluent:vote-24-filled"
             />
-            <p className={styles.header__text}>jevote</p>
+            <p className={styles.header__text}>Vote</p>
         </Link>
     );
 }

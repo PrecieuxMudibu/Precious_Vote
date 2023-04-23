@@ -6,6 +6,14 @@
     text-decoration: none;
 }
 
+.left_section_logo_icon{
+  color: var(--pink_light);
+  font-size: 50px;
+  border: 1px solid var(--pink_light);
+  border-radius: 100%;
+  padding: 10px;
+}
+
 .header__text {
     font-size: 20px;
     color: var(--pink_light);

@@ -37,8 +37,11 @@
   }
 
   .button_logout {
+    display: flex;
+    align-items: center;
     background: none;
     border: none;
     color:var(--pink_light);
     padding: 14px 30px;
+    font-size: 16px;
   }

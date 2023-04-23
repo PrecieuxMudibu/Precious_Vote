@@ -14,3 +14,12 @@
     height: 213px;
     border: 1px solid red;
 }
+
+
+@media screen and (max-width: 530px) {
+    .left-section {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+    }
+}

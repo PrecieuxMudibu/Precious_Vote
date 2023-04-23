@@ -119,7 +119,7 @@ export default function Left_Section() {
                     icon="ic:round-logout"
                     className={styles.left_section_link_icon}
                 />
-                Déconnexion
+                <span>Déconnexion</span>
             </button>
         </nav>
     );
