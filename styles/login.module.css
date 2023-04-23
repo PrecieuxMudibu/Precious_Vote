@@ -55,3 +55,23 @@
   width: 345px;
   border-radius: 100%;
 }
+
+@media screen and (max-width: 900px) {
+  .main {
+    width: 80%;
+    margin: 0 auto;
+    padding: 35px 43px;
+    background-color: var(--white);
+    box-shadow: 0px 0px 20px 6px rgba(255, 85, 89, 0.1);
+    border-radius: var(--radius);
+  }
+
+  .other {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .top_circle, .bottom_circle {
+      display: none;
+  }
+}
