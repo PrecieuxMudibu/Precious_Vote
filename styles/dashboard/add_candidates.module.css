@@ -86,8 +86,8 @@
         display: flex;
         flex-direction: column;
     }
-
-    .buttons_group div {
+    
+    .buttons_group button {
         margin: 20px 0;
-    }    
+    }
 }
