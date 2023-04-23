@@ -148,12 +148,15 @@ export default function Add_Candidates() {
                     <div className={styles.list_of_candidates}>
                         <div className={styles.thead}>
                             <div>N°</div>
-                            <div>Photo</div>
+                            <div>
+                                <span>Photo</span>
+                            </div>
                             <div>Prénom</div>
-                            <div>Nom</div>
+                            <div>
+                                Nom
+                            </div>
                         </div>
 
-                        {/* {election_to_create.candidates[number_of_post]?.people  election_to_create.candidates */}
                         {election_to_create
                             ? election_to_create.candidates[
                                   number_of_post
