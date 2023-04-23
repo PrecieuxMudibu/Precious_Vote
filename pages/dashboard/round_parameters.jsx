@@ -14,8 +14,6 @@ import { applicationContext } from '../_app';
 import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-// import { Small_Loader } from '../../../components/index';
-// import Small_Loader from '../../components/index';
 
 export default function Round_Parameters() {
     const { election_to_create, connectedUser, set_election_to_create } =
@@ -76,6 +74,7 @@ export default function Round_Parameters() {
                     set_election_to_create({
                         candidates: [{ post: '', people: [] }],
                         tariff: 'Free',
+                        two_rounds: false,
                     });
                     setTimeout(() => push(`/dashboard/my_projects`), 6000);
                 })
@@ -139,7 +138,7 @@ export default function Round_Parameters() {
                         </div>
                     </label>
 
-                    <label className={styles.two_rounds_or_not_question}>
+                    {/* <label className={styles.two_rounds_or_not_question}>
                         Souhaitez-vous des élections à deux tours
                         <div className="input_group">
                             <Icon
@@ -160,11 +159,11 @@ export default function Round_Parameters() {
                                 <option value="Non">Non</option>
                             </select>
                         </div>
-                    </label>
+                    </label> */}
                 </div>
 
                 <div className={styles.buttons_group}>
-                    <Link href="/dashboard/add_electors" className='link'>
+                    <Link href="/dashboard/add_electors" className="link">
                         <button className="button_primary">Précédent</button>
                     </Link>
 
@@ -180,15 +179,6 @@ export default function Round_Parameters() {
                             Soumettre
                         </button>
                     )}
-
-                    {/* <button
-                        type="button"
-                        className="button_primary"
-                        data-bs-toggle="modal"
-                        data-bs-target="#addClientModal"
-                    >
-                        Finaliser
-                    </button> */}
                 </div>
 
                 <Modal_Layout open={open} close_modal={close_modal}>
