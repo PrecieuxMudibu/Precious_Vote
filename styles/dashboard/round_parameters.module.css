@@ -68,4 +68,21 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 120px;
+}
+
+
+
+
+@media screen and (max-width: 900px) {
+    .buttons_group {
+        display: flex;
+        flex-direction: column;
+    margin-top: 30px;
+
+    }
+    
+    .buttons_group button {
+        margin: 20px 0;
+    }
 }

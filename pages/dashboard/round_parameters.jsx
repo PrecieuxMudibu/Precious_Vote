@@ -6,12 +6,14 @@ import {
     Dashboard_Layout,
     Failed_Message,
     Success_Message,
+    Small_Loader,
 } from '../../components/index';
 import { Icon } from '@iconify/react';
 import Modal_Layout from '../../components/layouts/modal_layout';
 import { applicationContext } from '../_app';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export default function Round_Parameters() {
     const { election_to_create, connectedUser, set_election_to_create } =
@@ -22,6 +24,7 @@ export default function Round_Parameters() {
     const close_modal = () => set_open(false);
     const open_modal = () => set_open(true);
     const { push } = useRouter();
+    const [show_loader, set_show_loader] = useState(false);
 
     function onChange(e) {
         const { name, value } = e.target;
@@ -47,15 +50,13 @@ export default function Round_Parameters() {
             });
     }
 
-    useEffect(() => {
-        console.log('response_after_query>>>', response_after_query);
-    }, [response_after_query]);
-
     function create_election() {
+        set_show_loader(true);
         if (
             election_to_create.hasOwnProperty('user_id') &&
             election_to_create.hasOwnProperty('name') &&
             election_to_create.hasOwnProperty('tariff') &&
+            election_to_create.hasOwnProperty('electors') &&
             election_to_create.hasOwnProperty(
                 'first_round_eligibility_criteria'
             ) &&
@@ -63,7 +64,6 @@ export default function Round_Parameters() {
             election_to_create.hasOwnProperty(
                 'candidates_for_the_second_round'
             ) &&
-            election_to_create.hasOwnProperty('status') &&
             election_to_create.hasOwnProperty('two_rounds')
         ) {
             axios
@@ -71,7 +71,12 @@ export default function Round_Parameters() {
                 .then((response) => {
                     set_response_after_query(response);
                     open_modal();
-                    setTimeout(() => push(`/dashboard/my_projects`), 10000);
+                    set_election_to_create({
+                        candidates: [{ post: '', people: [] }],
+                        tariff: 'Free',
+                        two_rounds: false,
+                    });
+                    setTimeout(() => push(`/dashboard/my_projects`), 6000);
                 })
                 .catch((error) => {
                     console.log('error--->>>', error);
@@ -80,6 +85,7 @@ export default function Round_Parameters() {
             set_response_after_query({ status: 404 });
             open_modal();
         }
+        set_show_loader(false);
     }
 
     return (
@@ -100,7 +106,9 @@ export default function Round_Parameters() {
                             />
                             <input
                                 onChange={onChange}
-                                // value={election_to_create.name}
+                                value={
+                                    election_to_create.first_round_eligibility_criteria
+                                }
                                 name="first_round_eligibility_criteria"
                                 type="number"
                                 placeholder="Election du comité de G1 Math-Info"
@@ -120,7 +128,9 @@ export default function Round_Parameters() {
                             />
                             <input
                                 onChange={onChange}
-                                // value={election_to_create.name}
+                                value={
+                                    election_to_create.candidates_for_the_second_round
+                                }
                                 name="candidates_for_the_second_round"
                                 type="number"
                                 placeholder="Election du comité de G1 Math-Info"
@@ -128,7 +138,7 @@ export default function Round_Parameters() {
                         </div>
                     </label>
 
-                    <label className={styles.two_rounds_or_not_question}>
+                    {/* <label className={styles.two_rounds_or_not_question}>
                         Souhaitez-vous des élections à deux tours
                         <div className="input_group">
                             <Icon
@@ -139,95 +149,39 @@ export default function Round_Parameters() {
                                 onChange={onChange}
                                 name="two_rounds"
                                 id="two_rounds"
+                                value={
+                                    election_to_create.two_rounds
+                                        ? 'Oui'
+                                        : 'Non'
+                                }
                             >
                                 <option value="Oui">Oui</option>
                                 <option value="Non">Non</option>
                             </select>
                         </div>
-                    </label>
+                    </label> */}
                 </div>
 
                 <div className={styles.buttons_group}>
-                    <button className="button_primary">Précédent</button>
-                    <button
-                        className="button_primary"
-                        onClick={() => create_election()}
-                    >
-                        Soumettre
-                    </button>
+                    <Link href="/dashboard/add_electors" className="link">
+                        <button className="button_primary">Précédent</button>
+                    </Link>
 
-                    {/* <button
-                        type="button"
-                        className="button_primary"
-                        data-bs-toggle="modal"
-                        data-bs-target="#addClientModal"
-                    >
-                        Finaliser
-                    </button> */}
+                    {show_loader ? (
+                        <button className="button_primary">
+                            <Small_Loader color="white" />
+                        </button>
+                    ) : (
+                        <button
+                            className="button_primary"
+                            onClick={() => create_election()}
+                        >
+                            Soumettre
+                        </button>
+                    )}
                 </div>
 
                 <Modal_Layout open={open} close_modal={close_modal}>
-                    {/* <h1>Paiement</h1>
-                    <p>Vous aller devoir payer 2$</p>
-
-                    <div className={styles.mobile_money_card_container}>
-                        <div className={styles.mobile_money_card}>
-                            <div className={styles.yyy}>
-                                <input
-                                    type="radio"
-                                    name="age"
-                                    value="moins15"
-                                    id="moins15"
-                                />
-                            </div>
-
-                            <div className={styles.yyy}>
-                                <Image src={airtel_money} height={125} />
-                            </div>
-                        </div>
-                        <div className={styles.mobile_money_card}>
-                            <div className={styles.yyy}>
-                                <input
-                                    type="radio"
-                                    name="age"
-                                    value="moins15"
-                                    id="moins15"
-                                />
-                            </div>
-
-                            <div className={styles.yyy}>
-                                <Image src={m_pesa} height={125} />
-                            </div>
-                        </div>
-                        <div className={styles.mobile_money_card}>
-                            <div className={styles.yyy}>
-                                <input
-                                    type="radio"
-                                    name="age"
-                                    value="moins15"
-                                    id="moins15"
-                                />
-                            </div>
-
-                            <div className={styles.yyy}>
-                                <Image src={m_pesa} height={125} />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className={styles.phone_number}>
-                        <span>
-                            Veuillez renseigner votre numéro de téléphone
-                        </span>
-                        <div className="input_group">
-                            <Icon
-                                icon="eos-icons:role-binding"
-                                className="icon"
-                            />
-                            <input name="phone_number" id="phone_number" />
-                        </div>
-                    </div>
-                    <button className="button_primary">Valider</button> */}
                     {response_after_query.status == 201 ? (
                         <Success_Message
                             action="Création de l'élection réussie"

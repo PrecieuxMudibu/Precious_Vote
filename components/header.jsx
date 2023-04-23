@@ -1,9 +1,7 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import styles from '../styles/header.module.css';
-import logo from '../public/images/test.png';
 import { useRouter } from 'next/router';
-
+import { Icon } from '@iconify/react';
 
 export default function Header() {
     const logo_group_class_name = `${styles.header_logo_group} link`;
@@ -13,14 +11,11 @@ export default function Header() {
         <header className={styles.header}>
             <div className={styles.header_logo_group}>
                 <Link href="/" className={logo_group_class_name}>
-                    <Image
-                        src={logo}
-                        alt="Picture of the author"
-                        width={40}
-                        height={40}
+                    <Icon
+                        icon="fluent:vote-24-filled"
                         className={styles.header_logo}
                     />
-                    <p className={styles.header__text}>jevote</p>
+                    <p className={styles.header__text}>Vote</p>
                 </Link>
             </div>
 
@@ -36,30 +31,7 @@ export default function Header() {
                             A propos
                         </Link>
                     </li>
-                    <li>
-                        <Link
-                            href="/tarifs"
-                            className={
-                                router.pathname === '/tarifs'
-                                    ? 'link active'
-                                    : 'link'
-                            }
-                        >
-                            Tarifs
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            href="/testimonies"
-                            className={
-                                router.pathname === '/testimonies'
-                                    ? 'link active'
-                                    : 'link'
-                            }
-                        >
-                            Témoignages
-                        </Link>
-                    </li>
+
                     <li>
                         <Link
                             href="/contact"

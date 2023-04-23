@@ -1,13 +1,17 @@
 import styles from '../../styles/dashboard/position_to_be_filled.module.css';
 import { Dashboard_Layout } from '../../components/index';
 import { Icon } from '@iconify/react';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { applicationContext } from '../_app';
 import Link from 'next/link';
 
 export default function Position_To_Be_Filled() {
     const { election_to_create, set_election_to_create } =
         useContext(applicationContext);
+
+    useEffect(() => {
+        console.log(election_to_create);
+    }, [election_to_create]);
 
     function add_a_post() {
         if (election_to_create.candidates.length < 4) {
@@ -54,15 +58,17 @@ export default function Position_To_Be_Filled() {
 
                 <div className={styles.list_of_posts}>
                     {election_to_create.candidates.map((post, index) => (
-                        <label key={index}>
-                            <span>Poste {index + 1} </span>
-                            <span>
-                                <Icon
-                                    icon="material-symbols:delete-outline-rounded"
-                                    className="icon pointer"
-                                    onClick={() => delete_post(index)}
-                                />
-                            </span>
+                        <label key={index} className={styles.label}>
+                            <div>
+                                <span>Poste {index + 1} </span>
+                                <span>
+                                    <Icon
+                                        icon="material-symbols:delete-outline-rounded"
+                                        className={styles.delete_icon}
+                                        onClick={() => delete_post(index)}
+                                    />
+                                </span>
+                            </div>
                             <div className="input_group">
                                 <Icon
                                     icon="eos-icons:role-binding"
@@ -87,10 +93,10 @@ export default function Position_To_Be_Filled() {
                 </button>
 
                 <div className={styles.buttons_group}>
-                    <Link href="/dashboard/general_parameters">
+                    <Link href="/dashboard/general_parameters" className="link">
                         <button className="button_primary">Précédent</button>
                     </Link>
-                    <Link href="/dashboard/add_candidates">
+                    <Link href="/dashboard/add_candidates" className="link">
                         <button className="button_primary">Suivant</button>
                     </Link>
                 </div>

@@ -10,3 +10,9 @@
     width: 82%;
     padding: 40px 50px;
 }
+
+@media screen and (max-width: 900px) {
+    .main {
+      flex-direction: column;
+    }
+}

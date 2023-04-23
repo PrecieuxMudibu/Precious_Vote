@@ -1,3 +1,10 @@
+.modal_sub_container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .candidate_card {
     border: 1px solid var(--primary_color);
     padding: 15px;
@@ -23,4 +30,5 @@
 .image {
     width: 210px;
     height :172px;
+    border-radius: 15px;
 }

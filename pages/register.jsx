@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Logo from '../components/logo';
 import styles from '../styles/register.module.css';
 import { Icon } from '@iconify/react';
 import { Quality_Item } from '../components/index';
@@ -64,9 +63,6 @@ export default function Register() {
             <div className={styles.bottom_circle}></div>
 
             <header className={styles.header}>
-                <div className={styles.header_logo_group}>
-                    <Logo />
-                </div>
                 <h1 className={styles.header__title}>
                     Content de vous revoir !
                 </h1>

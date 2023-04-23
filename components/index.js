@@ -11,6 +11,7 @@ import Header from './header';
 import Footer from './footer';
 import Candidate_Card from './candidate_card';
 import Result_Item from './result_item';
+import Small_Loader from './small_loader';
 
 export {
     Quality_Item,
@@ -25,5 +26,6 @@ export {
     Success_Message,
     Failed_Message,
     Header,
-    Footer
+    Footer,
+    Small_Loader
 };

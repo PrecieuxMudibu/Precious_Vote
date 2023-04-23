@@ -47,6 +47,7 @@ export default function General_Parameters() {
                                     className="icon"
                                 />
                                 <textarea
+                                    value={election_to_create.description}
                                     onChange={onChange}
                                     name="description"
                                 ></textarea>
@@ -86,8 +87,10 @@ export default function General_Parameters() {
                 </div>
 
                 <div className={styles.buttons_group}>
-                    {/* <button className="button_primary">Précédent</button> */}
-                    <Link href="/dashboard/position_to_be_filled">
+                    <Link
+                        href="/dashboard/position_to_be_filled"
+                        className="link"
+                    >
                         <button className="button_primary">Suivant</button>
                     </Link>
                 </div>
