@@ -30,13 +30,11 @@ export default function Candidate_Card({ candidate }) {
         axios
             .post(route_for_vote_candidate, data)
             .then((response) => {
-                console.log('response', response);
                 set_response_after_query(response);
             })
             .catch((error) => {
-                // eslint-disable-next-line no-console
                 set_response_after_query(error);
-                // console.log('Error Login --->', error.response);
+                console.log('Error-->', error.response);
             });
         set_has_user_voted(true);
         // set_post_number(post_number + 1);
