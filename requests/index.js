@@ -79,7 +79,7 @@ export async function send_email(data) {
 export async function get_candidates_for_the_round(round_id) {
     return await axios
         .get(`${route_for_get_candidates_for_the_round}/${round_id}`)
-        .then((response) => response.data)
+        .then((response) => response.data.candidates)
         .catch((error) => {
             console.log(error);
         });

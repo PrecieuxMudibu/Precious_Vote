@@ -43,14 +43,26 @@ export default function Choose_Candidate() {
     // GET CANDIDATES OF THE ROUNDS
     async function get_candidates() {
         // set_rounds(await get_rounds_for_a_post(current_post?._id));
-
-        set_candidates(
-            await get_candidates_for_the_round(rounds ? rounds[0]?._id : null)
+        console.log('rounds>>> ICICICICICI 2', rounds?.rounds[0]._id);
+        let candidates_rounds = await get_candidates_for_the_round(
+            rounds?.rounds[0]._id
         );
+
+        const candidates_intermediates_variables = candidates_rounds?.map(
+            (item) => item.candidate_id
+        );
+
+        console.log(
+            'candidates_intermediates_variables>>>',
+            candidates_intermediates_variables
+        );
+        set_candidates(candidates_intermediates_variables);
     }
+
     useEffect(() => {
+        console.log('rounds iiiiic>>>>', rounds);
         get_candidates();
-    }, [rounds,posts, post_index]);
+    }, [rounds, posts, post_index]);
 
     useEffect(() => {
         // get_rounds_for_a_post
@@ -82,11 +94,10 @@ export default function Choose_Candidate() {
             ) : null}
 
             <div className={styles.candidates}>
+                
                 {candidates?.map((candidate, index) => (
                     <Candidate_Card
-                        candidate={candidate.candidate_id}
-                        post_number={post_number}
-                        set_post_number={set_post_number}
+                        candidate={candidate}
                         key={index}
                     />
                 ))}

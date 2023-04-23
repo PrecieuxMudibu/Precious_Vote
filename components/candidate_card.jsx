@@ -4,17 +4,23 @@ import Modal_Layout from './layouts/modal_layout';
 import { Icon } from '@iconify/react';
 import axios from 'axios';
 import { route_for_vote_candidate } from '../public/routes';
+import Success_Message from './success_message';
+import Failed_Message from './failed_message';
 
-export default function Candidate_Card({
-    candidate,
-    // post_number,
-    // set_post_number,
-}) {
+export default function Candidate_Card({ candidate }) {
     const [open, set_open] = useState(false);
     const [token_for_vote, set_token_for_vote] = useState(false);
-    const close_modal = () => set_open(false);
+    const close_modal = () => {
+        set_has_user_voted(false);
+        set_open(false);
+    };
     const open_modal = () => set_open(true);
 
+    const [has_user_voted, set_has_user_voted] = useState(false);
+
+    const [response_after_query, set_response_after_query] = useState({
+        data: { message: '' },
+    });
     function vote_candidate() {
         let data = {
             token_for_vote: token_for_vote,
@@ -25,12 +31,14 @@ export default function Candidate_Card({
             .post(route_for_vote_candidate, data)
             .then((response) => {
                 console.log('response', response);
+                set_response_after_query(response);
             })
             .catch((error) => {
                 // eslint-disable-next-line no-console
-                console.log('Error Login --->', error);
+                set_response_after_query(error);
+                // console.log('Error Login --->', error.response);
             });
-
+        set_has_user_voted(true);
         // set_post_number(post_number + 1);
     }
 
@@ -39,15 +47,15 @@ export default function Candidate_Card({
             <div className={styles.candidate_card}>
                 <img
                     src={
-                        candidate.picture
+                        candidate?.picture
                             ? candidate.picture
                             : `https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png`
                     }
                     className={styles.image}
-                    alt={candidate.name}
+                    alt={candidate?.name}
                 />
                 <h2>
-                    {candidate.first_name} {candidate.name}
+                    {candidate?.first_name} {candidate?.name}
                 </h2>
 
                 <button
@@ -60,41 +68,60 @@ export default function Candidate_Card({
             </div>
 
             <Modal_Layout open={open} close_modal={close_modal}>
-                <label className={styles.modal_sub_container}>
-                    <div className={styles.candidate_card}>
-                        <img
-                            src={
-                                candidate.picture
-                                    ? candidate.picture
-                                    : `https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png`
-                            }
-                            className={styles.image}
-                            alt={candidate.name}
-                        />
-                        <h2>
-                            {candidate.first_name} {candidate.name}
-                        </h2>
-                    </div>
-                    <span>
-                        Entrez votre jeton de vote pour confirmer votre choix,
-                        puis cliquer sur "Valider".
-                    </span>
-                    <div className="input_group">
-                        <Icon
-                            icon="ic:round-drive-file-rename-outline"
-                            className="icon"
-                        />
-                        <input
-                            onChange={(e) => set_token_for_vote(e.target.value)}
-                            name="name"
-                            type="text"
-                            placeholder="Election du comité de G1 Math-Info"
-                        />
-                    </div>
-                    <button className="button_primary" onClick={vote_candidate}>
-                        Valider
-                    </button>
-                </label>
+                {!has_user_voted ? (
+                    <label className={styles.modal_sub_container}>
+                        <div className={styles.candidate_card}>
+                            <img
+                                src={
+                                    candidate?.picture
+                                        ? candidate.picture
+                                        : `https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png`
+                                }
+                                className={styles.image}
+                                alt={candidate?.name}
+                            />
+                            <h2>
+                                {candidate?.first_name} {candidate?.name}
+                            </h2>
+                        </div>
+                        <span>
+                            Entrez votre jeton de vote pour confirmer votre
+                            choix, puis cliquer sur "Valider".
+                        </span>
+                        <div className="input_group">
+                            <Icon
+                                icon="ic:round-drive-file-rename-outline"
+                                className="icon"
+                            />
+                            <input
+                                onChange={(e) =>
+                                    set_token_for_vote(e.target.value)
+                                }
+                                name="name"
+                                type="text"
+                                placeholder="Election du comité de G1 Math-Info"
+                            />
+                        </div>
+                        <button
+                            className="button_primary"
+                            onClick={vote_candidate}
+                        >
+                            Valider
+                        </button>
+                    </label>
+                ) : response_after_query.status == 201 ? (
+                    <Success_Message
+                        action="Vote enregistré"
+                        message={response_after_query.data.message}
+                    />
+                ) : (
+                    <Failed_Message
+                        action="Echec du vote"
+                        message="Quelque chose s'est mal passé."
+                    />
+                )}
+
+                {}
             </Modal_Layout>
         </>
     );
