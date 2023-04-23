@@ -58,15 +58,17 @@ export default function Position_To_Be_Filled() {
 
                 <div className={styles.list_of_posts}>
                     {election_to_create.candidates.map((post, index) => (
-                        <label key={index}>
-                            <span>Poste {index + 1} </span>
-                            <span>
-                                <Icon
-                                    icon="material-symbols:delete-outline-rounded"
-                                    className="icon pointer"
-                                    onClick={() => delete_post(index)}
-                                />
-                            </span>
+                        <label key={index} className={styles.label}>
+                            <div>
+                                <span>Poste {index + 1} </span>
+                                <span>
+                                    <Icon
+                                        icon="material-symbols:delete-outline-rounded"
+                                        className={styles.delete_icon}
+                                        onClick={() => delete_post(index)}
+                                    />
+                                </span>
+                            </div>
                             <div className="input_group">
                                 <Icon
                                     icon="eos-icons:role-binding"
