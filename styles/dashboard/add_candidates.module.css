@@ -34,8 +34,7 @@
     border: 1px dashed var(--primary_color);
     border-radius: 15px;
     height: 50vh;
-    overflow-y: scroll;
-   
+    overflow-y: scroll;  
 }
 
 .thead {
@@ -62,3 +61,33 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 900px) {
+    .upload_and_list_section {
+        display: block;
+        height: fit-content;
+    }
+
+    .list_of_candidates {
+        width: 100%;
+    }
+
+    .thead {
+        color: var(--primary_color);
+        display: grid;
+        grid-template-columns: repeat(3, 9% 12% 35%);
+        gap: 2%;
+    }
+
+    .thead > div  span {
+        display: none;
+    }
+
+    .buttons_group {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .buttons_group button {
+        margin: 20px 0;
+    }
+}

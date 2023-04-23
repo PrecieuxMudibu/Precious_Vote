@@ -3,7 +3,6 @@ import styles from '../styles/login.module.css';
 import { Icon } from '@iconify/react';
 import { Quality_Item } from '../components/index';
 import Link from 'next/link';
-import Logo from '../components/logo';
 import { applicationContext } from './_app';
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
@@ -68,9 +67,6 @@ export default function Login() {
             <div className={styles.bottom_circle}></div>
 
             <header className={styles.header}>
-                <div className={styles.header_logo_group}>
-                    <Logo />
-                </div>
                 <h1 className={styles.header__title}>Content de vous revoir</h1>
             </header>
 

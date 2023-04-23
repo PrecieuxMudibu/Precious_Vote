@@ -15,7 +15,11 @@ export default function Left_Section() {
     const { setConnectedUser, connectedUser } = useContext(applicationContext);
 
     useEffect(() => {
-        setConnectedUser({ _id: localStorage.getItem('vote_app_user_id') });
+        setConnectedUser({
+            ...connectedUser,
+            _id: localStorage.getItem('vote_app_user_id'),
+            token: localStorage.getItem('vote_app_token'),
+        });
 
         axios({
             method: 'get',
@@ -25,14 +29,15 @@ export default function Left_Section() {
             //   },
         })
             .then((response) => {
-                setConnectedUser({ ...response.data.user });
+                console.log('TEST');
+                setConnectedUser({
+                    ...response.data.user,
+                    _id: localStorage.getItem('vote_app_user_id'),
+                    token: localStorage.getItem('vote_app_token'),
+                });
             })
             .catch((error) => console.error(error));
     }, [connectedUser._id]);
-
-    useEffect(() => {
-        console.log('connectedUser-------', connectedUser);
-    }, [connectedUser]);
 
     function link_get_active_class_name_if_router_path_name(route) {
         const router = useRouter();
@@ -72,39 +77,7 @@ export default function Left_Section() {
                                 '/dashboard/my_projects'
                             )}
                         />
-                        Election
-                    </Link>
-                </li>
-                <li>
-                    <Link
-                        href="/dashboard/price"
-                        className={link_get_active_class_name_if_router_path_name(
-                            '/dashboard/price'
-                        )}
-                    >
-                        <Icon
-                            icon="ic:baseline-attach-money"
-                            className={icon_get_active_class_name_if_router_path_name(
-                                '/dashboard/price'
-                            )}
-                        />
-                        Prix
-                    </Link>
-                </li>
-                <li>
-                    <Link
-                        href="/dashboard/profile"
-                        className={link_get_active_class_name_if_router_path_name(
-                            '/dashboard/profile'
-                        )}
-                    >
-                        <Icon
-                            icon="gg:profile"
-                            className={icon_get_active_class_name_if_router_path_name(
-                                '/dashboard/profile'
-                            )}
-                        />
-                        Profil
+                        <span>Election</span>
                     </Link>
                 </li>
             </ul>
@@ -114,7 +87,7 @@ export default function Left_Section() {
                     icon="ic:round-logout"
                     className={styles.left_section_link_icon}
                 />
-                Déconnexion
+                <span>Déconnexion</span>
             </button>
         </nav>
     );

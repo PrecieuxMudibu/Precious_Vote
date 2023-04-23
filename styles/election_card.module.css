@@ -32,3 +32,8 @@
     width: 17px;
     border-radius: 17px;
 }
+@media screen and (max-width: 900px) {
+    .election_card {
+        margin: 10px 0;
+    }
+}
