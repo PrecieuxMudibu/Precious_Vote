@@ -66,6 +66,11 @@
     border-radius: var(--radius);
   }
 
+  .qualities_group {
+    margin: 40px auto auto;
+    width: 80%;
+  }
+
   .other {
     display: flex;
     flex-direction: column;
