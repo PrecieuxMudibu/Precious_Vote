@@ -5,6 +5,7 @@ import styles from '../../../styles/dashboard/my_projects/[election_id].module.c
 import { useEffect, useState } from 'react';
 import Modal_Layout from '../../../components/layouts/modal_layout';
 import Image from 'next/image';
+import { Small_Loader } from '../../../components/index';
 
 import {
     close_a_round,
@@ -20,6 +21,7 @@ import Link from 'next/link';
 export default function Election() {
     const { query } = useRouter();
     const { election_id } = query;
+    const [show_loader, set_show_loader] = useState(false);
 
     const [open_post, set_open_post] = useState(false);
     const open_modal_post = () => set_open_post(true);
@@ -80,6 +82,7 @@ export default function Election() {
 
     async function begin_round() {
         // START THE FIRST ROUNDS OF ALL POSTS
+        set_show_loader(true);
         for (let i = 0; i < election_posts_and_rounds.length; i++) {
             const round_id = election_posts_and_rounds[i].rounds[0]._id;
             let response = await start_a_round(round_id);
@@ -103,9 +106,12 @@ export default function Election() {
 
         // If the rounds are closed , display "Terminé"
         get_post_and_rounds();
+        set_show_loader(false);
     }
 
     async function close_round() {
+        set_show_loader(true);
+
         // START THE FIRST ROUNDS OF ALL POSTS
         for (let i = 0; i < election_posts_and_rounds.length; i++) {
             const round_id = election_posts_and_rounds[i].rounds[0]._id;
@@ -114,6 +120,7 @@ export default function Election() {
         }
         // If the rounds are closed , display "Terminé"
         get_post_and_rounds();
+        set_show_loader(false);
     }
 
     useEffect(() => {
@@ -125,7 +132,6 @@ export default function Election() {
             <section>
                 <div className={styles.header}>
                     <div>
-                        {/* <img src="" alt="" /> */}
                         <Image
                             src={logo}
                             alt="Picture of the author"
@@ -148,29 +154,34 @@ export default function Election() {
                         </div>
                     </div>
 
-                    {/* <button
-                        className="button_primary"
-                        onClick={() => begin_round()}
-                    >
-                        Commencer
-                    </button> */}
-
                     {election_posts_and_rounds[0]?.rounds[0].status ==
                     'Not started' ? (
-                        <button
-                            className="button_primary"
-                            onClick={() => begin_round()}
-                        >
-                            Commencer
-                        </button>
+                        show_loader ? (
+                            <button className="button_primary">
+                                <Small_Loader color="white" />
+                            </button>
+                        ) : (
+                            <button
+                                className="button_primary"
+                                onClick={() => begin_round()}
+                            >
+                                Commencer
+                            </button>
+                        )
                     ) : election_posts_and_rounds[0]?.rounds[0].status ==
                       'In progress' ? (
-                        <button
-                            className="button_primary"
-                            onClick={() => close_round()}
-                        >
-                            Arrêter
-                        </button>
+                        show_loader ? (
+                            <button className="button_primary">
+                                <Small_Loader color="white" />
+                            </button>
+                        ) : (
+                            <button
+                                className="button_primary"
+                                onClick={() => close_round()}
+                            >
+                                Arrêter
+                            </button>
+                        )
                     ) : (
                         <Link href={`../../result_page/${election_id}`}>
                             <p className="pointer">Résultats </p>

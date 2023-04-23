@@ -106,6 +106,9 @@ input::placeholder {
 .button_primary {
   border: none;
   padding: 18px 39px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
   font-size: var(--paragraph_size);
   color: var(--white);
   font-weight: var(--bold_weight);
@@ -113,6 +116,7 @@ input::placeholder {
   background-color: var(--primary_color);
   cursor: pointer;
   height: fit-content;
+  width: 200px;
 }
 
 .button_secondary {
