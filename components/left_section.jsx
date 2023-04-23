@@ -77,7 +77,7 @@ export default function Left_Section() {
                                 '/dashboard/my_projects'
                             )}
                         />
-                        Election
+                        <span>Election</span>
                     </Link>
                 </li>
                 <li>
@@ -93,7 +93,7 @@ export default function Left_Section() {
                                 '/dashboard/price'
                             )}
                         />
-                        Prix
+                        <span>Prix</span>
                     </Link>
                 </li>
                 <li>
@@ -109,7 +109,7 @@ export default function Left_Section() {
                                 '/dashboard/profile'
                             )}
                         />
-                        Profil
+                        <span>Profil</span>
                     </Link>
                 </li>
             </ul>
