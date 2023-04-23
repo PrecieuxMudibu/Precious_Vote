@@ -135,7 +135,10 @@ export default function Add_Candidates() {
                             <span>
                                 Télécharger un fichier exemple en cliquant{' '}
                             </span>
-                            <span className={styles.download_template_file_text} onClick={() => download_template_file()}>
+                            <span
+                                className={styles.download_template_file_text}
+                                onClick={() => download_template_file()}
+                            >
                                 ici
                             </span>
                             .
@@ -168,7 +171,10 @@ export default function Add_Candidates() {
                 </div>
 
                 <div className={styles.buttons_group}>
-                    <Link href="/dashboard/position_to_be_filled">
+                    <Link
+                        href="/dashboard/position_to_be_filled"
+                        className="link"
+                    >
                         <button className="button_primary">Précédent</button>
                     </Link>
                     <div>
@@ -184,7 +190,7 @@ export default function Add_Candidates() {
                             onClick={() => change_post('next')}
                         />
                     </div>
-                    <Link href="/dashboard/add_electors">
+                    <Link href="/dashboard/add_electors" className="link">
                         <button className="button_primary">Suivant</button>
                     </Link>
                 </div>

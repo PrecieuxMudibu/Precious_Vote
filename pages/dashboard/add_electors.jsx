@@ -140,10 +140,10 @@ export default function Add_Candidates() {
                 </div>
 
                 <div className={styles.buttons_group}>
-                    <Link href="/dashboard/add_candidates">
+                    <Link href="/dashboard/add_candidates" className='link'>
                         <button className="button_primary">Précédent</button>
                     </Link>
-                    <Link href="/dashboard/round_parameters">
+                    <Link href="/dashboard/round_parameters" className='link'>
                         <button className="button_primary">Suivant</button>
                     </Link>
                 </div>

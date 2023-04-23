@@ -9,9 +9,9 @@ export default function Position_To_Be_Filled() {
     const { election_to_create, set_election_to_create } =
         useContext(applicationContext);
 
-        useEffect(() => {
-            console.log(election_to_create);
-        }, [election_to_create]);
+    useEffect(() => {
+        console.log(election_to_create);
+    }, [election_to_create]);
 
     function add_a_post() {
         if (election_to_create.candidates.length < 4) {
@@ -91,10 +91,10 @@ export default function Position_To_Be_Filled() {
                 </button>
 
                 <div className={styles.buttons_group}>
-                    <Link href="/dashboard/general_parameters">
+                    <Link href="/dashboard/general_parameters" className="link">
                         <button className="button_primary">Précédent</button>
                     </Link>
-                    <Link href="/dashboard/add_candidates">
+                    <Link href="/dashboard/add_candidates" className="link">
                         <button className="button_primary">Suivant</button>
                     </Link>
                 </div>
