@@ -3,3 +3,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
 }
+
+.navigate_button {
+    margin: 10px 0;
+}
