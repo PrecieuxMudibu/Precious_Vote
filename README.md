@@ -18,7 +18,7 @@ Vote is an online voting application that allows any registered user to organize
 
 ## Installation
 
-First clone this repo. Open your terminale and type :
+First clone this repo. Open your terminal and type :
 
 ```bash
 git clone https://github.com/PrecieuxMudibu/Precious_Vote.git
