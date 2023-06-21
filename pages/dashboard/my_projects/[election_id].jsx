@@ -218,7 +218,7 @@ export default function Election() {
                         </p>
                     </div> */}
                 </div>
-                <Modal_Layout open={open_post} close_modal={close_modal_post}>
+                {/* <Modal_Layout open={open_post} close_modal={close_modal_post}>
                     <h1>Post 1</h1>
                 </Modal_Layout>
                 <Modal_Layout
@@ -232,7 +232,7 @@ export default function Election() {
                     close_modal={close_modal_rounds}
                 >
                     <h1>Nombre de tours</h1>
-                </Modal_Layout>
+                </Modal_Layout> */}
             </section>
         </Dashboard_Layout>
     );

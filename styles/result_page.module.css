@@ -34,3 +34,14 @@
     display: flex;
     justify-content: space-between;
 }
+
+@media screen and (max-width: 900px) {
+
+    .thead > :last-child {
+        display: none;
+    }
+    
+    .thead :nth-child(2) {
+        display: none;
+      }
+}
