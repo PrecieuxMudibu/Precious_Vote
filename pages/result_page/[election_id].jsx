@@ -149,6 +149,7 @@ export default function Result_Page() {
                 </label>
             </div>
 
+            {/* TO DO RESULT PAGE RESPONSIVE */}
             <div className={styles.result}>
                 <div className={styles.thead}>
                     <div>N°</div>
@@ -163,7 +164,10 @@ export default function Result_Page() {
                         key={index}
                         index={index}
                         candidate={candidate}
-                        percentage={((candidate.voices * 100) / electors.length).toFixed(2)}
+                        percentage={(
+                            (candidate.voices * 100) /
+                            electors.length
+                        ).toFixed(2)}
                     />
                 ))}
             </div>

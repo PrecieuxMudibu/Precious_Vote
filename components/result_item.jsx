@@ -3,7 +3,7 @@ import styles from '../styles/result_item.module.css';
 export default function Result_Item({ candidate, index, percentage }) {
     return (
         <div className={styles.row}>
-            <div>{index}</div>
+            <div>{index+1}</div>
             <div>
                 <img src={candidate.picture} alt={candidate.name} className={styles.image} />
                 {/* <Image src={candidate.picture} alt={first_name} width={65} height={65} /> */}
