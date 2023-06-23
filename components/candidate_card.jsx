@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from '../styles/candidate_card.module.css';
-import Modal_Layout from './layouts/modal_layout';
+import Modal_Layout from '../layouts/modal_layout';
 import { Icon } from '@iconify/react';
 import axios from 'axios';
 import { route_for_vote_candidate } from '../public/routes';

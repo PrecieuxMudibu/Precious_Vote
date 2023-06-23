@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import Left_Section from '../left_section';
-import styles from '../../styles/layouts/dashboard_layout.module.css';
+import { Left_Section } from '../components';
+import styles from '../styles/layouts/dashboard_layout.module.css';
 
 export default function Dashboard_Layout({ children, page_title }) {
     return (
