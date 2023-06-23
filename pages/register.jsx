@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/register.module.css';
 import { Icon } from '@iconify/react';
-import { Quality_Item } from '../components/index';
+import { Button, Quality_Item } from '../components/index';
 import Link from 'next/link';
 import axios from 'axios';
 import { useState } from 'react';
@@ -122,12 +122,10 @@ export default function Register() {
                     </label>
 
                     <div className={styles.other}>
-                        <button
+                        <Button
+                            label="S'inscrire"
                             onClick={(e) => register(e)}
-                            className="button_primary"
-                        >
-                            S'inscrire
-                        </button>
+                        />
                         <Link href="/login" className="link">
                             <p>Vous avez déjà un compte ?</p>
                         </Link>

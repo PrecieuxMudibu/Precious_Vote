@@ -4,7 +4,7 @@ import { saveAs } from 'file-saver';
 import { useContext, useEffect } from 'react';
 import { applicationContext } from '../_app';
 import styles from '../../styles/dashboard/add_candidates.module.css';
-import { Item, Dashboard_Layout } from '../../components/index';
+import { Item, Dashboard_Layout, Button } from '../../components/index';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import * as XLSX from 'xlsx';
@@ -152,9 +152,7 @@ export default function Add_Candidates() {
                                 <span>Photo</span>
                             </div>
                             <div>Prénom</div>
-                            <div>
-                                Nom
-                            </div>
+                            <div>Nom</div>
                         </div>
 
                         {election_to_create
@@ -178,7 +176,7 @@ export default function Add_Candidates() {
                         href="/dashboard/position_to_be_filled"
                         className="link"
                     >
-                        <button className="button_primary">Précédent</button>
+                        <Button label="Précédent" />
                     </Link>
                     <div>
                         <Icon
@@ -194,7 +192,7 @@ export default function Add_Candidates() {
                         />
                     </div>
                     <Link href="/dashboard/add_electors" className="link">
-                        <button className="button_primary">Suivant</button>
+                        <Button label="Suivant" />
                     </Link>
                 </div>
             </section>

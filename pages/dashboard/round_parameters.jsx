@@ -7,6 +7,7 @@ import {
     Failed_Message,
     Success_Message,
     Small_Loader,
+    Button,
 } from '../../components/index';
 import { Icon } from '@iconify/react';
 import Modal_Layout from '../../components/layouts/modal_layout';
@@ -164,7 +165,7 @@ export default function Round_Parameters() {
 
                 <div className={styles.buttons_group}>
                     <Link href="/dashboard/add_electors" className="link">
-                        <button className="button_primary">Précédent</button>
+                        <Button label="Précédent" />
                     </Link>
 
                     {show_loader ? (
@@ -172,12 +173,10 @@ export default function Round_Parameters() {
                             <Small_Loader color="white" />
                         </button>
                     ) : (
-                        <button
-                            className="button_primary"
+                        <Button
+                            label="Soumettre"
                             onClick={() => create_election()}
-                        >
-                            Soumettre
-                        </button>
+                        />
                     )}
                 </div>
 

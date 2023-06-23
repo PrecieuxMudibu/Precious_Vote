@@ -1,5 +1,5 @@
 import styles from '../../styles/dashboard/general_parameters.module.css';
-import { Dashboard_Layout } from '../../components/index';
+import { Button, Dashboard_Layout } from '../../components/index';
 import { Icon } from '@iconify/react';
 import { useContext } from 'react';
 import { applicationContext } from '../_app';
@@ -91,7 +91,7 @@ export default function General_Parameters() {
                         href="/dashboard/position_to_be_filled"
                         className="link"
                     >
-                        <button className="button_primary">Suivant</button>
+                        <Button label="Suivant" />
                     </Link>
                 </div>
             </section>

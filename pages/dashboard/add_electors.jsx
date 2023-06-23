@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-prototype-builtins */
 import styles from '../../styles/dashboard/add_candidates.module.css';
-import { Item, Dashboard_Layout } from '../../components/index';
+import { Item, Dashboard_Layout, Button } from '../../components/index';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import { Icon } from '@iconify/react';
@@ -146,10 +146,10 @@ export default function Add_Candidates() {
 
                 <div className={styles.buttons_group}>
                     <Link href="/dashboard/add_candidates" className="link">
-                        <button className="button_primary">Précédent</button>
+                        <Button label="Précédent" />
                     </Link>
                     <Link href="/dashboard/round_parameters" className="link">
-                        <button className="button_primary">Suivant</button>
+                        <Button label="Suivant" />
                     </Link>
                 </div>
             </section>

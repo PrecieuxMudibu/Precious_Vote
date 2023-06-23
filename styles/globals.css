@@ -119,6 +119,8 @@ input::placeholder {
   width: 200px;
 }
 
+
+
 .button_secondary {
   border: 1px solid var(--primary_color);
   padding: 18px 39px;

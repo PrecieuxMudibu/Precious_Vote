@@ -1,5 +1,5 @@
 import styles from '../../styles/dashboard/position_to_be_filled.module.css';
-import { Dashboard_Layout } from '../../components/index';
+import { Button, Dashboard_Layout } from '../../components/index';
 import { Icon } from '@iconify/react';
 import { useContext, useEffect } from 'react';
 import { applicationContext } from '../_app';
@@ -94,10 +94,10 @@ export default function Position_To_Be_Filled() {
 
                 <div className={styles.buttons_group}>
                     <Link href="/dashboard/general_parameters" className="link">
-                        <button className="button_primary">Précédent</button>
+                        <Button label="Précédent" />
                     </Link>
                     <Link href="/dashboard/add_candidates" className="link">
-                        <button className="button_primary">Suivant</button>
+                        <Button label="Suivant" />
                     </Link>
                 </div>
             </section>
