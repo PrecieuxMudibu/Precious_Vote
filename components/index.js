@@ -13,6 +13,7 @@ import Candidate_Card from './candidate_card';
 import Result_Item from './result_item';
 import Small_Loader from './small_loader';
 import Input from './input';
+import Button from './button';
 
 export {
     Quality_Item,
@@ -29,5 +30,6 @@ export {
     Header,
     Footer,
     Small_Loader,
-    Input
+    Input,
+    Button
 };

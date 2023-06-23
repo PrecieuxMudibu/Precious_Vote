@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import styles from '../styles/login.module.css';
-import { Icon } from '@iconify/react';
-import { Input, Quality_Item } from '../components/index';
+import { Button, Input, Quality_Item } from '../components/index';
 import Link from 'next/link';
 import { applicationContext } from './_app';
 import { useContext, useEffect, useState } from 'react';
@@ -63,8 +62,8 @@ export default function Login() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className={styles.top_circle}></div>
-            <div className={styles.bottom_circle}></div>
+            <div className={styles.top_circle}/>
+            <div className={styles.bottom_circle}/>
 
             <header className={styles.header}>
                 <h1 className={styles.header__title}>Content de vous revoir</h1>
@@ -91,12 +90,10 @@ export default function Login() {
                     />
 
                     <div className={styles.other}>
-                        <button
-                            className="button_primary"
+                        <Button
+                            label="Se connecter"
                             onClick={(e) => login(e)}
-                        >
-                            Se connecter
-                        </button>
+                        />
                         <Link href="/register" className="link">
                             <p>Vous n'avez de compte</p>
                         </Link>
