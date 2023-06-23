@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/login.module.css';
 import { Icon } from '@iconify/react';
-import { Quality_Item } from '../components/index';
+import { Input, Quality_Item } from '../components/index';
 import Link from 'next/link';
 import { applicationContext } from './_app';
 import { useContext, useEffect, useState } from 'react';
@@ -72,31 +72,23 @@ export default function Login() {
 
             <main className={main_class_name}>
                 <form>
-                    <label>
-                        <span>Votre email</span>
-                        <div className="input_group">
-                            <Icon icon="ic:round-email" className="icon" />
-                            <input
-                                onChange={onChange}
-                                name="email"
-                                type="text"
-                                placeholder="placide@gmail.com"
-                            />
-                        </div>
-                    </label>
+                    <Input
+                        label="Votre email"
+                        icon="ic:round-email"
+                        name="email"
+                        type="text"
+                        placeholder="placide@gmail.com"
+                        onChange={onChange}
+                    />
 
-                    <label>
-                        <span>Votre mot passe</span>
-                        <div className="input_group">
-                            <Icon icon="jam:padlock-f" className="icon" />
-                            <input
-                                onChange={onChange}
-                                name="password"
-                                type="password"
-                                placeholder="Votre mot de passe"
-                            />
-                        </div>
-                    </label>
+                    <Input
+                        label="Votre mot passe"
+                        icon="jam:padlock-f"
+                        name="password"
+                        type="password"
+                        placeholder="Votre mot de passe"
+                        onChange={onChange}
+                    />
 
                     <div className={styles.other}>
                         <button
