@@ -1,5 +1,3 @@
-export const route_for_register = `${process.env.NEXT_PUBLIC_API}/api/register`;
-export const route_for_login = `${process.env.NEXT_PUBLIC_API}/api/login`;
 export const route_for_create_election = `${process.env.NEXT_PUBLIC_API}/api/create_election`;
 export const route_for_get_election_of_the_user = `${process.env.NEXT_PUBLIC_API}/api/get_elections_of_the_current_user`
 export const route_for_get_user = `${process.env.NEXT_PUBLIC_API}/api/get_user`

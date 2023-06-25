@@ -10,7 +10,7 @@ import {
     Button,
 } from '../../components/index';
 import { Icon } from '@iconify/react';
-import Modal_Layout from '../../components/layouts/modal_layout';
+import Modal_Layout from '../../layouts/modal_layout';
 import { applicationContext } from '../_app';
 import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';

@@ -5,18 +5,20 @@ import Link from 'next/link';
 import { applicationContext } from './_app';
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { route_for_login } from '../public/routes';
+import { route_for_login } from '../routes';
 import { useRouter } from 'next/router';
+import { decode_token } from '../helpers';
 
 export default function Login() {
     const main_class_name = `${styles.main} shadow`;
 
     const [user, setUser] = useState({});
     const { push } = useRouter();
-    const { connectedUser, setConnectedUser } = useContext(applicationContext);
+    const { setConnectedUser } = useContext(applicationContext);
 
     function login(e) {
         e.preventDefault();
+        // console.log('Hello');
 
         axios
             .post(route_for_login, user)
@@ -25,10 +27,7 @@ export default function Login() {
                     'vote_app_token',
                     response.data.user.token
                 );
-                localStorage.setItem(
-                    'vote_app_user_id',
-                    response.data.user._id
-                );
+
                 setConnectedUser(response.data.user);
                 push(`/dashboard/my_projects`);
             })
@@ -43,15 +42,16 @@ export default function Login() {
         setUser({ ...user, [name]: value });
     }
 
-    // Redirect the user if he has a token
     useEffect(() => {
-        setConnectedUser({
-            ...connectedUser,
-            token: localStorage.getItem('vote_app_token'),
-        });
+        const token = localStorage.getItem('vote_app_token');
+        if (token) {
+            const user_local_data = decode_token(token);
 
-        if (connectedUser.token) {
-            push(`/dashboard/my_projects`);
+            if (user_local_data.exp * 1000 < Date.now()) {
+                localStorage.removeItem('vote_app_token');
+            } else {
+                push(`/dashboard/my_projects`);
+            }
         }
     }, []);
 
@@ -62,8 +62,8 @@ export default function Login() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className={styles.top_circle}/>
-            <div className={styles.bottom_circle}/>
+            <div className={styles.top_circle} />
+            <div className={styles.bottom_circle} />
 
             <header className={styles.header}>
                 <h1 className={styles.header__title}>Content de vous revoir</h1>
