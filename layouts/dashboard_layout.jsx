@@ -25,10 +25,7 @@ export default function Dashboard_Layout({ children, page_title }) {
                     url: `${route_for_get_user}/${user_local_data.id}`,
                 })
                     .then((response) => {
-                        console.log('USER GETTED', response);
-                        setConnectedUser({
-                            ...response.data.user,
-                        });
+                        setConnectedUser(response.data.user);
                     })
                     .catch((error) => console.error(error));
             }

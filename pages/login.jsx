@@ -18,7 +18,6 @@ export default function Login() {
 
     function login(e) {
         e.preventDefault();
-        // console.log('Hello');
 
         axios
             .post(route_for_login, user)
