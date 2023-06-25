@@ -9,7 +9,7 @@ import { decode_token } from '../helpers';
 import { useRouter } from 'next/router';
 
 export default function Dashboard_Layout({ children, page_title }) {
-    const { setConnectedUser } = useContext(applicationContext);
+    const { setConnectedUser, set_token } = useContext(applicationContext);
     const { push } = useRouter();
 
     useEffect(() => {
@@ -20,6 +20,7 @@ export default function Dashboard_Layout({ children, page_title }) {
             if (user_local_data.exp * 1000 < Date.now()) {
                 localStorage.removeItem('vote_app_token');
             } else {
+                set_token(token);
                 axios({
                     method: 'get',
                     url: `${route_for_get_user}/${user_local_data.id}`,
