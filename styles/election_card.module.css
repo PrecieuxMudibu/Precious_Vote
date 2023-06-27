@@ -1,28 +1,56 @@
 .election_card {
-    padding: 0 15px;
-    display: flex;
-    align-items: center;
-    height: 108px;
+    width: 100%;
+    border: 1px solid rgba(255, 85, 89,.4);
+    position: relative;
+    height: 270px;
+    border-radius: 20px;
     background-color: var(--white);
-    border-radius: 15px;
-    cursor: pointer;
-    border: 1px solid rgb(255, 85, 89, .1);
+    padding: 0 35px;
+    margin-bottom: 35px;
+}
+
+.election_card__image {
+    position: absolute;
+    left: 35px;
+    top: -40px;
+
 }
 
 .election_card__details {
-    width: 80%;
+    width: 100%;
+    margin: 50px 0 0 0;
 }
-.election_card__image {
-    margin-right: 28px;
+
+.election_card__statistics {
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(255, 85, 89,.4);;
+}
+
+.election_card__details p {
+margin: 10px 0;
+    display: flex;
+    align-items: center;
 }
 
 .election_card__name {
     margin: 0 0 10px 0;
 }
 
-.election_card__date > p {
-    margin: 6px 0;
+.election_card__footer {
+    display: flex;
+    justify-content: space-between;
 }
+
+.election_card__electors {
+    font-size: 24px;
+    font-weight: var(--bol);
+}
+/* 
+
+
+
+
+
 
 .election_status {
     background-color: red;
@@ -31,7 +59,7 @@
     height: 17px;
     width: 17px;
     border-radius: 17px;
-}
+} */
 @media screen and (max-width: 900px) {
     .election_card {
         margin: 10px 0;

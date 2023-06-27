@@ -1,10 +1,10 @@
-.title_and_search_bar {
+.title_and_create_button {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.title_and_search_bar > div {
+.title_and_create_button > div {
     display: flex;
     align-items: center;
     border: 1px solid rgb(255, 85, 89, .1);
@@ -15,18 +15,17 @@
     padding: 0 15px;
 }
 
-.title_and_search_bar > div > input {
+.title_and_create_button > div > input {
     width: 100%;
 }
 
-
-
 .elections_group {
     display: grid;
-    grid-template-columns: repeat(2, 48%);
-    gap: 4%;
-    height: 50vh;
+    grid-template-columns: repeat(3, 30%);
+    gap: 5%;
+    height: 70vh;
     overflow-y: scroll;
+    padding-top: 35px;
 }
 
 

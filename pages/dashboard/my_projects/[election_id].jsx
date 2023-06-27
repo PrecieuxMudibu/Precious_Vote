@@ -4,7 +4,7 @@ import { Dashboard_Layout } from '../../../components';
 import { useRouter } from 'next/router';
 import styles from '../../../styles/dashboard/my_projects/[election_id].module.css';
 import { useEffect, useState } from 'react';
-import Modal_Layout from '../../../components/layouts/modal_layout';
+import Modal_Layout from '../../../layouts/modal_layout';
 import Image from 'next/image';
 import { Small_Loader } from '../../../components/index';
 

@@ -27,24 +27,17 @@ export default function My_Projects() {
             .catch((error) => {
                 console.log('error--->>>', error);
             });
-    }, []);
+    }, [connectedUser]);
 
     console.log('elections', elections);
 
     return (
         <Dashboard_Layout page_title="Mes projets">
             <section>
-                <div className={styles.title_and_search_bar}>
+                <div className={styles.title_and_create_button}>
                     <h1>Vos projets</h1>
-                    {/* <div>
-                        <Icon icon="ic:outline-search" className="icon" />
-                        <input
-                            type="email"
-                            placeholder="Recherchez votre projet ici"
-                        />
-                    </div> */}
+                    <Create_Election_Card />
                 </div>
-                <Create_Election_Card />
 
                 <div className={styles.elections_group}>
                     {elections.map((election, index) => (

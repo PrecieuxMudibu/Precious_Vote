@@ -17,7 +17,8 @@
   --font: 'Inter', sans-serif;
 
   --first_title_size: 30px;
-  --second_title_size: 22px;
+  --second_title_size: 19px;
+  --third_title_size: 14px;
   --menu_size: 20px;
   --paragraph_size: 16px;
 
@@ -53,7 +54,12 @@ h2 {
   font-size: var(--second_title_size);
   font-weight: var(--medium_weight);
 }
-
+h3 {
+  margin-bottom: 10px;
+  color: var(--primary_color);
+  font-size: var(--third_title_size);
+  font-weight: var(--medium_weight);
+}
 
 label > span {
   font-size: paragraph_size;
