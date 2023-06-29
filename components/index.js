@@ -14,6 +14,7 @@ import Result_Item from './result_item';
 import Small_Loader from './small_loader';
 import Input from './input';
 import Button from './button';
+import StepperComponent from './stepper';
 
 export {
     Quality_Item,
@@ -31,5 +32,6 @@ export {
     Footer,
     Small_Loader,
     Input,
-    Button
+    Button,
+    StepperComponent
 };

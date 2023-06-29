@@ -1,13 +1,66 @@
 import styles from '../../styles/dashboard/general_parameters.module.css';
-import { Button, Dashboard_Layout } from '../../components/index';
+import {
+    Button,
+    Dashboard_Layout,
+    StepperComponent,
+} from '../../components/index';
 import { Icon } from '@iconify/react';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { applicationContext } from '../_app';
 import Link from 'next/link';
 
 export default function General_Parameters() {
     const { election_to_create, set_election_to_create } =
         useContext(applicationContext);
+    const [indice, setIndice] = useState(0);
+
+    const [links] = useState([
+        {
+            label: 'Paramètres généraux',
+            icon: (
+                <Icon
+                    icon="ic:round-drive-file-rename-outline"
+                    className="icon"
+                />
+            ),
+        },
+        {
+            label: ' Postes à pourvoir',
+            icon: (
+                <Icon
+                    icon="ic:round-drive-file-rename-outline"
+                    className="icon"
+                />
+            ),
+        },
+        {
+            label: ' Candidats',
+            icon: (
+                <Icon
+                    icon="ic:round-drive-file-rename-outline"
+                    className="icon"
+                />
+            ),
+        },
+        {
+            label: ' Electeurs',
+            icon: (
+                <Icon
+                    icon="ic:round-drive-file-rename-outline"
+                    className="icon"
+                />
+            ),
+        },
+        {
+            label: ' Tours',
+            icon: (
+                <Icon
+                    icon="ic:round-drive-file-rename-outline"
+                    className="icon"
+                />
+            ),
+        },
+    ]);
 
     function onChange(e) {
         const { name, value } = e.target;
@@ -19,6 +72,12 @@ export default function General_Parameters() {
             <section>
                 <h1>Nouveau projet : {election_to_create.name}</h1>
                 <h2>Etape 1 : Paramètres généraux</h2>
+
+                <StepperComponent
+                    links={links}
+                    indice={indice}
+                    setIndice={setIndice}
+                />
 
                 <div className={styles}>
                     <div className={styles.left_bloc}>

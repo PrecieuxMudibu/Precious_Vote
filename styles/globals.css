@@ -214,3 +214,9 @@ table {
 .hidden {
   display: none;
 }
+
+
+.step {
+  background-color: var(--primary_color);
+  color: blue;
+}
