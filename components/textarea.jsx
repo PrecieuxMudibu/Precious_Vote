@@ -6,6 +6,7 @@ export default function Textarea({
     label,
     icon,
     onChange,
+    value,
 }) {
     return (
         <label>
@@ -16,6 +17,7 @@ export default function Textarea({
                     onChange={onChange}
                     name={name}
                     placeholder={placeholder}
+                    value={value}
                 />
             </div>
         </label>

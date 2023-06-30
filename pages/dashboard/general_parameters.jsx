@@ -1,12 +1,15 @@
 import React from 'react';
 import { Textarea, Input } from '../../components';
 
-export default function General_Parameters({election_to_create, set_election_to_create}) {
+export default function General_Parameters({
+    election_to_create,
+    set_election_to_create,
+}) {
     function onChange(e) {
         const { name, value } = e.target;
         set_election_to_create({ ...election_to_create, [name]: value });
     }
-    
+
     return (
         <>
             <Input
@@ -16,6 +19,7 @@ export default function General_Parameters({election_to_create, set_election_to_
                 type="text"
                 placeholder="Election du comité de G1 Math-Info"
                 onChange={onChange}
+                value={election_to_create.name}
             />
 
             <Textarea
@@ -23,6 +27,7 @@ export default function General_Parameters({election_to_create, set_election_to_
                 icon="fluent:text-description-24-filled"
                 name="description"
                 onChange={onChange}
+                value={election_to_create.description}
             />
         </>
     );
