@@ -149,7 +149,7 @@ export default function Result_Page() {
                 </label>
             </div>
 
-            {/* TO DO RESULT PAGE RESPONSIVE */}
+            {/* TODOS: RESULT PAGE RESPONSIVE */}
             <div className={styles.result}>
                 <div className={styles.thead}>
                     <div>N°</div>

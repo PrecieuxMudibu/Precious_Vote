@@ -18,10 +18,12 @@ import Button from './button';
 import StepperComponent from './stepper';
 import Textarea from './textarea';
 import Select from './select';
+import Details_Item from './details_item';
 
 export {
     Quality_Item,
     Result_Item,
+    Details_Item,
     Candidate_Card,
     Create_Election_Card,
     Election_Card,
