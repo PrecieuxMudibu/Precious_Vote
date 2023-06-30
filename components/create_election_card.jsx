@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Create_Election_Card() {
     return (
-        <Link href="/dashboard/general_parameters" className="link">
+        <Link href="/dashboard/create_election" className="link">
              <Icon icon="ph:plus-fill" className={styles.create_election_card} />
         </Link>
     );

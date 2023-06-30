@@ -86,7 +86,7 @@ export default function Create_Election() {
     function create_election() {
         set_show_loader(true);
         if (
-            election_to_create.hasOwnProperty('user_id') &&
+            election_to_create.hasOwnProperty('created_by') &&
             election_to_create.hasOwnProperty('name') &&
             election_to_create.hasOwnProperty('tariff') &&
             election_to_create.hasOwnProperty('electors') &&

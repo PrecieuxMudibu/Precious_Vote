@@ -1,20 +1,19 @@
-import {  Input, Select } from '../../components/index';
-import { applicationContext } from '../_app';
-import { useContext } from 'react';
+import { Input, Select } from '../../components/index';
+import { decode_token } from '../../helpers/index';
 
 export default function Round_Parameters({
     election_to_create,
     set_election_to_create,
 }) {
-    const { connectedUser } = useContext(applicationContext);
-
     function onChange(e) {
         const { name, value } = e.target;
+        const token = localStorage.getItem('vote_app_token');
+        const user_local_data = decode_token(token);
 
         if (name == 'first_round_eligibility_criteria') {
             set_election_to_create({
                 ...election_to_create,
-                user_id: connectedUser._id,
+                created_by: user_local_data.id,
                 [name]: parseInt(value),
             });
         }
@@ -22,7 +21,7 @@ export default function Round_Parameters({
         if (name == 'candidates_for_the_second_round') {
             set_election_to_create({
                 ...election_to_create,
-                user_id: connectedUser._id,
+                created_by: user_local_data.id,
                 [name]: parseInt(value),
             });
         }

@@ -26,13 +26,13 @@ export default function Add_Candidates({
 
     function change_post(action) {
         if (action == 'next') {
-            if (number_of_post < election_to_create.candidates.length - 1) {
+            if (number_of_post < election_to_create.posts.length - 1) {
                 set_number_of_post(number_of_post + 1);
             }
         }
 
         if (action == 'previous') {
-            if (number_of_post >= election_to_create.candidates.length - 1) {
+            if (number_of_post >= election_to_create.posts.length - 1) {
                 set_number_of_post(number_of_post - 1);
             }
         }
@@ -55,8 +55,7 @@ export default function Add_Candidates({
         let candidates_verified = [];
         for (
             let i = 0;
-            i <
-            election_to_create_copy.posts[number_of_post].candidates.length;
+            i < election_to_create_copy.posts[number_of_post].candidates.length;
             i++
         ) {
             let current_candidate =
@@ -95,6 +94,19 @@ export default function Add_Candidates({
 
     return (
         <section>
+            <div className={styles.switch_post}>
+                <Icon
+                    icon="ooui:previous-ltr"
+                    className="pointer"
+                    onClick={() => change_post('previous')}
+                />
+                Poste {number_of_post + 1}
+                <Icon
+                    icon="ooui:previous-rtl"
+                    className="pointer"
+                    onClick={() => change_post('next')}
+                />
+            </div>
             <div className={styles.upload_and_list_section}>
                 <div>
                     <div className={styles.upload_file_section}>

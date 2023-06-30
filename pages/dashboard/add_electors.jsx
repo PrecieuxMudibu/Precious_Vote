@@ -5,7 +5,7 @@ import { Item, Button } from '../../components/index';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import { Icon } from '@iconify/react';
-import {  useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function Add_Electors({
@@ -20,7 +20,7 @@ export default function Add_Electors({
     const { push } = useRouter();
 
     useEffect(() => {
-        if (election_to_create.candidates[0].post != '') {
+        if (election_to_create.posts[0].name != '') {
             set_election_contains_posts(true);
         }
     }, [election_to_create]);
@@ -59,7 +59,7 @@ export default function Add_Electors({
                     electors: electors_verified,
                 });
             }
-        } 
+        }
         // else {
         //     push(`/dashboard/my_projects`);
         // }
@@ -73,10 +73,6 @@ export default function Add_Electors({
                 saveAs(blob, 'electors_template.xlsx');
             });
     }
-
-    useEffect(() => {
-        console.log(election_to_create);
-    }, [election_to_create]);
 
     return (
         <section>

@@ -56,6 +56,10 @@
     cursor: pointer;
 }
 
+.switch_post {
+    margin-bottom: 20px;
+}
+
 @media screen and (max-width: 900px) {
     .upload_and_list_section {
         display: block;

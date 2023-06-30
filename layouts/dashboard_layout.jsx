@@ -17,7 +17,7 @@ export default function Dashboard_Layout({ children, page_title }) {
         if (token) {
             const user_local_data = decode_token(token);
 
-            if (user_local_data.exp * 1000 < Date.now()) {
+            if (user_local_data?.exp * 1000 < Date.now()) {
                 localStorage.removeItem('vote_app_token');
             } else {
                 set_token(token);
