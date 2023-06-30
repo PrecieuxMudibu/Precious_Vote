@@ -10,6 +10,7 @@ import { applicationContext } from '../_app';
 import General_Parameters from './general_parameters';
 import Position_To_Be_Filled from './position_to_be_filled';
 import Add_Candidates from './add_candidates';
+import Add_Electors from './add_electors';
 
 export default function Create_Election() {
     const {
@@ -86,6 +87,11 @@ export default function Create_Election() {
                         />,
                         <Add_Candidates
                             key={2}
+                            election_to_create={election_to_create}
+                            set_election_to_create={set_election_to_create}
+                        />,
+                        <Add_Electors
+                            key={3}
                             election_to_create={election_to_create}
                             set_election_to_create={set_election_to_create}
                         />,

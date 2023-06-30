@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-prototype-builtins */
 import styles from '../../styles/dashboard/add_candidates.module.css';
-import { Item, Dashboard_Layout, Button } from '../../components/index';
+import { Item, Button } from '../../components/index';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import { Icon } from '@iconify/react';
@@ -10,10 +10,10 @@ import { applicationContext } from '../_app';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 
-export default function Add_Candidates() {
-    const { election_to_create, set_election_to_create, connect } =
-        useContext(applicationContext);
-
+export default function Add_Electors({
+    election_to_create,
+    set_election_to_create,
+}) {
     const [file, set_file] = useState(null);
     const [election_contains_posts, set_election_contains_posts] =
         useState(false);
@@ -61,9 +61,10 @@ export default function Add_Candidates() {
                     electors: electors_verified,
                 });
             }
-        } else {
-            push(`/dashboard/my_projects`);
-        }
+        } 
+        // else {
+        //     push(`/dashboard/my_projects`);
+        // }
     }
 
     function download_template_file() {
@@ -80,79 +81,61 @@ export default function Add_Candidates() {
     }, [election_to_create]);
 
     return (
-        <Dashboard_Layout page_title="Ajoutez des électeurs">
-            <section>
-                <h1>Nouveau projet : {election_to_create.name}</h1>
-                <h2>Etape 3 : Rajoutez des électeurs</h2>
-
-                <div className={styles.upload_and_list_section}>
-                    <div>
-                        <div className={styles.upload_file_section}>
-                            <Icon
-                                icon="material-symbols:cloud-upload"
-                                className={styles.upload_file_icon}
-                            />
-                            <p>Sélectionner un fichier Excel au format XLSX</p>
-                            <button
-                                onClick={() => inputFile.current.click()}
-                                className="button_secondary"
-                            >
-                                Choisir un fichier
-                            </button>
-                            <input
-                                className="hidden"
-                                ref={inputFile}
-                                type="file"
-                                onInput={(e) => handle_file(e)}
-                            />
-                        </div>
-                        <p>
-                            <span>
-                                Télécharger un fichier exemple en cliquant{' '}
-                            </span>
-                            <span
-                                className={styles.download_template_file_text}
-                                onClick={() => download_template_file()}
-                            >
-                                ici
-                            </span>
-                            .
-                        </p>
+        <section>
+            <div className={styles.upload_and_list_section}>
+                <div>
+                    <div className={styles.upload_file_section}>
+                        <Icon
+                            icon="material-symbols:cloud-upload"
+                            className={styles.upload_file_icon}
+                        />
+                        <p>Sélectionner un fichier Excel au format XLSX</p>
+                        <button
+                            onClick={() => inputFile.current.click()}
+                            className="button_secondary"
+                        >
+                            Choisir un fichier
+                        </button>
+                        <input
+                            className="hidden"
+                            ref={inputFile}
+                            type="file"
+                            onInput={(e) => handle_file(e)}
+                        />
                     </div>
-
-                    <div className={styles.list_of_candidates}>
-                        <div className={styles.thead}>
-                            <div>N°</div>
-                            <div>
-                                <span>Photo</span>
-                            </div>
-                            <div>Prénom</div>
-                            <div>Nom</div>
-                        </div>
-                        {election_to_create.electors
-                            ? election_to_create.electors.map(
-                                  (elector, index) => (
-                                      <Item
-                                          key={index}
-                                          number={index}
-                                          first_name={elector.first_name}
-                                          name={elector.name}
-                                      />
-                                  )
-                              )
-                            : null}
-                    </div>
+                    <p>
+                        <span>Télécharger un fichier exemple en cliquant </span>
+                        <span
+                            className={styles.download_template_file_text}
+                            onClick={() => download_template_file()}
+                        >
+                            ici
+                        </span>
+                        .
+                    </p>
                 </div>
 
-                <div className={styles.buttons_group}>
-                    <Link href="/dashboard/add_candidates" className="link">
-                        <Button label="Précédent" />
-                    </Link>
-                    <Link href="/dashboard/round_parameters" className="link">
-                        <Button label="Suivant" />
-                    </Link>
+                <div className={styles.list_of_candidates}>
+                    <div className={styles.thead}>
+                        <div>N°</div>
+                        <div>
+                            <span>Photo</span>
+                        </div>
+                        <div>Prénom</div>
+                        <div>Nom</div>
+                    </div>
+                    {election_to_create.electors
+                        ? election_to_create.electors.map((elector, index) => (
+                              <Item
+                                  key={index}
+                                  number={index}
+                                  first_name={elector.first_name}
+                                  name={elector.name}
+                              />
+                          ))
+                        : null}
                 </div>
-            </section>
-        </Dashboard_Layout>
+            </div>
+        </section>
     );
 }
