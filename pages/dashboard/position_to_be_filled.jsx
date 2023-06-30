@@ -1,14 +1,12 @@
 import styles from '../../styles/dashboard/position_to_be_filled.module.css';
-import { Button, Dashboard_Layout } from '../../components/index';
 import { Icon } from '@iconify/react';
-import { useContext, useEffect } from 'react';
-import { applicationContext } from '../_app';
-import Link from 'next/link';
+import { useEffect } from 'react';
+import { Input } from '../../components';
 
-export default function Position_To_Be_Filled() {
-    const { election_to_create, set_election_to_create } =
-        useContext(applicationContext);
-
+export default function Position_To_Be_Filled({
+    election_to_create,
+    set_election_to_create,
+}) {
     useEffect(() => {
         console.log(election_to_create);
     }, [election_to_create]);
@@ -51,15 +49,17 @@ export default function Position_To_Be_Filled() {
     }
 
     return (
-        <Dashboard_Layout page_title="Poste à pourvoir">
-            <section>
-                <h1>Nouveau projet : {election_to_create.name}</h1>
-                <h2>Etape 2 : Postes à pourvoir</h2>
+        <>
+            <button onClick={add_a_post} className={styles.add_post_button}>
+                <Icon icon="ic:outline-plus" /> <span> Ajoutez un poste</span>
+            </button>
 
-                <div className={styles.list_of_posts}>
-                    {election_to_create.candidates.map((post, index) => (
-                        <label key={index} className={styles.label}>
-                            <div>
+            <div className={styles.list_of_posts}>
+                {election_to_create.candidates.map((post, index) => (
+                    <Input
+                        key={index}
+                        label={
+                            <>
                                 <span>Poste {index + 1} </span>
                                 <span>
                                     <Icon
@@ -68,39 +68,17 @@ export default function Position_To_Be_Filled() {
                                         onClick={() => delete_post(index)}
                                     />
                                 </span>
-                            </div>
-                            <div className="input_group">
-                                <Icon
-                                    icon="eos-icons:role-binding"
-                                    className="icon"
-                                />
-                                <input
-                                    onChange={(e) =>
-                                        handle_change_post(e, index)
-                                    }
-                                    name="name"
-                                    type="text"
-                                    placeholder="Président"
-                                    value={post.post}
-                                />
-                            </div>
-                        </label>
-                    ))}
-                </div>
-
-                <button onClick={add_a_post} className={styles.add_post_button}>
-                    <Icon icon="ic:outline-plus" /> Ajoutez un poste
-                </button>
-
-                <div className={styles.buttons_group}>
-                    <Link href="/dashboard/general_parameters" className="link">
-                        <Button label="Précédent" />
-                    </Link>
-                    <Link href="/dashboard/add_candidates" className="link">
-                        <Button label="Suivant" />
-                    </Link>
-                </div>
-            </section>
-        </Dashboard_Layout>
+                            </>
+                        }
+                        icon="eos-icons:role-binding"
+                        name="name"
+                        type="text"
+                        placeholder="Président"
+                        value={post.post}
+                        onChange={(e) => handle_change_post(e, index)}
+                    />
+                ))}
+            </div>
+        </>
     );
 }

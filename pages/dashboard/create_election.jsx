@@ -8,6 +8,7 @@ import { Icon } from '@iconify/react';
 import { useContext, useState } from 'react';
 import { applicationContext } from '../_app';
 import General_Parameters from './general_parameters';
+import Position_To_Be_Filled from './position_to_be_filled';
 
 export default function Create_Election() {
     const {
@@ -74,6 +75,11 @@ export default function Create_Election() {
                     [
                         <General_Parameters
                             key={0}
+                            election_to_create={election_to_create}
+                            set_election_to_create={set_election_to_create}
+                        />,
+                        <Position_To_Be_Filled
+                            key={1}
                             election_to_create={election_to_create}
                             set_election_to_create={set_election_to_create}
                         />,

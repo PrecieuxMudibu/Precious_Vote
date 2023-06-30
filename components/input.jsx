@@ -7,6 +7,7 @@ export default function Input({
     label,
     icon,
     onChange,
+    value
 }) {
     return (
         <label>
@@ -17,6 +18,7 @@ export default function Input({
                     onChange={onChange}
                     name={name}
                     type={type}
+                    value={value}
                     placeholder={placeholder}
                 />
             </div>
