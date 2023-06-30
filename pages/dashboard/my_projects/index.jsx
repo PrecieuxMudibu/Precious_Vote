@@ -5,6 +5,7 @@ import {
     Election_Card,
     Create_Election_Card,
     Dashboard_Layout,
+    Small_Loader,
 } from '../../../components/index';
 import { useContext, useEffect, useState } from 'react';
 import { applicationContext } from '../../_app';
@@ -13,8 +14,6 @@ import Link from 'next/link';
 export default function My_Projects() {
     const { connectedUser, token } = useContext(applicationContext);
     const [elections, set_elections] = useState([]);
-
-    console.log('connectedUser', connectedUser);
 
     useEffect(() => {
         axios
@@ -39,17 +38,23 @@ export default function My_Projects() {
                     <Create_Election_Card />
                 </div>
 
-                <div className={styles.elections_group}>
-                    {elections.map((election, index) => (
-                        <Link
-                            className="link"
-                            key={index}
-                            href={`/dashboard/my_projects/${election._id}`}
-                        >
-                            <Election_Card election={election} />
-                        </Link>
-                    ))}
-                </div>
+                {elections.length !== 0 ? (
+                    <div className={styles.elections_group}>
+                        {elections.map((election, index) => (
+                            <Link
+                                className="link"
+                                key={index}
+                                href={`/dashboard/my_projects/${election._id}`}
+                            >
+                                <Election_Card election={election} />
+                            </Link>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="center_loader">
+                        <Small_Loader />
+                    </div>
+                )}
             </section>
         </Dashboard_Layout>
     );
