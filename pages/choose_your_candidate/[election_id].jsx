@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import styles from '../../styles/choose_your_candidate/index.module.css';
 import { Candidate_Card } from '../../components';
-import Layout from '../../components/layouts/layout';
+import Layout from '../../layouts/layout';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import {

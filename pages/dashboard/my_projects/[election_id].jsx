@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import logo from '../../../public/images/test.png';
-import { Dashboard_Layout } from '../../../components';
+import { Dashboard_Layout, Election_Property_Card } from '../../../components';
 import { useRouter } from 'next/router';
 import styles from '../../../styles/dashboard/my_projects/[election_id].module.css';
 import { useEffect, useState } from 'react';
@@ -190,49 +190,12 @@ export default function Election() {
                     )}
                 </div>
                 <div className={styles.cards}>
-                    <div
-                        className={styles.card}
-                        onClick={() => open_modal_post()}
-                    >
-                        <h3 className={styles.card_title}>Poste à pourvoir</h3>
-                        <p className={styles.card_paragraph}>{posts?.length}</p>
-                    </div>
-
-                    <div
-                        className={styles.card}
-                        onClick={() => open_modal_electors()}
-                    >
-                        <h3 className={styles.card_title}>Electeurs</h3>
-                        <p className={styles.card_paragraph}>
-                            {electors?.length}
-                        </p>
-                    </div>
-
-                    {/* <div
-                        className={styles.card}
-                        onClick={() => open_modal_rounds()}
-                    >
-                        <h3 className={styles.card_title}>Poste à pourvoir</h3>
-                        <p className={styles.card_paragraph}>
-                            {election_posts_and_rounds.length}
-                        </p>
-                    </div> */}
+                    <Election_Property_Card label="123" title="Electeurs" icon="fluent:vote-24-filled"/>
+                    <Election_Property_Card label="4" title="Candidats" icon="fluent:vote-24-filled"/>
+                    <Election_Property_Card label="2" title="Poste à pourvoir" icon="fluent:vote-24-filled"/>
+                    <Election_Property_Card label="2" title="Tour(s)" icon="fluent:vote-24-filled"/>
+                    
                 </div>
-                {/* <Modal_Layout open={open_post} close_modal={close_modal_post}>
-                    <h1>Post 1</h1>
-                </Modal_Layout>
-                <Modal_Layout
-                    open={open_electors}
-                    close_modal={close_modal_electors}
-                >
-                    <h1>Electeurs</h1>
-                </Modal_Layout>
-                <Modal_Layout
-                    open={open_rounds}
-                    close_modal={close_modal_rounds}
-                >
-                    <h1>Nombre de tours</h1>
-                </Modal_Layout> */}
             </section>
         </Dashboard_Layout>
     );

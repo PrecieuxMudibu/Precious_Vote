@@ -18,40 +18,14 @@
 }
 
 .cards {
-    display: grid;
-    grid-template-columns: repeat(3, 31.2%);
-    gap: 3%;
+    display: flex;
+    justify-content: space-between;
+   
     margin-top: 30px;
 }
 
-.card {
-    border: 1px solid rgba(255, 85, 89,.4);
-    background-color: var(--white);
-    padding: 20px;
-    border-radius: 15px;
-    cursor: pointer;
-
-}
-
-.card_title {
-    font-size: 16px;
-}
-
-.card_paragraph {
-    font-size: 30px;
-    font-weight: var(--bold_weight);
-
-}
-
-
 @media screen and (max-width: 900px) {
-   
-
     .cards {
         display: block;
-    }
-
-    .card {
-        margin: 30px 0;
     }
 }

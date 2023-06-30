@@ -1,10 +1,9 @@
--   **Créer une élection**
+-   **Afficher une élection**
 -   **Commencer une élection**
+-   **Arrêter un round**
 -   **Afficher les électeurs**
 -   **Afficher les candidats**
--   **Afficher une élection**
--   **Renvoyer le mail àun électeur**
 -   **Modifier son profil**
 -   **Voter un candidat**
--   **Arrêter un round**
 -   **Mettre du contenu pour les autres pages**
+-   **Renvoyer le mail à un électeur**

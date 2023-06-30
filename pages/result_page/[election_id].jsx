@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import Layout from '../../components/layouts/layout';
+import Layout from '../../layouts/layout';
 import styles from '../../styles/result_page.module.css';
 import { Result_Item } from '../../components';
 import { useRouter } from 'next/router';

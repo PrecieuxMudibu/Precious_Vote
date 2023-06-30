@@ -10,6 +10,7 @@ import Failed_Message from './failed_message';
 import Header from './header';
 import Footer from './footer';
 import Candidate_Card from './candidate_card';
+import Election_Property_Card from './election_property_card';
 import Result_Item from './result_item';
 import Small_Loader from './small_loader';
 import Input from './input';
@@ -24,6 +25,7 @@ export {
     Candidate_Card,
     Create_Election_Card,
     Election_Card,
+    Election_Property_Card,
     Left_Section,
     Logo,
     Item,
