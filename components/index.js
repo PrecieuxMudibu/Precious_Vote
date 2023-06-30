@@ -16,6 +16,7 @@ import Input from './input';
 import Button from './button';
 import StepperComponent from './stepper';
 import Textarea from './textarea';
+import Select from './select';
 
 export {
     Quality_Item,
@@ -35,5 +36,6 @@ export {
     Input,
     Button,
     StepperComponent,
-    Textarea
+    Textarea,
+    Select
 };
