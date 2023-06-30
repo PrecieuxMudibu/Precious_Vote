@@ -277,7 +277,7 @@ ColorlibStepIcon.propTypes = {
     icon: PropTypes.node,
 };
 
-export default function StepperComponent({ links }) {
+export default function StepperComponent({ links, indice }) {
     const iconsFinal = links.map((link) => link.icon);
     const intermediate = [];
 
@@ -287,14 +287,15 @@ export default function StepperComponent({ links }) {
     icons = { ...intermediate };
 
     return (
-        <Stack sx={{ width: '100%' }} spacing={4}>
+        <Stack sx={{ width: '100%', marginBottom: 5 }} spacing={4}>
             <Stepper
+                sx={{ width: '100%' }}
                 alternativeLabel
-                activeStep={1}
+                activeStep={indice}
                 connector={<ColorlibConnector />}
             >
                 {links.map((link) => (
-                    <Step key={link}>
+                    <Step key={link} sx={{ padding: 0 }}>
                         <StepLabel StepIconComponent={ColorlibStepIcon}>
                             {link.label}
                         </StepLabel>

@@ -15,6 +15,7 @@ import Small_Loader from './small_loader';
 import Input from './input';
 import Button from './button';
 import StepperComponent from './stepper';
+import Textarea from './textarea';
 
 export {
     Quality_Item,
@@ -33,5 +34,6 @@ export {
     Small_Loader,
     Input,
     Button,
-    StepperComponent
+    StepperComponent,
+    Textarea
 };
