@@ -1,3 +1,13 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.container > .buttons_group {
+    height: 1OOvh;
+}
+
 .buttons_group {
     display: flex;
     justify-content: space-between;

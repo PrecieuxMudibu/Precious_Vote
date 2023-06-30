@@ -50,11 +50,6 @@
     width: 100%;
 }
 
-.buttons_group {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 .download_template_file_text {
     text-decoration: underline;
@@ -82,12 +77,4 @@
         display: none;
     }
 
-    .buttons_group {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .buttons_group button {
-        margin: 20px 0;
-    }
 }

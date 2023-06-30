@@ -5,9 +5,7 @@ import { Item, Button } from '../../components/index';
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import { Icon } from '@iconify/react';
-import Link from 'next/link';
-import { applicationContext } from '../_app';
-import { useContext, useEffect, useRef, useState } from 'react';
+import {  useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function Add_Electors({

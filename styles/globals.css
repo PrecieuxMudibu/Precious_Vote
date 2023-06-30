@@ -93,6 +93,11 @@ label {
   width: 25px;
   height: 25px;
 }
+.iconLinks {
+  color: var(--white);
+  width: 25px;
+  height: 25px;
+}
 
 input, textarea, select {
   font-size: var(--paragraph_size);

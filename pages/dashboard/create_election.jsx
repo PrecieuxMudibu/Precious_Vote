@@ -35,7 +35,7 @@ export default function Create_Election() {
             icon: (
                 <Icon
                     icon="ic:round-drive-file-rename-outline"
-                    className="icon"
+                    className="iconLinks"
                 />
             ),
         },
@@ -44,7 +44,7 @@ export default function Create_Election() {
             icon: (
                 <Icon
                     icon="ic:round-drive-file-rename-outline"
-                    className="icon"
+                    className="iconLinks"
                 />
             ),
         },
@@ -53,7 +53,7 @@ export default function Create_Election() {
             icon: (
                 <Icon
                     icon="ic:round-drive-file-rename-outline"
-                    className="icon"
+                    className="iconLinks"
                 />
             ),
         },
@@ -62,7 +62,7 @@ export default function Create_Election() {
             icon: (
                 <Icon
                     icon="ic:round-drive-file-rename-outline"
-                    className="icon"
+                    className="iconLinks"
                 />
             ),
         },
@@ -71,7 +71,7 @@ export default function Create_Election() {
             icon: (
                 <Icon
                     icon="ic:round-drive-file-rename-outline"
-                    className="icon"
+                    className="iconLinks"
                 />
             ),
         },
@@ -124,38 +124,52 @@ export default function Create_Election() {
     return (
         <>
             <Dashboard_Layout page_title="Paramètres généraux">
-                <section>
-                    {/* <h1>Nouveau projet : {election_to_create.name}</h1> */}
-                    <StepperComponent links={links} indice={indice_stepper} />
-                    {
-                        [
-                            <General_Parameters
-                                key={0}
-                                election_to_create={election_to_create}
-                                set_election_to_create={set_election_to_create}
-                            />,
-                            <Position_To_Be_Filled
-                                key={1}
-                                election_to_create={election_to_create}
-                                set_election_to_create={set_election_to_create}
-                            />,
-                            <Add_Candidates
-                                key={2}
-                                election_to_create={election_to_create}
-                                set_election_to_create={set_election_to_create}
-                            />,
-                            <Add_Electors
-                                key={3}
-                                election_to_create={election_to_create}
-                                set_election_to_create={set_election_to_create}
-                            />,
-                            <Round_Parameters
-                                key={4}
-                                election_to_create={election_to_create}
-                                set_election_to_create={set_election_to_create}
-                            />,
-                        ][indice_stepper]
-                    }
+                <section className={styles.container}>
+                    <div>
+                        <StepperComponent
+                            links={links}
+                            indice={indice_stepper}
+                        />
+                        {
+                            [
+                                <General_Parameters
+                                    key={0}
+                                    election_to_create={election_to_create}
+                                    set_election_to_create={
+                                        set_election_to_create
+                                    }
+                                />,
+                                <Position_To_Be_Filled
+                                    key={1}
+                                    election_to_create={election_to_create}
+                                    set_election_to_create={
+                                        set_election_to_create
+                                    }
+                                />,
+                                <Add_Candidates
+                                    key={2}
+                                    election_to_create={election_to_create}
+                                    set_election_to_create={
+                                        set_election_to_create
+                                    }
+                                />,
+                                <Add_Electors
+                                    key={3}
+                                    election_to_create={election_to_create}
+                                    set_election_to_create={
+                                        set_election_to_create
+                                    }
+                                />,
+                                <Round_Parameters
+                                    key={4}
+                                    election_to_create={election_to_create}
+                                    set_election_to_create={
+                                        set_election_to_create
+                                    }
+                                />,
+                            ][indice_stepper]
+                        }
+                    </div>
                     <div className={styles.buttons_group}>
                         <div>
                             {indice_stepper > 0 && (
@@ -173,10 +187,9 @@ export default function Create_Election() {
 
                         <div>
                             {indice_stepper === 4 ? (
-                                !show_loader ? (
+                                show_loader ? (
                                     <Button
                                         label={<Small_Loader color="white" />}
-                                        onClick={() => create_election()}
                                     />
                                 ) : (
                                     <Button
@@ -208,8 +221,8 @@ export default function Create_Election() {
                     />
                 ) : (
                     <Failed_Message
-                        action="Echec dans la création de l'élection"
-                        message="Quelque chose s'est mal passé. Soyez sûr d'avoir rempli tous les champs."
+                        action="Echec de création de l'élection"
+                        message="Quelque chose s'est mal passée. Rassurez-vous d'avoir rempli tous les champs."
                     />
                 )}
             </Modal_Layout>
