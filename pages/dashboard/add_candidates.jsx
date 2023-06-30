@@ -47,20 +47,20 @@ export default function Add_Candidates({
         // set_candidates([...jsonData]);
 
         let election_to_create_copy = election_to_create;
-        election_to_create_copy.candidates[number_of_post] = {
-            ...election_to_create_copy.candidates[number_of_post],
-            people: jsonData,
+        election_to_create_copy.posts[number_of_post] = {
+            ...election_to_create_copy.posts[number_of_post],
+            candidates: jsonData,
         };
 
         let candidates_verified = [];
         for (
             let i = 0;
             i <
-            election_to_create_copy.candidates[number_of_post].people.length;
+            election_to_create_copy.posts[number_of_post].candidates.length;
             i++
         ) {
             let current_candidate =
-                election_to_create_copy.candidates[number_of_post].people[i];
+                election_to_create_copy.posts[number_of_post].candidates[i];
 
             if (
                 current_candidate.hasOwnProperty('first_name') &&
@@ -76,9 +76,9 @@ export default function Add_Candidates({
             }
         }
 
-        election_to_create_copy.candidates[number_of_post] = {
-            ...election_to_create_copy.candidates[number_of_post],
-            people: candidates_verified,
+        election_to_create_copy.posts[number_of_post] = {
+            ...election_to_create_copy.posts[number_of_post],
+            candidates: candidates_verified,
         };
 
         set_election_to_create({ ...election_to_create_copy });
@@ -93,9 +93,6 @@ export default function Add_Candidates({
             });
     }
 
-    useEffect(() => {
-        console.log('election_to_create>>>', election_to_create);
-    }, [election_to_create]);
     return (
         <section>
             <div className={styles.upload_and_list_section}>
@@ -142,9 +139,9 @@ export default function Add_Candidates({
                     </div>
 
                     {election_to_create
-                        ? election_to_create.candidates[
+                        ? election_to_create.posts[
                               number_of_post
-                          ].people.map((candidate, index) => (
+                          ].candidates.map((candidate, index) => (
                               <Item
                                   key={index}
                                   number={index}
