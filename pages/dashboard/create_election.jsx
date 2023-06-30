@@ -79,12 +79,12 @@ export default function Create_Election() {
     const [response_after_query, set_response_after_query] = useState('');
     const open_modal = () => set_open(true);
     const { push } = useRouter();
-    const [show_loader, set_show_loader] = useState(false);
     const [open, set_open] = useState(false);
-    const close_modal = () => set_open(false);
+    const dont_close = () => set_open(false);
 
     function create_election() {
-        set_show_loader(true);
+        open_modal();
+
         if (
             election_to_create.hasOwnProperty('created_by') &&
             election_to_create.hasOwnProperty('name') &&
@@ -103,22 +103,22 @@ export default function Create_Election() {
                 .post(route_for_create_election, election_to_create)
                 .then((response) => {
                     set_response_after_query(response);
-                    open_modal();
                     set_election_to_create({
-                        candidates: [{ post: '', people: [] }],
+                        posts: [{ name: '', candidates: [] }],
                         tariff: 'Free',
                         two_rounds: false,
                     });
                     setTimeout(() => push(`/dashboard/my_projects`), 6000);
                 })
                 .catch((error) => {
-                    console.log('error--->>>', error);
+                    set_response_after_query({ status: 404 });
+                    setTimeout(() => push(`/dashboard/my_projects`), 6000);
+                    console.log(error);
                 });
         } else {
             set_response_after_query({ status: 404 });
-            open_modal();
+            setTimeout(() => push(`/dashboard/my_projects`), 6000);
         }
-        set_show_loader(false);
     }
 
     console.log('election_to_create', election_to_create);
@@ -189,16 +189,10 @@ export default function Create_Election() {
 
                         <div>
                             {indice_stepper === 4 ? (
-                                show_loader ? (
-                                    <Button
-                                        label={<Small_Loader color="white" />}
-                                    />
-                                ) : (
-                                    <Button
-                                        label="Soumettre"
-                                        onClick={() => create_election()}
-                                    />
-                                )
+                                <Button
+                                    label="Soumettre"
+                                    onClick={() => create_election()}
+                                />
                             ) : (
                                 <Button
                                     label="Suivant"
@@ -215,8 +209,12 @@ export default function Create_Election() {
                 </section>
             </Dashboard_Layout>
 
-            <Modal_Layout open={open} close_modal={close_modal}>
-                {response_after_query.status == 201 ? (
+            <Modal_Layout open={open} close_modal={dont_close}>
+                {response_after_query === '' ? (
+                    <div className="center_loader">
+                        <Small_Loader />
+                    </div>
+                ) : response_after_query.status == 201 ? (
                     <Success_Message
                         action="Création de l'élection réussie"
                         message={response_after_query.data.message}
