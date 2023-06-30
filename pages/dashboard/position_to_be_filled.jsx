@@ -1,27 +1,22 @@
 import styles from '../../styles/dashboard/position_to_be_filled.module.css';
 import { Icon } from '@iconify/react';
-import { useEffect } from 'react';
 import { Input } from '../../components';
 
 export default function Position_To_Be_Filled({
     election_to_create,
     set_election_to_create,
 }) {
-    useEffect(() => {
-        console.log(election_to_create);
-    }, [election_to_create]);
-
     function add_a_post() {
-        if (election_to_create.candidates.length < 4) {
+        if (election_to_create.posts.length < 4) {
             let newPost = {
-                post: '',
-                people: [],
+                name: '',
+                candidates: [],
             };
 
             set_election_to_create((election_to_create) => {
                 return {
                     ...election_to_create,
-                    candidates: [...election_to_create.candidates, newPost],
+                    posts: [...election_to_create.posts, newPost],
                 };
             });
         }
@@ -43,7 +38,7 @@ export default function Position_To_Be_Filled({
 
     function handle_change_post(e, index) {
         let election_to_create_copy = election_to_create;
-        election_to_create_copy.candidates[index].post = e.target.value;
+        election_to_create_copy.posts[index].name = e.target.value;
 
         set_election_to_create({ ...election_to_create_copy });
     }
@@ -55,7 +50,7 @@ export default function Position_To_Be_Filled({
             </button>
 
             <div className={styles.list_of_posts}>
-                {election_to_create.candidates.map((post, index) => (
+                {election_to_create?.posts?.map((post, index) => (
                     <Input
                         key={index}
                         label={
@@ -74,7 +69,7 @@ export default function Position_To_Be_Filled({
                         name="name"
                         type="text"
                         placeholder="Président"
-                        value={post.post}
+                        value={post.name}
                         onChange={(e) => handle_change_post(e, index)}
                     />
                 ))}

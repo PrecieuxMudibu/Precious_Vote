@@ -121,6 +121,8 @@ export default function Create_Election() {
         set_show_loader(false);
     }
 
+    console.log('election_to_create', election_to_create);
+
     return (
         <>
             <Dashboard_Layout page_title="Paramètres généraux">
