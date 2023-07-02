@@ -29,6 +29,22 @@
     background-color: var(--white);
     border: 1px solid var(--primary_color);
     border-radius: 15px;
+    height: 40%;
+}
+
+.thead {
+    position: relative;
+    top: 0;
+    color: var(--primary_color);
+    display: grid;
+    grid-template-columns: repeat(6, 5% 8% 20% 20% 20% 22%);
+    gap: 1%;
+}
+
+.thead  div {
+    font-weight: var(--bold_weight);
+    text-align: left;
+    width: 100%;
 }
 
 

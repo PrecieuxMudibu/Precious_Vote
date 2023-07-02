@@ -181,20 +181,17 @@ export default function Election() {
                         <div>Photo</div>
                         <div>Prénom</div>
                         <div>Nom</div>
-                        <div>Nombre de voix</div>
-                        <div>Pourcentage de voix</div>
+                        <div>Email</div>
+                        <div>Actions</div>
                     </div>
-                    {/* {candidates?.map((candidate, index) => (
+
+                    {election?.electors?.map((elector, index) => (
                         <Details_Item
                             key={index}
                             index={index}
-                            candidate={candidate}
-                            percentage={(
-                                (candidate.voices * 100) /
-                                electors.length
-                            ).toFixed(2)}
+                            item={elector}
                         />
-                    ))} */}
+                    ))}
 
                     {display === 'candidates' && <>Candidats</>}
                     {display === 'electors' && <>Electeurs</>}
