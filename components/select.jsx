@@ -15,7 +15,7 @@ export default function Select({
                 <Icon icon={icon} className="icon" />
 
                 <select onChange={onChange} name={name} id={name} value={value}>
-                    {options.map((item, index) => (
+                    {options?.map((item, index) => (
                         <option key={index} value={item}>
                             {item}
                         </option>

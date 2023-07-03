@@ -4,6 +4,7 @@ import {
     Dashboard_Layout,
     Details_Item,
     Election_Property_Card,
+    Select,
 } from '../../../components';
 import { useRouter } from 'next/router';
 import styles from '../../../styles/dashboard/my_projects/[election_id].module.css';
@@ -39,7 +40,6 @@ export default function Election() {
                 candidates_number + data.posts[i].candidates.length;
         }
 
-        console.log('candidates_number', candidates_number);
         set_election({ ...data, candidates_number });
     }
 
@@ -175,27 +175,63 @@ export default function Election() {
                     />
                 </div>
 
-                <div className={styles.details}>
+                {display === 'candidates' && (
+                    <>
+                        <Select
+                            options={election?.posts?.map((post) => post.name)}
+                            label="Poste"
+                        />
+                        <Select options={[1, 2]} label="Tours" />
+                        <div className={styles.details}>
+                            <div className={styles.thead}>
+                                <div>N°</div>
+                                <div>Photo</div>
+                                <div>Prénom</div>
+                                <div>Nom</div>
+                            </div>
+                        </div>
+                        {election?.electors?.map((elector, index) => (
+                            <Details_Item
+                                key={index}
+                                index={index}
+                                item={elector}
+                                display={display}
+                            />
+                        ))}
+                    </>
+                )}
+
+                {/* <div className={styles.details}>
                     <div className={styles.thead}>
-                        <div>N°</div>
-                        <div>Photo</div>
-                        <div>Prénom</div>
-                        <div>Nom</div>
-                        <div>Email</div>
-                        <div>Actions</div>
+                        {display === 'candidates' && (
+                            <>
+                                <div>N°</div>
+                                <div>Photo</div>
+                                <div>Prénom</div>
+                                <div>Nom</div>
+                            </>
+                        )}
+
+                        {display === 'electors' && (
+                            <>
+                                <div>N°</div>
+                                <div>Prénom</div>
+                                <div>Nom</div>
+                                <div>Actions</div>
+                            </>
+                        )}
                     </div>
 
-                    {election?.electors?.map((elector, index) => (
-                        <Details_Item
-                            key={index}
-                            index={index}
-                            item={elector}
-                        />
-                    ))}
-
-                    {display === 'candidates' && <>Candidats</>}
-                    {display === 'electors' && <>Electeurs</>}
-                </div>
+                    {display === 'electors' &&
+                        election?.electors?.map((elector, index) => (
+                            <Details_Item
+                                key={index}
+                                index={index}
+                                item={elector}
+                                display={display}
+                            />
+                        ))}
+                </div> */}
             </section>
         </Dashboard_Layout>
     );
