@@ -14,9 +14,12 @@ export async function get_posts_of_election(id) {
 
 
 
-export async function get_an_election(id) {
+export async function get_an_election(id, token) {
     try{
-        const response = await axios.get(`${route_for_get_an_election}/${id}`)
+        const response = await axios.get(`${route_for_get_an_election}/${id}`,
+        {
+            headers: { Authorization: token },
+        })
         return response.data.election
     }catch(error) {
         console.log(error)

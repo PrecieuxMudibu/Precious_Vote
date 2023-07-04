@@ -8,7 +8,7 @@ import {
 } from '../../../components';
 import { useRouter } from 'next/router';
 import styles from '../../../styles/dashboard/my_projects/[election_id].module.css';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Modal_Layout from '../../../layouts/modal_layout';
 import Image from 'next/image';
 import { Small_Loader } from '../../../components/index';
@@ -23,8 +23,11 @@ import {
     start_a_round,
 } from '../../../requests';
 import Link from 'next/link';
+import { applicationContext } from '../../_app';
+import { Icon } from '@iconify/react';
 
 export default function Election() {
+    const { token } = useContext(applicationContext);
     const { query } = useRouter();
     const { election_id } = query;
     const [show_loader, set_show_loader] = useState(false);
@@ -32,7 +35,7 @@ export default function Election() {
 
     const [election, set_election] = useState([]);
     async function get_election_info() {
-        const data = await get_an_election(election_id);
+        const data = await get_an_election(election_id, token);
         // const candidates_number = data.map(())
         let candidates_number = 0;
         for (let i = 0; i < data?.posts.length; i++) {
@@ -105,7 +108,7 @@ export default function Election() {
                         />
                         <div>
                             <h1>{election?.name}</h1>
-
+                            <p>Statut: En cours</p>
                             {/* {election_posts_and_rounds[0]?.rounds[0].status ==
                             'Not started' ? (
                                 <p> Commencer </p>
@@ -118,6 +121,11 @@ export default function Election() {
                         </div>
                     </div>
 
+                    {/* <Icon icon="carbon:play-filled" className="icon"  /> */}
+                    <Icon
+                        icon="carbon:play-filled"
+                        className={styles.play_icon}
+                    />
                     {/* {election_posts_and_rounds[0]?.rounds[0].status ==
                     'Not started' ? (
                         show_loader ? (

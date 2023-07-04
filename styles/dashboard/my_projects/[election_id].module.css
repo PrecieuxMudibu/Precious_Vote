@@ -1,7 +1,5 @@
-.header{
-    border: 1px solid rgba(255, 85, 89,.4);
-    background-color: var(--white);
-    padding: 20px;
+.header {
+    border: 1px solid blue;
     border-radius: 15px;
     display: flex;
     justify-content: space-between;
@@ -11,10 +9,28 @@
 .header >div{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.header >div >h1{
-    margin: auto 0;
+.header h1, .header p{
+    margin: 0;
+    padding: 0;
+    border: 1px solid red;
+}
+
+.play_icon {
+    width: 25px;
+    height: 25px;
+    width: 60px;
+    height: 60px;
+    font-size: 50px;
+}
+
+.play_icon:hover {
+    transform: scale(1.2);
+    transition-timing-function: ease-in-out;
+    transition-duration: 400ms;
+    cursor: pointer;
 }
 
 .cards {
