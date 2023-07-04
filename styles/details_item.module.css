@@ -1,7 +1,7 @@
 .row {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(6, 5% 8% 20% 20% 20% 22%);
+    grid-template-columns: repeat(4, 7% 30% 30% 29%);
     gap: 1%;
     margin: 10px 0;
     padding: auto 0;

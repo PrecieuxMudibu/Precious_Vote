@@ -1,28 +1,26 @@
 import styles from '../styles/details_item.module.css';
 
-export default function Details_Item({ item, index, display }) {
+export default function Details_Item({ item, index }) {
     return (
-        <div className={styles.row}>
-            {display === 'electors' && (
-                <>
-                    <div>{index + 1}</div>
-                    <div>{item.first_name}</div>
-                    <div>{item.name}</div>
-                </>
-            )}
-            {display === 'candidates' && (
-                <>
-                    <div>{index + 1}</div>
-                    <img
-                        src={item.picture}
-                        alt={item.name}
-                        className={styles.image}
-                    />
-                    <div>{item.first_name}</div>
-                    <div>{item.name}</div>
-                </>
-            )}
-        </div>
+        <>
+            <div className={styles.row}>
+                <div>{index + 1}</div>
+                <img
+                    src={item.picture}
+                    alt={item.name}
+                    className={styles.image}
+                />
+                <div>{item.first_name}</div>
+                <div>{item.name}</div>
+            </div>
+
+            <div className={styles.row}>
+                <div>2</div>
+                <div>first_name</div>
+                <div>item.name </div>
+                <div>1ction</div>
+            </div>
+        </>
     );
 }
 

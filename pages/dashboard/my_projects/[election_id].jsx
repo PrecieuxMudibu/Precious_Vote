@@ -31,7 +31,6 @@ export default function Election() {
     const { query } = useRouter();
     const { election_id } = query;
     const [show_loader, set_show_loader] = useState(false);
-    const [display, set_display] = useState('candidates');
 
     const [election, set_election] = useState([]);
     async function get_election_info() {
@@ -183,63 +182,22 @@ export default function Election() {
                     />
                 </div>
 
-                {display === 'candidates' && (
-                    <>
-                        <Select
-                            options={election?.posts?.map((post) => post.name)}
-                            label="Poste"
-                        />
-                        <Select options={[1, 2]} label="Tours" />
-                        <div className={styles.details}>
-                            <div className={styles.thead}>
-                                <div>N°</div>
-                                <div>Photo</div>
-                                <div>Prénom</div>
-                                <div>Nom</div>
-                            </div>
-                        </div>
-                        {election?.electors?.map((elector, index) => (
-                            <Details_Item
-                                key={index}
-                                index={index}
-                                item={elector}
-                                display={display}
-                            />
-                        ))}
-                    </>
-                )}
-
-                {/* <div className={styles.details}>
+                <div className={styles.details}>
                     <div className={styles.thead}>
-                        {display === 'candidates' && (
-                            <>
-                                <div>N°</div>
-                                <div>Photo</div>
-                                <div>Prénom</div>
-                                <div>Nom</div>
-                            </>
-                        )}
-
-                        {display === 'electors' && (
-                            <>
-                                <div>N°</div>
-                                <div>Prénom</div>
-                                <div>Nom</div>
-                                <div>Actions</div>
-                            </>
-                        )}
+                        <div>N°</div>
+                        <div>Prénom</div>
+                        <div>Nom</div>
+                        <div>Acctions</div>
                     </div>
-
-                    {display === 'electors' &&
-                        election?.electors?.map((elector, index) => (
-                            <Details_Item
-                                key={index}
-                                index={index}
-                                item={elector}
-                                display={display}
-                            />
-                        ))}
-                </div> */}
+                    <Details_Item key={2} index={2} item={{ a: 2 }} />
+                    {election?.electors?.map((elector, index) => (
+                        <Details_Item
+                            key={index}
+                            index={index}
+                            item={elector}
+                        />
+                    ))}
+                </div>
             </section>
         </Dashboard_Layout>
     );
