@@ -27,6 +27,7 @@ export default function Create_Election() {
         set_election_to_create,
         indice_stepper,
         set_indice_stepper,
+        token
     } = useContext(applicationContext);
 
     const [links] = useState([
@@ -100,7 +101,9 @@ export default function Create_Election() {
             election_to_create.hasOwnProperty('two_rounds')
         ) {
             axios
-                .post(route_for_create_election, election_to_create)
+                .post(route_for_create_election, election_to_create, {
+                    headers: { Authorization: token },
+                })
                 .then((response) => {
                     set_response_after_query(response);
                     set_election_to_create({

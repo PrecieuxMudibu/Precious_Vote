@@ -1,5 +1,3 @@
--   **Afficher une élection**
--   **Commencer une élection**
 -   **Arrêter un round**
 -   **Afficher les électeurs**
 -   **Afficher les candidats**

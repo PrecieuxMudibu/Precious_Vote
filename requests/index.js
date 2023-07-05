@@ -24,13 +24,6 @@ export async function get_an_election(id, token) {
     }catch(error) {
         console.log(error)
     }
-        
-    // return await axios
-    //     .get(`${route_for_get_an_election}/${id}`)
-    //     .then((response) => response.data.election)
-    //     .catch((error) => {
-    //         console.log(error);
-    //     });
 }
 
 export async function get_rounds_for_a_post(id) {
@@ -42,13 +35,31 @@ export async function get_rounds_for_a_post(id) {
         });
 }
 
-export async function start_a_round(id) {
-    return await axios
-        .put(`${route_for_start_round}/${id}`)
-        .then((response) => response.data)
-        .catch((error) => {
-            console.log(error);
-        });
+export async function start_a_round(id, token) {
+    console.log("token",token)
+    console.log("id",id)
+    console.log("route", `${route_for_start_round}/${id}`)
+    
+    // return await axios
+    //     .put(`${route_for_start_round}/${id}`, {
+    //         headers: { Authorization: token },
+    //     })
+    //     .then((response) => response.data)
+    //     .catch((error) => {
+    //         console.log(error);
+    //     });
+
+        try{
+            const response = await axios({
+                method: 'put',
+                url: `${route_for_start_round}/${id}`,
+                headers: { Authorization: token },
+            });
+            
+            return response.data
+        }catch(error) {
+            console.log(error)
+        }
 }
 
 export async function close_a_round(id) {

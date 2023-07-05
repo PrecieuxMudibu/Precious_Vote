@@ -51,32 +51,22 @@ export default function Election() {
     console.log('response', election);
 
     async function begin_round() {
-        // START THE FIRST ROUNDS OF ALL POSTS
-        set_show_loader(true);
-        // for (let i = 0; i < election_posts_and_rounds.length; i++) {
-        //     const round_id = election_posts_and_rounds[i].rounds[0]._id;
-        //     let response = await start_a_round(round_id);
-        //     console.log('response>>>' + i, response);
-        // }
+        console.log('BEGIN ROUND');
 
-        // SEND NOTIFICATION MAIL TO ALL ELECTORS OF THE ELECTION
-        // for (let i = 0; i < electors.length; i++) {
-        //     const current_elector = {
-        //         first_name: electors[i].first_name,
-        //         name: electors[i].name,
-        //         email: electors[i].email,
-        //         token_for_vote: electors[i].token_for_vote,
-        //     };
-        //     // eslint-disable-next-line no-unused-vars
-        //     let response = await send_email({
-        //         election_id: election_id,
-        //         elector: current_elector,
-        //     });
-        // }
+        for (let i = 0; i < election?.posts.length; i++) {
+            const current_post = election.posts[i];
 
-        // // If the rounds are closed , display "Terminé"
-        // get_post_and_rounds();
-        // set_show_loader(false);
+            for (let j = 0; j < current_post.rounds.length; j++) {
+                const current_round = current_post.rounds[j];
+
+                if (current_round.status === 'Not started') {
+                    const response = await start_a_round(
+                        current_round._id,
+                        token
+                    );
+                }
+            }
+        }
     }
 
     async function close_round() {
@@ -106,7 +96,7 @@ export default function Election() {
                             className={styles.election_card__image}
                         />
                         <div>
-                            <h1>{election?.name} hh33</h1>
+                            <h1>{election?.name}</h1>
                             <p>Statut: En cours</p>
                             {/* {election_posts_and_rounds[0]?.rounds[0].status ==
                             'Not started' ? (
@@ -125,6 +115,7 @@ export default function Election() {
                         <Icon
                             icon="carbon:play-filled"
                             className={styles.play_icon}
+                            onClick={begin_round}
                         />
                     </div>
                     {/* {election_posts_and_rounds[0]?.rounds[0].status ==
