@@ -106,7 +106,7 @@ export default function Election() {
                             className={styles.election_card__image}
                         />
                         <div>
-                            <h1>{election?.name}</h1>
+                            <h1>{election?.name} hh33</h1>
                             <p>Statut: En cours</p>
                             {/* {election_posts_and_rounds[0]?.rounds[0].status ==
                             'Not started' ? (
@@ -121,10 +121,12 @@ export default function Election() {
                     </div>
 
                     {/* <Icon icon="carbon:play-filled" className="icon"  /> */}
-                    <Icon
-                        icon="carbon:play-filled"
-                        className={styles.play_icon}
-                    />
+                    <div title="Test">
+                        <Icon
+                            icon="carbon:play-filled"
+                            className={styles.play_icon}
+                        />
+                    </div>
                     {/* {election_posts_and_rounds[0]?.rounds[0].status ==
                     'Not started' ? (
                         show_loader ? (
@@ -189,7 +191,6 @@ export default function Election() {
                         <div>Nom</div>
                         <div>Acctions</div>
                     </div>
-                    <Details_Item key={2} index={2} item={{ a: 2 }} />
                     {election?.electors?.map((elector, index) => (
                         <Details_Item
                             key={index}

@@ -42,14 +42,14 @@
     margin-top: 30px;
     padding: 20px;
     background-color: var(--white);
-    border: 1px solid var(--primary_color);
+    border: 1px solid rgba(255, 85, 89,.4);
     border-radius: 15px;
-    height: 56%;
+    height: 48vh;
+    overflow: scroll;
 }
 
 .thead {
     position: relative;
-    border: 1px solid blue;
     top: 0;
     color: var(--primary_color);
     display: grid;
@@ -58,7 +58,6 @@
 }
 
 .thead  div {
-    border: 1px solid red;
     font-weight: var(--bold_weight);
     text-align: left;
     width: 100%;

@@ -5,21 +5,17 @@ export default function Details_Item({ item, index }) {
         <>
             <div className={styles.row}>
                 <div>{index + 1}</div>
-                <img
-                    src={item.picture}
-                    alt={item.name}
-                    className={styles.image}
-                />
                 <div>{item.first_name}</div>
                 <div>{item.name}</div>
+                <div>1ction</div>
             </div>
 
-            <div className={styles.row}>
+            {/* <div className={styles.row}>
                 <div>2</div>
                 <div>first_name</div>
                 <div>item.name </div>
                 <div>1ction</div>
-            </div>
+            </div> */}
         </>
     );
 }
