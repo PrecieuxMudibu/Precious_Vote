@@ -50,17 +50,20 @@ export async function start_a_round(id, token) {
 }
 
 export async function close_a_round(id, token) {
+    console.log("BEFIN CLOSE")
+
     try{
         const response = await axios({
             method: 'put',
             url: `${route_for_close_round}/${id}`,
             headers: { Authorization: token },
         });
-        console.log("RESPOJNSE", response)
         return response.data
     }catch(error) {
         console.log(error)
     }
+    console.log("END CLOSE")
+
 }
 
 export async function vote_candidate(data) {

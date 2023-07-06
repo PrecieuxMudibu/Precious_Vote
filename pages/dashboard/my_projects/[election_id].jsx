@@ -31,6 +31,8 @@ export default function Election() {
     const { query } = useRouter();
     const { election_id } = query;
     const [show_loader, set_show_loader] = useState(false);
+    const [tooltip_text, set_tooltip_text] = useState('');
+    const [correct_button, set_correct_button] = useState('');
 
     const [election, set_election] = useState([]);
     async function get_election_info() {
@@ -48,6 +50,10 @@ export default function Election() {
     useEffect(() => {
         get_election_info();
     }, [query]);
+
+    useEffect(() => {
+        set_correct_button(return_correct_button());
+    }, [election]);
     console.log('response', election);
 
     async function begin_round() {
@@ -65,6 +71,7 @@ export default function Election() {
                 }
             }
         }
+        get_election_info();
     }
 
     async function close_round() {
@@ -74,7 +81,7 @@ export default function Election() {
             for (let j = 0; j < current_post.rounds.length; j++) {
                 const current_round = current_post.rounds[j];
 
-                if (current_round.status === 'Not started') {
+                if (current_round.status === 'In progress') {
                     const response = await close_a_round(
                         current_round._id,
                         token
@@ -82,16 +89,59 @@ export default function Election() {
                 }
             }
         }
+        get_election_info();
+    }
 
-        // START THE FIRST ROUNDS OF ALL POSTS
-        // for (let i = 0; i < election_posts_and_rounds.length; i++) {
-        //     const round_id = election_posts_and_rounds[i].rounds[0]._id;
-        //     let response = await close_a_round(round_id);
-        //     console.log('response>>>' + i, response);
-        // }
-        // // If the rounds are closed , display "Terminé"
-        // get_post_and_rounds();
-        // set_show_loader(false);
+    function return_correct_button() {
+        if (election.posts) {
+            if (election.posts[0].rounds[0].status === 'Not started') {
+                set_tooltip_text('Commencer le round 1');
+                return (
+                    <Icon
+                        icon="carbon:play-filled"
+                        className={styles.play_icon}
+                        onClick={begin_round}
+                    />
+                );
+            } else if (election.posts[0].rounds[0].status === 'In progress') {
+                set_tooltip_text('Arrêter le round 1');
+                return (
+                    <Icon
+                        icon="carbon:stop-filled"
+                        className={styles.play_icon}
+                        onClick={close_round}
+                    />
+                );
+            } else if (election.posts[0].rounds[0].status === 'Completed') {
+                if (election.posts[0].rounds[1].status === 'Not started') {
+                    set_tooltip_text('Commencer le round 2');
+                    return (
+                        <Icon
+                            icon="carbon:play-filled"
+                            className={styles.play_icon}
+                            onClick={begin_round}
+                        />
+                    );
+                } else if (
+                    election.posts[0].rounds[1].status === 'In progress'
+                ) {
+                    set_tooltip_text('Arrêter le round 2');
+                    return (
+                        <Icon
+                            icon="carbon:stop-filled"
+                            className={styles.play_icon}
+                            onClick={close_round}
+                        />
+                    );
+                } else  {
+                    return (
+                        <Link href={`../../result_page/${election_id}`}>
+                            <p className="pointer">Résultats</p>
+                        </Link>
+                    );
+                }
+            }
+        }
     }
 
     return (
@@ -122,62 +172,8 @@ export default function Election() {
                     </div>
 
                     {/* <Icon icon="carbon:play-filled" className="icon"  /> */}
-                    <div title="Test">
-                        {election?.posts &&
-                        election?.posts[0].rounds[0].status ===
-                            'Not started' ? (
-                            <Icon
-                                icon="carbon:play-filled"
-                                className={styles.play_icon}
-                                onClick={begin_round}
-                            />
-                        ) : election?.posts &&
-                          election?.posts[0].rounds[0].status ===
-                              'In progress' ? (
-                            <Icon
-                                icon="carbon:stop-filled"
-                                className={styles.play_icon}
-                                onClick={close_round}
-                            />
-                        ) : (
-                            <Link href={`../../result_page/${election_id}`}>
-                                <p className="pointer">Résultats </p>
-                            </Link>
-                        )}
-                    </div>
-                    {/* {election_posts_and_rounds[0]?.rounds[0].status ==
-                    'Not started' ? (
-                        show_loader ? (
-                            <button className="button_primary">
-                                <Small_Loader color="white" />
-                            </button>
-                        ) : (
-                            <button
-                                className="button_primary"
-                                onClick={() => begin_round()}
-                            >
-                                Commencer
-                            </button>
-                        )
-                    ) : election_posts_and_rounds[0]?.rounds[0].status ==
-                      'In progress' ? (
-                        show_loader ? (
-                            <button className="button_primary">
-                                <Small_Loader color="white" />
-                            </button>
-                        ) : (
-                            <button
-                                className="button_primary"
-                                onClick={() => close_round()}
-                            >
-                                Arrêter
-                            </button>
-                        )
-                    ) : (
-                        <Link href={`../../result_page/${election_id}`}>
-                            <p className="pointer">Résultats </p>
-                        </Link>
-                    )} */}
+                    <div title="Test">{correct_button}</div>
+                    {tooltip_text}
                 </div>
                 <div className={styles.cards}>
                     <Election_Property_Card
