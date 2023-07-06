@@ -51,8 +51,6 @@ export default function Election() {
     console.log('response', election);
 
     async function begin_round() {
-        console.log('BEGIN ROUND');
-
         for (let i = 0; i < election?.posts.length; i++) {
             const current_post = election.posts[i];
 
@@ -70,7 +68,20 @@ export default function Election() {
     }
 
     async function close_round() {
-        set_show_loader(true);
+        for (let i = 0; i < election?.posts.length; i++) {
+            const current_post = election.posts[i];
+
+            for (let j = 0; j < current_post.rounds.length; j++) {
+                const current_round = current_post.rounds[j];
+
+                if (current_round.status === 'Not started') {
+                    const response = await close_a_round(
+                        current_round._id,
+                        token
+                    );
+                }
+            }
+        }
 
         // START THE FIRST ROUNDS OF ALL POSTS
         // for (let i = 0; i < election_posts_and_rounds.length; i++) {
@@ -112,11 +123,27 @@ export default function Election() {
 
                     {/* <Icon icon="carbon:play-filled" className="icon"  /> */}
                     <div title="Test">
-                        <Icon
-                            icon="carbon:play-filled"
-                            className={styles.play_icon}
-                            onClick={begin_round}
-                        />
+                        {election?.posts &&
+                        election?.posts[0].rounds[0].status ===
+                            'Not started' ? (
+                            <Icon
+                                icon="carbon:play-filled"
+                                className={styles.play_icon}
+                                onClick={begin_round}
+                            />
+                        ) : election?.posts &&
+                          election?.posts[0].rounds[0].status ===
+                              'In progress' ? (
+                            <Icon
+                                icon="carbon:stop-filled"
+                                className={styles.play_icon}
+                                onClick={close_round}
+                            />
+                        ) : (
+                            <Link href={`../../result_page/${election_id}`}>
+                                <p className="pointer">Résultats </p>
+                            </Link>
+                        )}
                     </div>
                     {/* {election_posts_and_rounds[0]?.rounds[0].status ==
                     'Not started' ? (
