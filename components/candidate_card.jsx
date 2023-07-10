@@ -8,6 +8,7 @@ import Success_Message from './success_message';
 import Failed_Message from './failed_message';
 
 export default function Candidate_Card({ candidate }) {
+    console.log('candidate', candidate);
     const [open, set_open] = useState(false);
     const [token_for_vote, set_token_for_vote] = useState(false);
     const close_modal = () => {
@@ -42,18 +43,21 @@ export default function Candidate_Card({ candidate }) {
 
     return (
         <>
-            <div className={styles.candidate_card}>
+            <div
+                className={styles.candidate_card}
+                onClick={() => alert(candidate.first_name)}
+            >
                 <img
                     src={
-                        candidate?.picture
-                            ? candidate.picture
+                        candidate?.candidate?.picture
+                            ? candidate?.candidate?.picture
                             : `https://gem.ec-nantes.fr/wp-content/uploads/2019/01/profil-vide.png`
                     }
                     className={styles.image}
                     alt={candidate?.name}
                 />
                 <h2>
-                    {candidate?.first_name} {candidate?.name}
+                    {candidate?.candidate?.first_name} {candidate?.candidate?.name}
                 </h2>
 
                 <button

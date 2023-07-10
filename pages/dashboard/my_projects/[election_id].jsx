@@ -113,7 +113,7 @@ export default function Election() {
                     />
                 );
             } else if (election.posts[0].rounds[0].status === 'Completed') {
-                if (election.posts[0].rounds[1].status === 'Not started') {
+                if (election.posts[0].rounds[1]?.status === 'Not started') {
                     set_tooltip_text('Commencer le round 2');
                     return (
                         <Icon
@@ -123,7 +123,7 @@ export default function Election() {
                         />
                     );
                 } else if (
-                    election.posts[0].rounds[1].status === 'In progress'
+                    election.posts[0].rounds[1]?.status === 'In progress'
                 ) {
                     set_tooltip_text('Arrêter le round 2');
                     return (
