@@ -13,7 +13,6 @@ export default function Choose_Candidate() {
 
     const { election_id } = query;
     const [post_index, set_post_index] = useState(0);
-    const [candidates, set_candidates] = useState([]);
     const [current_post, set_current_post] = useState(0);
 
     const [election, set_election] = useState([]);
