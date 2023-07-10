@@ -9,7 +9,6 @@ import { Icon } from '@iconify/react';
 
 export default function Choose_Candidate() {
     const { query } = useRouter();
-    // const { token } = useContext(applicationContext);
 
     const { election_id } = query;
     const [post_index, set_post_index] = useState(0);
@@ -73,6 +72,7 @@ export default function Choose_Candidate() {
                           (candidate, index) => (
                               <Candidate_Card
                                   candidate={candidate}
+                                  round_id={current_post?.rounds[0]?._id}
                                   key={index}
                               />
                           )
@@ -83,6 +83,7 @@ export default function Choose_Candidate() {
                           (candidate, index) => (
                               <Candidate_Card
                                   candidate={candidate}
+                                  round_id={current_post?.rounds[1]?._id}
                                   key={index}
                               />
                           )
