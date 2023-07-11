@@ -1,4 +1,5 @@
 import { Icon } from '@iconify/react';
+import { isObject } from '../helpers';
 
 export default function Select({
     name,
@@ -15,11 +16,17 @@ export default function Select({
                 <Icon icon={icon} className="icon" />
 
                 <select onChange={onChange} name={name} id={name} value={value}>
-                    {options?.map((item, index) => (
-                        <option key={index} value={item}>
-                            {item}
-                        </option>
-                    ))}
+                    {options && isObject(options[0])
+                        ? options?.map((item, index) => (
+                              <option key={index} value={item._id}>
+                                  {item?.name}
+                              </option>
+                          ))
+                        : options?.map((item, index) => (
+                              <option key={index} value={item}>
+                                  {item}
+                              </option>
+                          ))}
                 </select>
             </div>
         </label>

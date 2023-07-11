@@ -5,3 +5,8 @@ export const decode_token = (token) => {
     return jwt_decode(token_without_bearer);
 };
   
+export const isObject = (data) => {
+    if (typeof data === 'object' && data !== null && !Array.isArray(data))
+        return true;
+    return false;
+};

@@ -5,11 +5,11 @@ export default function Result_Item({ candidate, index, percentage }) {
         <div className={styles.row}>
             <div>{index+1}</div>
             <div>
-                <img src={candidate.picture} alt={candidate.name} className={styles.image} />
+                <img src={candidate.candidate.picture} alt={candidate.name} className={styles.image} />
                 {/* <Image src={candidate.picture} alt={first_name} width={65} height={65} /> */}
             </div>
-            <div>{candidate.first_name}</div>
-            <div>{candidate.name}</div>
+            <div>{candidate.candidate.first_name}</div>
+            <div>{candidate.candidate.name}</div>
             <div>{candidate.voices}</div>
             <div>{percentage} %</div>
         </div>

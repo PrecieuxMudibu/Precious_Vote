@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react';
 import Layout from '../../layouts/layout';
 import styles from '../../styles/result_page.module.css';
-import { Result_Item } from '../../components';
+import { Result_Item, Select } from '../../components';
 import { useRouter } from 'next/router';
 import {
     get_an_election,
@@ -16,79 +16,114 @@ import { route_for_get_candidates_for_the_round } from '../../public/routes';
 export default function Result_Page() {
     const { query } = useRouter();
     const { election_id } = query;
+    const [election, set_election] = useState([]);
+    const [post_index, set_post_index] = useState(0);
+    const [round_index, set_round_index] = useState(0);
 
-    const [current_post_selected, set_current_post_selected] = useState([]);
-    const [round_selected, set_round_selected] = useState({});
-    const [rounds_of_the_post_selected, set_rounds_of_the_post_selected] =
-        useState([]);
-    const [current_election, set_current_election] = useState({});
-    const [candidates, set_candidates] = useState([]);
-    const [election_post_and_rounds, set_election_post_and_rounds] = useState(
-        []
-    );
-    const [electors, set_electors] = useState([]);
-    async function get_electors_of_election() {
-        set_electors(await get_electors(election_id));
-    }
+    async function get_election_info() {
+        const token = localStorage.getItem('vote_app_token');
 
-    async function get_candidates_for_the_round(id) {
-        return await axios
-            .get(`${route_for_get_candidates_for_the_round}/${id}`)
-            .then((response) => response.data.candidates)
-            .catch((error) => {
-                console.log(error);
-            });
-    }
+        const data = await get_an_election(election_id, token);
 
-    async function get_candidates() {
-        const posts = await get_posts_of_election(election_id);
-
-        // GET THE ROUNDS FOR ALL POST
-        let post_and_rounds = [];
-        for (let i = 0; i < posts?.length; i++) {
-            const rounds = await get_rounds_for_a_post(posts[i]._id);
-            post_and_rounds.push({
-                post: posts[i],
-                ...rounds,
-            });
-        }
-
-        set_election_post_and_rounds(post_and_rounds);
-        if (round_selected != undefined) {
-            const candidates_for_the_round = await get_candidates_for_the_round(
-                round_selected._id
-            );
-            set_candidates(
-                candidates_for_the_round?.map((item) => {
-                    return {
-                        ...item.candidate_id,
-                        voices: item.voices,
-                    };
-                })
-            );
-        }
-
-        set_current_election(await get_an_election(election_id));
+        set_election(data);
     }
 
     useEffect(() => {
-        const found = election_post_and_rounds.find(
-            (element) => element.post.name == current_post_selected
-        );
-        set_rounds_of_the_post_selected(found?.rounds);
-    }, [election_post_and_rounds, current_post_selected]);
+        get_election_info();
+    }, [query]);
 
     useEffect(() => {
-        get_electors_of_election();
-        get_candidates();
-    }, [election_id, round_selected]);
+        console.log('election', election);
+    }, [election]);
+
+    // const [current_post_selected, set_current_post_selected] = useState([]);
+    // const [round_selected, set_round_selected] = useState({});
+    // const [rounds_of_the_post_selected, set_rounds_of_the_post_selected] =
+    //     useState([]);
+    // const [current_election, set_current_election] = useState({});
+    // const [candidates, set_candidates] = useState([]);
+    // const [election_post_and_rounds, set_election_post_and_rounds] = useState(
+    //     []
+    // );
+    // const [electors, set_electors] = useState([]);
+    // async function get_electors_of_election() {
+    //     set_electors(await get_electors(election_id));
+    // }
+
+    // async function get_candidates_for_the_round(id) {
+    //     return await axios
+    //         .get(`${route_for_get_candidates_for_the_round}/${id}`)
+    //         .then((response) => response.data.candidates)
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    // }
+
+    // async function get_candidates() {
+    //     const posts = await get_posts_of_election(election_id);
+
+    //     // GET THE ROUNDS FOR ALL POST
+    //     let post_and_rounds = [];
+    //     for (let i = 0; i < posts?.length; i++) {
+    //         const rounds = await get_rounds_for_a_post(posts[i]._id);
+    //         post_and_rounds.push({
+    //             post: posts[i],
+    //             ...rounds,
+    //         });
+    //     }
+
+    //     set_election_post_and_rounds(post_and_rounds);
+    //     if (round_selected != undefined) {
+    //         const candidates_for_the_round = await get_candidates_for_the_round(
+    //             round_selected._id
+    //         );
+    //         set_candidates(
+    //             candidates_for_the_round?.map((item) => {
+    //                 return {
+    //                     ...item.candidate_id,
+    //                     voices: item.voices,
+    //                 };
+    //             })
+    //         );
+    //     }
+
+    //     set_current_election(await get_an_election(election_id));
+    // }
+
+    // useEffect(() => {
+    //     const found = election_post_and_rounds.find(
+    //         (element) => element.post.name == current_post_selected
+    //     );
+    //     set_rounds_of_the_post_selected(found?.rounds);
+    // }, [election_post_and_rounds, current_post_selected]);
+
+    // useEffect(() => {
+    //     get_electors_of_election();
+    //     get_candidates();
+    // }, [election_id, round_selected]);
 
     return (
         <Layout>
-            <h1>Résultat pour : {current_election?.name}</h1>
+            {/* <h1>Résultat pour : {current_election?.name}</h1> */}
 
             <div className={styles.filters}>
-                <label className={styles.filter}>
+                <Select
+                    id="poste"
+                    name="poste"
+                    label="Poste"
+                    icon="material-symbols:confirmation-number"
+                    // options={election?.posts?.map((item) => item?.name)}
+                    options={election?.posts}
+                    onChange={(e) => console.log('ICI', e.target.value)}
+                />
+
+                <Select
+                    id="tours"
+                    name="tours"
+                    label="Tours"
+                    icon="material-symbols:confirmation-number"
+                />
+                {/* <label className={styles.filter}>
                     <span>Poste</span>
                     <div className="input_group">
                         <Icon
@@ -97,9 +132,9 @@ export default function Result_Page() {
                         />
 
                         <select
-                            onChange={(e) =>
-                                set_current_post_selected(e.target.value)
-                            }
+                            // onChange={(e) =>
+                            //     set_current_post_selected(e.target.value)
+                            // }
                             name="poste"
                             id="poste"
                         >
@@ -113,9 +148,9 @@ export default function Result_Page() {
                             })}{' '}
                         </select>
                     </div>
-                </label>
+                </label> */}
 
-                <label className={styles.filter}>
+                {/* <label className={styles.filter}>
                     <span>Tours</span>
                     <div className="input_group">
                         <Icon
@@ -123,30 +158,30 @@ export default function Result_Page() {
                             className="icon"
                         />
                         <select
-                            value={round_selected?.number}
-                            onChange={(e) =>
-                                set_round_selected(
-                                    rounds_of_the_post_selected.find(
-                                        (element) =>
-                                            element.number == e.target.value
-                                    )
-                                )
-                            }
+                            // value={round_selected?.number}
+                            // onChange={(e) =>
+                            //     set_round_selected(
+                            //         rounds_of_the_post_selected.find(
+                            //             (element) =>
+                            //                 element.number == e.target.value
+                            //         )
+                            //     )
+                            // }
                             name="rounds"
                             id="rounds"
                         >
                             <option value=""></option>
-                            {rounds_of_the_post_selected?.map((item, index) => {
+                             {rounds_of_the_post_selected?.map((item, index) => {
                                 return (
                                     <option key={index} value={item.number}>
                                         {' '}
                                         {item.number}
                                     </option>
                                 );
-                            })}
+                            })} 
                         </select>
                     </div>
-                </label>
+                </label> */}
             </div>
 
             {/* TODOS: RESULT PAGE RESPONSIVE */}
@@ -159,7 +194,21 @@ export default function Result_Page() {
                     <div>Nombre de voix</div>
                     <div>Pourcentage de voix</div>
                 </div>
-                {candidates?.map((candidate, index) => (
+                {election?.posts &&
+                    election?.posts[post_index]?.rounds[
+                        round_index
+                    ]?.candidates?.map((candidate, index) => (
+                        <Result_Item
+                            key={index}
+                            index={index}
+                            candidate={candidate}
+                            percentage={(
+                                (candidate.voices * 100) /
+                                election?.electors.length
+                            ).toFixed(2)}
+                        />
+                    ))}
+                {/* {candidates?.map((candidate, index) => (
                     <Result_Item
                         key={index}
                         index={index}
@@ -169,7 +218,7 @@ export default function Result_Page() {
                             electors.length
                         ).toFixed(2)}
                     />
-                ))}
+                ))} */}
             </div>
         </Layout>
     );
