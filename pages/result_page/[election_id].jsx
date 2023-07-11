@@ -36,6 +36,16 @@ export default function Result_Page() {
         console.log('election', election);
     }, [election]);
 
+    function change_post(e) {
+        console.log('ICI', e.target.value);
+
+        const index = election.posts.findIndex(
+            (item) => item._id === e.target.value
+        );
+
+        set_post_index(index);
+    }
+
     // const [current_post_selected, set_current_post_selected] = useState([]);
     // const [round_selected, set_round_selected] = useState({});
     // const [rounds_of_the_post_selected, set_rounds_of_the_post_selected] =
@@ -114,7 +124,11 @@ export default function Result_Page() {
                     icon="material-symbols:confirmation-number"
                     // options={election?.posts?.map((item) => item?.name)}
                     options={election?.posts}
-                    onChange={(e) => console.log('ICI', e.target.value)}
+                    // onChange={(e) => console.log('ICI', e.target.value)}
+                    onChange={change_post}
+                    // election?.posts.findIndex(
+                    //     (item) => (item = e.target.value)
+                    // );
                 />
 
                 <Select
