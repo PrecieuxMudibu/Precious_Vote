@@ -1,7 +1,5 @@
 -   **Arrêter un round**
--   **Afficher les électeurs**
--   **Afficher les candidats**
 -   **Modifier son profil**
--   **Voter un candidat**
+-   **Voter un candidat** (Arranger le message après le vote)
 -   **Mettre du contenu pour les autres pages**
 -   **Renvoyer le mail à un électeur**
