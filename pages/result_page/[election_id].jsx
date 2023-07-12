@@ -11,7 +11,7 @@ export default function Result_Page() {
     const [election, set_election] = useState([]);
     const [post_index, set_post_index] = useState(0);
     const [round_index, set_round_index] = useState(0);
-    const [show_result, set_show_result]= useState(false)
+    const [show_result, set_show_result] = useState(false);
 
     async function get_election_info() {
         const token = localStorage.getItem('vote_app_token');
@@ -25,7 +25,14 @@ export default function Result_Page() {
     }, [query]);
 
     useEffect(() => {
-        console.log('election', election);
+        if (election?.two_rounds) {
+            if (
+                election?.posts[0].rounds[0].status === 'Completed' &&
+                election?.posts[0].rounds[1].status === 'Completed'
+            ) {
+                set_show_result(true);
+            }
+        }
     }, [election]);
 
     function change_post(e) {
@@ -46,60 +53,67 @@ export default function Result_Page() {
 
     return (
         <Layout>
-            <h1>Résultat pour : {election?.name}</h1>
+            {show_result ? (
+                <>
+                    <h1>Résultat pour : {election?.name}</h1>
 
-            <div className={styles.filters}>
-                <Select
-                    id="poste"
-                    name="poste"
-                    label="Poste"
-                    icon="material-symbols:confirmation-number"
-                    options={election?.posts}
-                    onChange={change_post}
-                />
-
-                <Select
-                    id="tours"
-                    name="tours"
-                    label="Tours"
-                    icon="material-symbols:confirmation-number"
-                    options={
-                        election?.posts &&
-                        election?.posts[post_index]?.rounds.map((round) => ({
-                            ...round,
-                            name: round?.number,
-                        }))
-                    }
-                    onChange={change_round}
-                />
-            </div>
-
-            {/* TODOS: RESULT PAGE RESPONSIVE */}
-            <div className={styles.result}>
-                <div className={styles.thead}>
-                    <div>N°</div>
-                    <div>Photo</div>
-                    <div>Prénom</div>
-                    <div>Nom</div>
-                    <div>Nombre de voix</div>
-                    <div>Pourcentage de voix</div>
-                </div>
-                {election?.posts &&
-                    election?.posts[post_index]?.rounds[
-                        round_index
-                    ]?.candidates?.map((candidate, index) => (
-                        <Result_Item
-                            key={index}
-                            index={index}
-                            candidate={candidate}
-                            percentage={(
-                                (candidate.voices * 100) /
-                                election?.electors.length
-                            ).toFixed(2)}
+                    <div className={styles.filters}>
+                        <Select
+                            id="poste"
+                            name="poste"
+                            label="Poste"
+                            icon="material-symbols:confirmation-number"
+                            options={election?.posts}
+                            onChange={change_post}
                         />
-                    ))}
-            </div>
-            <No_Data />
+
+                        <Select
+                            id="tours"
+                            name="tours"
+                            label="Tours"
+                            icon="material-symbols:confirmation-number"
+                            options={
+                                election?.posts &&
+                                election?.posts[post_index]?.rounds.map(
+                                    (round) => ({
+                                        ...round,
+                                        name: round?.number,
+                                    })
+                                )
+                            }
+                            onChange={change_round}
+                        />
+                    </div>
+
+                    {/* TODOS: RESULT PAGE RESPONSIVE */}
+                    <div className={styles.result}>
+                        <div className={styles.thead}>
+                            <div>N°</div>
+                            <div>Photo</div>
+                            <div>Prénom</div>
+                            <div>Nom</div>
+                            <div>Nombre de voix</div>
+                            <div>Pourcentage de voix</div>
+                        </div>
+                        {election?.posts &&
+                            election?.posts[post_index]?.rounds[
+                                round_index
+                            ]?.candidates?.map((candidate, index) => (
+                                <Result_Item
+                                    key={index}
+                                    index={index}
+                                    candidate={candidate}
+                                    percentage={(
+                                        (candidate.voices * 100) /
+                                        election?.electors.length
+                                    ).toFixed(2)}
+                                />
+                            ))}
+                    </div>
+                </>
+            ) : (
+                <No_Data label="Aucune donnée trouvée" />
+            )}
         </Layout>
     );
 }
