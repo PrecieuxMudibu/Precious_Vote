@@ -1,17 +1,11 @@
-import { Icon } from '@iconify/react';
 import Layout from '../../layouts/layout';
 import styles from '../../styles/result_page.module.css';
 import { Result_Item, Select } from '../../components';
 import { useRouter } from 'next/router';
 import {
     get_an_election,
-    get_electors,
-    get_posts_of_election,
-    get_rounds_for_a_post,
 } from '../../requests';
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { route_for_get_candidates_for_the_round } from '../../public/routes';
 
 export default function Result_Page() {
     const { query } = useRouter();
@@ -37,13 +31,21 @@ export default function Result_Page() {
     }, [election]);
 
     function change_post(e) {
-        console.log('ICI', e.target.value);
-
         const index = election.posts.findIndex(
             (item) => item._id === e.target.value
         );
 
         set_post_index(index);
+    }
+
+    function change_round(e) {
+        const index = election.posts[post_index].rounds.findIndex(
+            (item) => item._id === e.target.value
+        );
+
+        console.log('index ROUND', index);
+
+        set_round_index(index);
     }
 
     // const [current_post_selected, set_current_post_selected] = useState([]);
@@ -124,7 +126,6 @@ export default function Result_Page() {
                     icon="material-symbols:confirmation-number"
                     // options={election?.posts?.map((item) => item?.name)}
                     options={election?.posts}
-                    // onChange={(e) => console.log('ICI', e.target.value)}
                     onChange={change_post}
                     // election?.posts.findIndex(
                     //     (item) => (item = e.target.value)
@@ -136,6 +137,14 @@ export default function Result_Page() {
                     name="tours"
                     label="Tours"
                     icon="material-symbols:confirmation-number"
+                    options={
+                        election?.posts &&
+                        election?.posts[post_index]?.rounds.map((round) => ({
+                            ...round,
+                            name: round?.number,
+                        }))
+                    }
+                    onChange={change_round}
                 />
                 {/* <label className={styles.filter}>
                     <span>Poste</span>
