@@ -5,7 +5,7 @@ import styles from '../styles/no_data.module.css';
 export default function No_Data({label}) {
     return (
         <div className={styles.no_data}>
-            <h1>{label}</h1>
+            <h2>{label}</h2>
             <Image src={no_data} width={500} height={400} />
         </div>
     );

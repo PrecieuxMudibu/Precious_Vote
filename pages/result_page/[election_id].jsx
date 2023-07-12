@@ -112,7 +112,7 @@ export default function Result_Page() {
                     </div>
                 </>
             ) : (
-                <No_Data label="Aucune donnée trouvée" />
+                <No_Data label="Vous ne pouvez pas voir les résultats pour l'instant." />
             )}
         </Layout>
     );
