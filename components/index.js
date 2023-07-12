@@ -19,6 +19,7 @@ import StepperComponent from './stepper';
 import Textarea from './textarea';
 import Select from './select';
 import Details_Item from './details_item';
+import No_Data from './no_data';
 
 export {
     Quality_Item,
@@ -41,5 +42,6 @@ export {
     Button,
     StepperComponent,
     Textarea,
-    Select
+    Select,
+    No_Data
 };

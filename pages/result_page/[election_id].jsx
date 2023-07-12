@@ -1,6 +1,6 @@
 import Layout from '../../layouts/layout';
 import styles from '../../styles/result_page.module.css';
-import { Result_Item, Select } from '../../components';
+import { No_Data, Result_Item, Select } from '../../components';
 import { useRouter } from 'next/router';
 import {
     get_an_election,
@@ -243,6 +243,7 @@ export default function Result_Page() {
                     />
                 ))} */}
             </div>
+                <No_Data />
         </Layout>
     );
 }
