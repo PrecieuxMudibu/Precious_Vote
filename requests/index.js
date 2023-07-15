@@ -20,6 +20,7 @@ export async function get_an_election(id, token) {
         {
             headers: { Authorization: token },
         })
+        console.log("response FUNCTION",response)
         return response
     }catch(error) {
         console.log(error)
@@ -109,23 +110,19 @@ export async function get_a_token() {
         });
 }
 
-export async function send_email_to_all_electors (electors, token) {
+export async function send_email_to_all_electors (electors, election_id, token) {
     try{
         const response = await axios({
             method: 'post',
             url: route_for_send_emails_to_all_electors,
+            data: { electors , election_id},
             headers: { Authorization: token },
         });
         return response
     }catch(error) {
         console.log(error)
     }
-    // return  axios
-    //         .post(route_for_send_emails_to_all_electors, electors)
-    //         .then((response) => response)
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
+  
 }
 
 // route_for_get_a_token

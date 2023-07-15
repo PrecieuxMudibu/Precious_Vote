@@ -58,7 +58,8 @@ export default function Election() {
                     i++
                 ) {
                     candidates_number =
-                        candidates_number + response.data.election.posts[i].candidates.length;
+                        candidates_number +
+                        response.data.election.posts[i].candidates.length;
                 }
 
                 set_election({ ...response.data.election, candidates_number });
@@ -66,7 +67,6 @@ export default function Election() {
             .catch((error) => {
                 console.log(error);
             });
-
     }, [query]);
 
     useEffect(() => {
@@ -75,6 +75,7 @@ export default function Election() {
     console.log('response', election);
 
     async function begin_round() {
+        console.log('START');
         for (let i = 0; i < election?.posts.length; i++) {
             const current_post = election.posts[i];
 
@@ -90,9 +91,11 @@ export default function Election() {
             }
         }
 
-        send_email_to_all_electors(election.electors).then((response) => {
-            console.log('response HERE', response);
-        });
+        send_email_to_all_electors(election.electors, election_id, token).then(
+            (response) => {
+                console.log('response HERE', response.data.message);
+            }
+        );
         get_election_info();
     }
 
