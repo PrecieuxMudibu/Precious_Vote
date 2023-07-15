@@ -18,7 +18,6 @@ export default function Choose_Candidate() {
     const [current_post, set_current_post] = useState(0);
     const [election, set_election] = useState([]);
 
-
     useEffect(() => {
         get_an_election(election_id, fake_token)
             .then((response) => {
@@ -34,9 +33,6 @@ export default function Choose_Candidate() {
             set_current_post(election?.posts[post_index]);
         }
     }, [post_index, election]);
-
-    console.log('election', election);
-    console.log('current_post', current_post);
 
     return (
         <Layout>

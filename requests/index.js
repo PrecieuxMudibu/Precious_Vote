@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import axios from "axios";
 // import { route_for_close_round, route_for_get_candidates_for_the_round, route_for_get_electors, route_for_get_posts_for_an_election, route_for_get_rounds_for_a_post, route_for_send_email, route_for_start_round, route_for_vote_candidate, } from "../public/routes";
-import { route_for_get_an_election,route_for_close_round, route_for_get_candidates_for_the_round, route_for_get_electors, route_for_get_posts_for_an_election, route_for_get_rounds_for_a_post, route_for_send_email, route_for_start_round, route_for_vote_candidate, route_for_get_a_token, } from "../routes";
+import { route_for_get_an_election,route_for_close_round, route_for_get_candidates_for_the_round, route_for_get_electors, route_for_get_posts_for_an_election, route_for_get_rounds_for_a_post, route_for_send_email, route_for_start_round, route_for_vote_candidate, route_for_get_a_token, route_for_send_emails_to_all_electors, } from "../routes";
 
 export async function get_posts_of_election(id) {
     return await axios
@@ -50,7 +50,6 @@ export async function start_a_round(id, token) {
 }
 
 export async function close_a_round(id, token) {
-    console.log("BEFIN CLOSE")
 
     try{
         const response = await axios({
@@ -62,7 +61,6 @@ export async function close_a_round(id, token) {
     }catch(error) {
         console.log(error)
     }
-    console.log("END CLOSE")
 
 }
 
@@ -109,10 +107,25 @@ export async function get_a_token() {
         .catch((error) => {
             console.log(error);
         });
+}
 
-   
-     
-
+export async function send_email_to_all_electors (electors, token) {
+    try{
+        const response = await axios({
+            method: 'post',
+            url: route_for_send_emails_to_all_electors,
+            headers: { Authorization: token },
+        });
+        return response
+    }catch(error) {
+        console.log(error)
+    }
+    // return  axios
+    //         .post(route_for_send_emails_to_all_electors, electors)
+    //         .then((response) => response)
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
 }
 
 // route_for_get_a_token

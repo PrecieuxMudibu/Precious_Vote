@@ -1,4 +1,3 @@
--   **Arrêter un round**
 -   **Modifier son profil**
 -   **Voter un candidat** (Arranger le message après le vote)
 -   **Mettre du contenu pour les autres pages**

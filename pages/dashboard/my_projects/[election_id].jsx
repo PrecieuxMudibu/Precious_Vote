@@ -20,6 +20,7 @@ import {
     get_posts_of_election,
     get_rounds_for_a_post,
     send_email,
+    send_email_to_all_electors,
     start_a_round,
 } from '../../../requests';
 import Link from 'next/link';
@@ -36,19 +37,36 @@ export default function Election() {
 
     const [election, set_election] = useState([]);
     async function get_election_info() {
-        const data = await get_an_election(election_id, token);
-        // const candidates_number = data.map(())
-        let candidates_number = 0;
-        for (let i = 0; i < data?.posts.length; i++) {
-            candidates_number =
-                candidates_number + data.posts[i].candidates.length;
-        }
-
-        set_election({ ...data, candidates_number });
+        // const data = await get_an_election(election_id, token);
+        // // const candidates_number = data.map(())
+        // let candidates_number = 0;
+        // for (let i = 0; i < data?.posts.length; i++) {
+        //     candidates_number =
+        //         candidates_number + data.posts[i].candidates.length;
+        // }
+        // set_election({ ...data, candidates_number });
     }
 
     useEffect(() => {
-        get_election_info();
+        get_an_election(election_id, token)
+            .then((response) => {
+                let candidates_number = 0;
+                console.log('heloo', response);
+                for (
+                    let i = 0;
+                    i < response?.data?.election?.posts.length;
+                    i++
+                ) {
+                    candidates_number =
+                        candidates_number + response.data.election.posts[i].candidates.length;
+                }
+
+                set_election({ ...response.data.election, candidates_number });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+
     }, [query]);
 
     useEffect(() => {
@@ -71,6 +89,10 @@ export default function Election() {
                 }
             }
         }
+
+        send_email_to_all_electors(election.electors).then((response) => {
+            console.log('response HERE', response);
+        });
         get_election_info();
     }
 
@@ -133,7 +155,7 @@ export default function Election() {
                             onClick={close_round}
                         />
                     );
-                } else  {
+                } else {
                     return (
                         <Link href={`../../result_page/${election_id}`}>
                             <p className="pointer">Résultats</p>

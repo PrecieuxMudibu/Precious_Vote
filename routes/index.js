@@ -13,3 +13,5 @@ export const route_for_vote_candidate = `${process.env.NEXT_PUBLIC_API}/api/vote
 export  const route_for_get_electors = `${process.env.NEXT_PUBLIC_API}/api/get_electors`
 export  const route_for_send_email = `${process.env.NEXT_PUBLIC_API}/api/send_email`
 export  const route_for_get_a_token = `${process.env.NEXT_PUBLIC_API}/api/get_token`
+export  const route_for_send_emails_to_all_electors = `${process.env.NEXT_PUBLIC_API}/api/send_emails_to_all_electors`
+
