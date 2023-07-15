@@ -2,8 +2,18 @@ import Link from 'next/link';
 import styles from '../styles/header.module.css';
 import { useRouter } from 'next/router';
 import { Icon } from '@iconify/react';
+import { useEffect, useContext } from 'react';
+import { get_a_token } from '../requests';
+import { applicationContext } from '../pages/_app';
 
 export default function Header() {
+    const { set_fake_token } = useContext(applicationContext);
+    useEffect(() => {
+        get_a_token().then((response) => {
+            set_fake_token(response.data.token);
+        });
+    }, []);
+
     const logo_group_class_name = `${styles.header_logo_group} link`;
     const router = useRouter();
 

@@ -3,9 +3,11 @@ import styles from '../../styles/result_page.module.css';
 import { No_Data, Result_Item, Select } from '../../components';
 import { useRouter } from 'next/router';
 import { get_an_election } from '../../requests';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { applicationContext } from '../_app';
 
 export default function Result_Page() {
+    const { fake_token } = useContext(applicationContext);
     const { query } = useRouter();
     const { election_id } = query;
     const [election, set_election] = useState([]);
@@ -13,17 +15,16 @@ export default function Result_Page() {
     const [round_index, set_round_index] = useState(0);
     const [show_result, set_show_result] = useState(false);
 
-    async function get_election_info() {
-        const token = localStorage.getItem('vote_app_token');
-        const data = await get_an_election(election_id, token);
-
-        set_election(data);
-    }
-
     useEffect(() => {
-        get_election_info();
+        get_an_election(election_id, fake_token)
+            .then((response) => {
+                set_election(response.data.election);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }, [query]);
-
+    console.log('election', election);
     useEffect(() => {
         if (election?.two_rounds) {
             if (
