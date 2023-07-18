@@ -1,5 +1,4 @@
 .profile {
-    border: 4px solid green;
     height: 86vh;
 }
 
@@ -36,6 +35,7 @@
     border: 1px solid var(--primary_color);
     background-color: var(--white);
     position: absolute;
+    border-radius: 3px;
     left: 65%;
     /* top: 450%; */
     top: 80px;

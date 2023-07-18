@@ -57,7 +57,7 @@ export default function Left_Section() {
                         )}
                     >
                         <Icon
-                            icon="fluent:vote-24-filled"
+                            icon="wpf:name"
                             className={icon_get_active_class_name_if_router_path_name(
                                 '/dashboard/my_profile'
                             )}

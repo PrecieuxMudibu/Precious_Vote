@@ -2,11 +2,19 @@ import Image from 'next/image';
 import { Button, Dashboard_Layout, Input } from '../../components/index';
 import udate_user_image from '../../public/images/update_user.jpg';
 import styles from '../../styles/dashboard/my_profile.module.css';
-import { useRef } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Icon } from '@iconify/react';
+import { applicationContext } from '../_app';
 
 export default function My_Profile() {
     const inputFile = useRef();
+    const { connectedUser } = useContext(applicationContext);
+    const [user_update, set_user_update] = useState(connectedUser);
+    useEffect(() => {
+        set_user_update(connectedUser);
+    }, [connectedUser]);
+
+    console.log('user_update', user_update);
 
     const onChange = async (e) => {
         const body = new FormData();
@@ -30,7 +38,7 @@ export default function My_Profile() {
     };
 
     return (
-        <Dashboard_Layout page_title="Paramètres généraux">
+        <Dashboard_Layout page_title="Mon profil">
             <section>
                 <div className={styles.profile}>
                     <div className={styles.profile_background_image_section} />
@@ -38,7 +46,7 @@ export default function My_Profile() {
                     <div className={styles.profile_image_section}>
                         <div>
                             <Image
-                                src={udate_user_image}
+                                src={user_update?.profile_picture}
                                 alt="Entite avatar"
                                 className={styles.profile_image}
                                 height={100}
@@ -46,7 +54,7 @@ export default function My_Profile() {
                             />
                             <span className={styles.edit_image}>
                                 <Icon
-                                    icon="fluent:vote-24-filled"
+                                    icon="material-symbols:edit"
                                     className={styles.edit_image_icon}
                                     onClick={() => inputFile.current.click()}
                                 />
@@ -66,32 +74,34 @@ export default function My_Profile() {
 
                     <div className={styles.profile_inputs_section}>
                         <Input
-                            label="Votre email"
+                            label="Nom"
+                            icon="wpf:name"
+                            name="email"
+                            type="text"
+                            placeholder=""
+                            onChange={onChange}
+                            value={user_update?.name}
+                        />
+                        <Input
+                            label="Email"
                             icon="ic:round-email"
+                            name="email"
+                            type="text"
+                            placeholder=""
+                            onChange={onChange}
+                            value={user_update?.email}
+                        />
+                        <Input
+                            label="Ancien mot de passe"
+                            icon="mdi:password"
                             name="email"
                             type="text"
                             placeholder="placide@gmail.com"
                             onChange={onChange}
                         />
                         <Input
-                            label="Votre email"
-                            icon="ic:round-email"
-                            name="email"
-                            type="text"
-                            placeholder="placide@gmail.com"
-                            onChange={onChange}
-                        />
-                        <Input
-                            label="Votre email"
-                            icon="ic:round-email"
-                            name="email"
-                            type="text"
-                            placeholder="placide@gmail.com"
-                            onChange={onChange}
-                        />
-                        <Input
-                            label="Votre email"
-                            icon="ic:round-email"
+                            label="Nouveau mot de passe"
+                            icon="mdi:password"
                             name="email"
                             type="text"
                             placeholder="placide@gmail.com"
