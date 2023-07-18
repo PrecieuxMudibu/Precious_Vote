@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Dashboard_Layout, Input } from '../../components/index';
+import { Button, Dashboard_Layout, Input } from '../../components/index';
 import udate_user_image from '../../public/images/update_user.jpg';
 import styles from '../../styles/dashboard/my_profile.module.css';
 import { useRef } from 'react';
@@ -96,6 +96,10 @@ export default function My_Profile() {
                             type="text"
                             placeholder="placide@gmail.com"
                             onChange={onChange}
+                        />
+                        <Button
+                            label="Enregistrer"
+                            // onClick={(e) => login(e)}
                         />
                     </div>
                 </div>
