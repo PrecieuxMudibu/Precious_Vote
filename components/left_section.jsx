@@ -49,6 +49,22 @@ export default function Left_Section() {
                         <span>Election</span>
                     </Link>
                 </li>
+                <li>
+                    <Link
+                        href="/dashboard/my_profile"
+                        className={link_get_active_class_name_if_router_path_name(
+                            '/dashboard/my_profile'
+                        )}
+                    >
+                        <Icon
+                            icon="fluent:vote-24-filled"
+                            className={icon_get_active_class_name_if_router_path_name(
+                                '/dashboard/my_profile'
+                            )}
+                        />
+                        <span>Profil</span>
+                    </Link>
+                </li>
             </ul>
 
             <button onClick={() => logout()} className={styles.button_logout}>

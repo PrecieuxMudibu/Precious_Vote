@@ -31,7 +31,9 @@ export default function Dashboard_Layout({ children, page_title }) {
                     .catch((error) => console.error(error));
             }
         } else {
-            push('/login');
+            // TODOS: DECOMMENT THIS
+            // push('/login');
+            console.log('Heloo');
         }
     }, []);
 
