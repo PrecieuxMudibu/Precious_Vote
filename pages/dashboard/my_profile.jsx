@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Dashboard_Layout } from '../../components/index';
+import { Dashboard_Layout, Input } from '../../components/index';
 import udate_user_image from '../../public/images/update_user.jpg';
 import styles from '../../styles/dashboard/my_profile.module.css';
 import { useRef } from 'react';
@@ -48,6 +48,7 @@ export default function My_Profile() {
                                 <Icon
                                     icon="fluent:vote-24-filled"
                                     className={styles.edit_image_icon}
+                                    onClick={() => inputFile.current.click()}
                                 />
                                 <input
                                     className="hidden"
@@ -57,6 +58,45 @@ export default function My_Profile() {
                                 />
                             </span>
                         </div>
+
+                        <div className={styles.profile_name}>
+                            <h2>Précieux Mudibu</h2>
+                        </div>
+                    </div>
+
+                    <div className={styles.profile_inputs_section}>
+                        <Input
+                            label="Votre email"
+                            icon="ic:round-email"
+                            name="email"
+                            type="text"
+                            placeholder="placide@gmail.com"
+                            onChange={onChange}
+                        />
+                        <Input
+                            label="Votre email"
+                            icon="ic:round-email"
+                            name="email"
+                            type="text"
+                            placeholder="placide@gmail.com"
+                            onChange={onChange}
+                        />
+                        <Input
+                            label="Votre email"
+                            icon="ic:round-email"
+                            name="email"
+                            type="text"
+                            placeholder="placide@gmail.com"
+                            onChange={onChange}
+                        />
+                        <Input
+                            label="Votre email"
+                            icon="ic:round-email"
+                            name="email"
+                            type="text"
+                            placeholder="placide@gmail.com"
+                            onChange={onChange}
+                        />
                     </div>
                 </div>
             </section>

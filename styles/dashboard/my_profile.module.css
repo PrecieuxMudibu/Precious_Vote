@@ -44,3 +44,21 @@
 .edit_image_icon {
     font-size: 14px;
 }
+
+.profile_name {
+    position: absolute;
+    left: 16px;
+    top: 45px;
+}
+
+.profile_name > h2 {
+    display: block;
+    width: 350px;
+}
+
+.profile_inputs_section {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(2, 48%);
+    gap: 0% 4%;
+}
