@@ -18,14 +18,16 @@ export default function My_Profile() {
 
     const onChange = async (e) => {
         const body = new FormData();
-        body.append('file', e.target.files[0]);
+        if (e?.target.files) {
+            body.append('file', e?.target.files[0]);
 
-        const content = {
-            method: 'post',
-            body,
-        };
-        const localLink = URL.createObjectURL(e.target.files[0]);
-        // setValue('image', { content, localLink });
+            const content = {
+                method: 'post',
+                body,
+            };
+            const localLink = URL?.createObjectURL(e.target.files[0]);
+            // setValue('image', { content, localLink });
+        }
 
         // setUser((previousState) => ({
         //     ...previousState,
@@ -62,13 +64,13 @@ export default function My_Profile() {
                                     className="hidden"
                                     type="file"
                                     ref={inputFile}
-                                    onChange={onChange}
+                                    onChange={(e) => onChange(e)}
                                 />
                             </span>
                         </div>
 
                         <div className={styles.profile_name}>
-                            <h2>Précieux Mudibu</h2>
+                            <h2>{user_update?.name}</h2>
                         </div>
                     </div>
 
@@ -96,7 +98,7 @@ export default function My_Profile() {
                             icon="mdi:password"
                             name="email"
                             type="text"
-                            placeholder="placide@gmail.com"
+                            placeholder="Ancien mot de passe"
                             onChange={onChange}
                         />
                         <Input
@@ -104,7 +106,7 @@ export default function My_Profile() {
                             icon="mdi:password"
                             name="email"
                             type="text"
-                            placeholder="placide@gmail.com"
+                            placeholder="Nouveau mot de passe"
                             onChange={onChange}
                         />
                         <Button

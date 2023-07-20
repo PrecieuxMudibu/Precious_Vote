@@ -10,7 +10,7 @@ export default function Header() {
     const { set_fake_token } = useContext(applicationContext);
     useEffect(() => {
         get_a_token().then((response) => {
-            set_fake_token(response.data.token);
+            set_fake_token(response?.data?.token);
         });
     }, []);
 

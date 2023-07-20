@@ -14,4 +14,5 @@ export  const route_for_get_electors = `${process.env.NEXT_PUBLIC_API}/api/get_e
 export  const route_for_send_email = `${process.env.NEXT_PUBLIC_API}/api/send_email`
 export  const route_for_get_a_token = `${process.env.NEXT_PUBLIC_API}/api/get_token`
 export  const route_for_send_emails_to_all_electors = `${process.env.NEXT_PUBLIC_API}/api/send_emails_to_all_electors`
+export  const route_for_update_user = `${process.env.NEXT_PUBLIC_API}/api/update_user`
 
