@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import axios from "axios";
 // import { route_for_close_round, route_for_get_candidates_for_the_round, route_for_get_electors, route_for_get_posts_for_an_election, route_for_get_rounds_for_a_post, route_for_send_email, route_for_start_round, route_for_vote_candidate, } from "../public/routes";
-import { route_for_get_an_election,route_for_close_round, route_for_get_candidates_for_the_round, route_for_get_electors, route_for_get_posts_for_an_election, route_for_get_rounds_for_a_post, route_for_send_email, route_for_start_round, route_for_vote_candidate, route_for_get_a_token, route_for_send_emails_to_all_electors, } from "../routes";
+import { route_for_get_an_election,route_for_close_round, route_for_get_candidates_for_the_round, route_for_get_electors, route_for_get_posts_for_an_election, route_for_get_rounds_for_a_post, route_for_send_email, route_for_start_round, route_for_vote_candidate, route_for_get_a_token, route_for_send_emails_to_all_electors } from "../routes";
 
 export async function get_posts_of_election(id) {
     return await axios
@@ -124,5 +124,6 @@ export async function send_email_to_all_electors (electors, election_id, token) 
     }
   
 }
+
 
 // route_for_get_a_token
