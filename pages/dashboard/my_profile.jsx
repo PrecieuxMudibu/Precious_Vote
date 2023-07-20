@@ -26,17 +26,27 @@ export default function My_Profile() {
                 body,
             };
             const localLink = URL?.createObjectURL(e.target.files[0]);
-            // setValue('image', { content, localLink });
         }
+    };
 
-        // setUser((previousState) => ({
-        //     ...previousState,
-        //     image: {
-        //         content,
-        //         localLink,
-        //     },
-        // }));
-        // handleSubmit(() => null)();
+    const on_change_image = async (e) => {
+        const body = new FormData();
+        if (e?.target.files) {
+            body.append('file', e?.target.files[0]);
+
+            const content = {
+                method: 'post',
+                body,
+            };
+            const local_link = URL?.createObjectURL(e.target.files[0]);
+            set_user_update((previousState) => ({
+                ...previousState,
+                profile_picture: {
+                    content,
+                    local_link,
+                },
+            }));
+        }
     };
 
     return (
@@ -47,13 +57,26 @@ export default function My_Profile() {
 
                     <div className={styles.profile_image_section}>
                         <div>
-                            <Image
-                                src={user_update?.profile_picture}
-                                alt="Entite avatar"
-                                className={styles.profile_image}
-                                height={100}
-                                width={100}
-                            />
+                            {user_update?.profile_picture?.local_link ? (
+                                <Image
+                                    src={
+                                        user_update?.profile_picture?.local_link
+                                    }
+                                    alt="Entite avatar"
+                                    className={styles.profile_image}
+                                    height={100}
+                                    width={100}
+                                />
+                            ) : (
+                                <Image
+                                    src={user_update?.profile_picture}
+                                    alt="Entite avatar"
+                                    className={styles.profile_image}
+                                    height={100}
+                                    width={100}
+                                />
+                            )}
+
                             <span className={styles.edit_image}>
                                 <Icon
                                     icon="material-symbols:edit"
@@ -64,7 +87,7 @@ export default function My_Profile() {
                                     className="hidden"
                                     type="file"
                                     ref={inputFile}
-                                    onChange={(e) => onChange(e)}
+                                    onChange={on_change_image}
                                 />
                             </span>
                         </div>
