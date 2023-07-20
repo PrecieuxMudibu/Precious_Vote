@@ -10,3 +10,5 @@ export const isObject = (data) => {
         return true;
     return false;
 };
+
+export const cloud_name = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUDNAME

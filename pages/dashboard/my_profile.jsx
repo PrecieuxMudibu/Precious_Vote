@@ -5,6 +5,8 @@ import styles from '../../styles/dashboard/my_profile.module.css';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { applicationContext } from '../_app';
+import axios from 'axios';
+import { cloud_name } from '../../helpers';
 
 export default function My_Profile() {
     const inputFile = useRef();
@@ -16,38 +18,49 @@ export default function My_Profile() {
 
     console.log('user_update', user_update);
 
-    const onChange = async (e) => {
+    async function on_change(e) {
+        const { name, value } = e.target;
+
+        set_user_update((previous_state) => ({
+            ...previous_state,
+            [name]: value,
+        }));
+    }
+
+    async function on_change_image(e) {
         const body = new FormData();
         if (e?.target.files) {
             body.append('file', e?.target.files[0]);
-
-            const content = {
-                method: 'post',
-                body,
-            };
-            const localLink = URL?.createObjectURL(e.target.files[0]);
-        }
-    };
-
-    const on_change_image = async (e) => {
-        const body = new FormData();
-        if (e?.target.files) {
-            body.append('file', e?.target.files[0]);
+            body.append('upload_preset', 'testPresetName');
 
             const content = {
                 method: 'post',
                 body,
             };
             const local_link = URL?.createObjectURL(e.target.files[0]);
-            set_user_update((previousState) => ({
-                ...previousState,
+            set_user_update((previous_state) => ({
+                ...previous_state,
                 profile_picture: {
                     content,
                     local_link,
                 },
             }));
         }
-    };
+    }
+
+    async function upload_image() {
+        // const formData = new FormData();
+        // formData.append('file', fileInfo);
+        // formData.append('upload_preset', 'testPresetName');
+
+        axios
+            .post(
+                `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
+                user_update.profile_picture.content.body
+            )
+            .then((response) => response.data.secure_url)
+            .catch((error) => console.log(error));
+    }
 
     return (
         <Dashboard_Layout page_title="Mon profil">
@@ -101,10 +114,10 @@ export default function My_Profile() {
                         <Input
                             label="Nom"
                             icon="wpf:name"
-                            name="email"
+                            name="name"
                             type="text"
                             placeholder=""
-                            onChange={onChange}
+                            onChange={on_change}
                             value={user_update?.name}
                         />
                         <Input
@@ -113,24 +126,24 @@ export default function My_Profile() {
                             name="email"
                             type="text"
                             placeholder=""
-                            onChange={onChange}
+                            onChange={on_change}
                             value={user_update?.email}
                         />
                         <Input
                             label="Ancien mot de passe"
                             icon="mdi:password"
-                            name="email"
+                            name="old_password"
                             type="text"
                             placeholder="Ancien mot de passe"
-                            onChange={onChange}
+                            onChange={on_change}
                         />
                         <Input
                             label="Nouveau mot de passe"
                             icon="mdi:password"
-                            name="email"
+                            name="password"
                             type="text"
                             placeholder="Nouveau mot de passe"
-                            onChange={onChange}
+                            onChange={on_change}
                         />
                         <Button
                             label="Enregistrer"
