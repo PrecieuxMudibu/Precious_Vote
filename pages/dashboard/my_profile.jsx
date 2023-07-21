@@ -12,13 +12,14 @@ import { route_for_update_user } from '../../routes';
 
 export default function My_Profile() {
     const inputFile = useRef();
-    const { connectedUser } = useContext(applicationContext);
+    const { connectedUser, setConnectedUser } = useContext(applicationContext);
     const [user_update, set_user_update] = useState(connectedUser);
     useEffect(() => {
         set_user_update(connectedUser);
     }, [connectedUser]);
 
     console.log('user_update', user_update);
+    console.log('connectedUser', connectedUser);
 
     async function on_change(e) {
         const { name, value } = e.target;
@@ -50,44 +51,41 @@ export default function My_Profile() {
         }
     }
 
-    async function upload_image() {
-        // const formData = new FormData();
-        // formData.append('file', fileInfo);
-        // formData.append('upload_preset', 'testPresetName');
-
-        axios
-            .post(
-                `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
-                user_update.profile_picture.content.body
-            )
-            .then((response) => response.data.secure_url)
-            .catch((error) => console.log(error));
-    }
-
     async function update_user() {
         let data_to_send = user_update;
         if (user_update.profile_picture.content) {
             console.log('BEFORE', data_to_send);
-            await upload_image().then((link) => {
-                data_to_send = {
-                    ...data_to_send,
-                    profile_picture: link,
-                };
-            });
-        }
-        console.log('AFTER data_to_send', data_to_send);
-        try {
-            const response = await axios({
-                method: 'put',
-                url: `${route_for_update_user}/${connectedUser._id}`,
-                data: data_to_send,
-                // headers: { Authorization: token },
-            });
 
-            console.log('RESPONSE', response.data);
-            // return response.data;
-        } catch (error) {
-            console.log(error);
+            axios
+                .post(
+                    `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
+                    user_update.profile_picture.content.body
+                )
+                .then(async (response) => {
+                    data_to_send.profile_picture = response.data.secure_url;
+                    console.log('data_to_send', data_to_send);
+
+                    try {
+                        const response = await axios({
+                            method: 'put',
+                            url: `${route_for_update_user}/${connectedUser._id}`,
+                            data: data_to_send,
+                            // headers: { Authorization: token },
+                        });
+
+                        console.log('UPDATE USER RESPONSE', response.data);
+
+                        const {
+                            data: { user },
+                        } = response;
+
+                        setConnectedUser(user);
+                        // return response.data;
+                    } catch (error) {
+                        console.log(error);
+                    }
+                })
+                .catch((error) => console.log(error));
         }
     }
 
