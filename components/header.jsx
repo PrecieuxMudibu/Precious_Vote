@@ -42,7 +42,7 @@ export default function Header() {
                         </Link>
                     </li>
 
-                    <li>
+                    {/* <li>
                         <Link
                             href="/contact"
                             className={
@@ -53,7 +53,7 @@ export default function Header() {
                         >
                             Contact
                         </Link>
-                    </li>
+                    </li> */}
                 </ul>
                 <Link href="/login">
                     <button className="button_primary">Se connecter</button>

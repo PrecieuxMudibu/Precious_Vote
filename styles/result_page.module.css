@@ -37,11 +37,17 @@
 
 @media screen and (max-width: 900px) {
 
+    .thead {
+        display: grid;
+        grid-template-columns: repeat(4, 5% 30% 30% 24%);
+        gap: 1%;
+    }
+
     .thead > :last-child {
         display: none;
     }
     
     .thead :nth-child(2) {
         display: none;
-      }
+    }
 }
