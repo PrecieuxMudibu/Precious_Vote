@@ -29,7 +29,15 @@
 }
 
 
-@media screen and (max-width: 900px) {
+@media screen and (min-width: 601px) and (max-width: 900px) {
+    .elections_group {
+        display: grid;
+        grid-template-columns: repeat(2, 48%);
+        gap: 2%;
+    }
+}
+
+@media screen and (max-width: 600px) {
     .elections_group {
       display: block;
     }
