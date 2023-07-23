@@ -55,10 +55,7 @@ export default function Candidate_Card({ candidate, round_id }) {
 
     return (
         <>
-            <div
-                className={styles.candidate_card}
-                onClick={() => alert(candidate.first_name)}
-            >
+            <div className={styles.candidate_card}>
                 <img
                     src={
                         candidate?.candidate?.picture
@@ -96,7 +93,8 @@ export default function Candidate_Card({ candidate, round_id }) {
                                 alt={candidate?.candidate?.name}
                             />
                             <h2>
-                                {candidate?.candidate?.first_name} {candidate?.candidate?.name}
+                                {candidate?.candidate?.first_name}{' '}
+                                {candidate?.candidate?.name}
                             </h2>
                         </div>
                         <span>

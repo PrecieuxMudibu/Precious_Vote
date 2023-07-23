@@ -1,13 +1,11 @@
 import Image from 'next/image';
 import { Button, Dashboard_Layout, Input } from '../../components/index';
-import udate_user_image from '../../public/images/update_user.jpg';
 import styles from '../../styles/dashboard/my_profile.module.css';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { applicationContext } from '../_app';
 import axios from 'axios';
 import { cloud_name } from '../../helpers';
-import { update_user } from '../../requests';
 import { route_for_update_user } from '../../routes';
 
 export default function My_Profile() {
@@ -17,9 +15,6 @@ export default function My_Profile() {
     useEffect(() => {
         set_user_update(connectedUser);
     }, [connectedUser]);
-
-    console.log('user_update', user_update);
-    console.log('connectedUser', connectedUser);
 
     async function on_change(e) {
         const { name, value } = e.target;
