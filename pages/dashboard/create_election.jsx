@@ -35,7 +35,7 @@ export default function Create_Election() {
             label: 'Paramètres généraux',
             icon: (
                 <Icon
-                    icon="ic:round-drive-file-rename-outline"
+                    icon="ic:round-settings"
                     className="iconLinks"
                 />
             ),
@@ -44,7 +44,7 @@ export default function Create_Election() {
             label: ' Postes à pourvoir',
             icon: (
                 <Icon
-                    icon="ic:round-drive-file-rename-outline"
+                    icon="eos-icons:role-binding"
                     className="iconLinks"
                 />
             ),
@@ -53,7 +53,7 @@ export default function Create_Election() {
             label: ' Candidats',
             icon: (
                 <Icon
-                    icon="ic:round-drive-file-rename-outline"
+                    icon="mdi:podium-first"
                     className="iconLinks"
                 />
             ),
@@ -62,7 +62,7 @@ export default function Create_Election() {
             label: ' Electeurs',
             icon: (
                 <Icon
-                    icon="ic:round-drive-file-rename-outline"
+                    icon="bi:people-fill"
                     className="iconLinks"
                 />
             ),
@@ -71,7 +71,7 @@ export default function Create_Election() {
             label: ' Tours',
             icon: (
                 <Icon
-                    icon="ic:round-drive-file-rename-outline"
+                    icon="ic:round-360"
                     className="iconLinks"
                 />
             ),

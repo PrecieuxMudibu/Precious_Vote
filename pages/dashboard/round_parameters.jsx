@@ -40,7 +40,7 @@ export default function Round_Parameters({
             <div>
                 <Input
                     label="Pour qu'un candidat soit élu au premier tour, il doit avoir quel pourcentage au minimum ?"
-                    icon="ic:round-drive-file-rename-outline"
+                    icon="fa6-solid:percent"
                     name="first_round_eligibility_criteria"
                     type="number"
                     placeholder="50"
@@ -50,7 +50,7 @@ export default function Round_Parameters({
 
                 <Input
                     label="Combien de candidat souhaiteriez-vous en cas de deuxième tour ?"
-                    icon="ic:round-drive-file-rename-outline"
+                    icon="ant-design:number-outlined"
                     name="candidates_for_the_second_round"
                     type="number"
                     placeholder="2"
@@ -60,7 +60,7 @@ export default function Round_Parameters({
 
                 <Select
                     label=" Souhaitez-vous des élections à deux tours ?"
-                    icon="ic:round-drive-file-rename-outline"
+                    icon="carbon:boolean"
                     name="two_rounds"
                     placeholder="Oui"
                     onChange={onChange}
