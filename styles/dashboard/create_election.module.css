@@ -4,11 +4,18 @@
     justify-content: space-between;
 }
 
-.container > .buttons_group {
-    height: 1OOvh;
-}
-
 .buttons_group {
     display: flex;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 500px) {
+    .buttons_group {
+      display: block;
+    }
+
+    .buttons_group > div {
+        margin: 10px 0;
+        display: block;
+      }
 }
