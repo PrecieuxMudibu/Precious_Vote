@@ -37,7 +37,6 @@
     position: absolute;
     border-radius: 3px;
     left: 65%;
-    /* top: 450%; */
     top: 80px;
 }
 
@@ -61,4 +60,10 @@
     display: grid;
     grid-template-columns: repeat(2, 48%);
     gap: 0% 4%;
+}
+
+@media screen and (max-width: 600px) {
+    .profile_inputs_section {
+        display: block;
+    }
 }

@@ -49,16 +49,6 @@ export default function My_Projects() {
                                 <Election_Card election={election} />
                             </Link>
                         ))}
-
-                        {elections.map((election, index) => (
-                            <Link
-                                className="link"
-                                key={index}
-                                href={`/dashboard/my_projects/${election._id}`}
-                            >
-                                <Election_Card election={election} />
-                            </Link>
-                        ))}
                     </div>
                 ) : (
                     <div className="center_loader">
