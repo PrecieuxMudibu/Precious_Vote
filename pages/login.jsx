@@ -1,23 +1,24 @@
 import Head from 'next/head';
 import styles from '../styles/login.module.css';
-import { Icon } from '@iconify/react';
-import { Quality_Item } from '../components/index';
+import { Button, Input, Quality_Item } from '../components/index';
 import Link from 'next/link';
 import { applicationContext } from './_app';
 import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { route_for_login } from '../public/routes';
+import { route_for_login } from '../routes';
 import { useRouter } from 'next/router';
+import { decode_token } from '../helpers';
 
 export default function Login() {
     const main_class_name = `${styles.main} shadow`;
 
     const [user, setUser] = useState({});
     const { push } = useRouter();
-    const { connectedUser, setConnectedUser } = useContext(applicationContext);
+    const { setConnectedUser } = useContext(applicationContext);
 
     function login(e) {
         e.preventDefault();
+        console.log('USER', user);
 
         axios
             .post(route_for_login, user)
@@ -26,10 +27,7 @@ export default function Login() {
                     'vote_app_token',
                     response.data.user.token
                 );
-                localStorage.setItem(
-                    'vote_app_user_id',
-                    response.data.user._id
-                );
+
                 setConnectedUser(response.data.user);
                 push(`/dashboard/my_projects`);
             })
@@ -44,15 +42,16 @@ export default function Login() {
         setUser({ ...user, [name]: value });
     }
 
-    // Redirect the user if he has a token
     useEffect(() => {
-        setConnectedUser({
-            ...connectedUser,
-            token: localStorage.getItem('vote_app_token'),
-        });
+        const token = localStorage.getItem('vote_app_token');
+        if (token) {
+            const user_local_data = decode_token(token);
 
-        if (connectedUser.token) {
-            push(`/dashboard/my_projects`);
+            if (user_local_data.exp * 1000 < Date.now()) {
+                localStorage.removeItem('vote_app_token');
+            } else {
+                push(`/dashboard/my_projects`);
+            }
         }
     }, []);
 
@@ -63,8 +62,8 @@ export default function Login() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <div className={styles.top_circle}></div>
-            <div className={styles.bottom_circle}></div>
+            <div className={styles.top_circle} />
+            <div className={styles.bottom_circle} />
 
             <header className={styles.header}>
                 <h1 className={styles.header__title}>Content de vous revoir</h1>
@@ -72,39 +71,29 @@ export default function Login() {
 
             <main className={main_class_name}>
                 <form>
-                    <label>
-                        <span>Votre email</span>
-                        <div className="input_group">
-                            <Icon icon="ic:round-email" className="icon" />
-                            <input
-                                onChange={onChange}
-                                name="email"
-                                type="text"
-                                placeholder="placide@gmail.com"
-                            />
-                        </div>
-                    </label>
+                    <Input
+                        label="Votre email"
+                        icon="ic:round-email"
+                        name="email"
+                        type="text"
+                        placeholder="placide@gmail.com"
+                        onChange={onChange}
+                    />
 
-                    <label>
-                        <span>Votre mot passe</span>
-                        <div className="input_group">
-                            <Icon icon="jam:padlock-f" className="icon" />
-                            <input
-                                onChange={onChange}
-                                name="password"
-                                type="password"
-                                placeholder="Votre mot de passe"
-                            />
-                        </div>
-                    </label>
+                    <Input
+                        label="Votre mot passe"
+                        icon="jam:padlock-f"
+                        name="password"
+                        type="password"
+                        placeholder="Votre mot de passe"
+                        onChange={onChange}
+                    />
 
                     <div className={styles.other}>
-                        <button
-                            className="button_primary"
+                        <Button
+                            label="Se connecter"
                             onClick={(e) => login(e)}
-                        >
-                            Se connecter
-                        </button>
+                        />
                         <Link href="/register" className="link">
                             <p>Vous n'avez de compte</p>
                         </Link>

@@ -1,10 +1,10 @@
 .nav {
-  height: 100vh;
-  background-color: var(--primary_color);
-  width:18%;
-  color: var(--white);
-  padding: 50px 0 80px 0;
-  border-radius: 0 40px 40px 0;
+    height: 100vh;
+    background-color: var(--primary_color);
+    width:18%;
+    color: var(--white);
+    padding: 50px 0 80px 0;
+    border-radius: 0 40px 40px 0;
 }
 
 .nav > ul {
@@ -17,26 +17,26 @@
     display: flex;
     align-items: center;
     padding: 14px 30px;
-  }
+}
   
-  .left_section_link_active {
+.left_section_link_active {
     background-color: var(--pink_light);
     border-radius: 40px;
     color: var(--primary_color);
-  }
-  
-  .left_section_link_icon {
+}
+
+.left_section_link_icon {
     color: var(--pink_light);
     width: 25px;
     height: 25px;
     margin-right: 10px;
-  }
+}
   
-  .left_section_link_icon_active {
+.left_section_link_icon_active {
     color: var(--primary_color);
-  }
+}
 
-  .button_logout {
+.button_logout {
     display: flex;
     align-items: center;
     background: none;
@@ -44,38 +44,53 @@
     color:var(--pink_light);
     padding: 14px 30px;
     font-size: 16px;
-  }
+}
 
 @media screen and (max-width: 900px) {
-  .nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 10px;
-    background-color: var(--primary_color);
-    width:100%;
-    height: 10vh;
-    border-radius: 0;
-  }
+    .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10px;
+        background-color: var(--primary_color);
+        width:100%;
+        height: 10vh;
+        border-radius: 0;
+    }
 
-  .nav > ul {
-    display: flex;
-    align-items: center;
-    margin: auto 0;
-  }
+    .nav > ul {
+        width: 50%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: auto 0 auto 20px;
+    }
 
-  .nav > ul > li span{
-    display: none;
-  }
+    .nav > ul > li {
+        margin-left: 10%;
+    }
 
-  .left_section_link {
-    flex-direction: row;
-    /* padding: 0 10px; */
+    .nav > ul > li span{
+        display: none;
+    }
 
-  }
+    .left_section_link {
+        flex-direction: row;
+        padding: 0;
+    }
 
-  .button_logout span {
-    display: none;
-  }
-  
+    .left_section_link_icon {
+        margin-right: 5px;
+    }
+
+    .button_logout span {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .nav > ul {
+        justify-content: space-between;
+        margin: auto 0 auto 20px;
+    }
 }

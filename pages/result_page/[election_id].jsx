@@ -1,176 +1,120 @@
-import { Icon } from '@iconify/react';
-import Layout from '../../components/layouts/layout';
+import Layout from '../../layouts/layout';
 import styles from '../../styles/result_page.module.css';
-import { Result_Item } from '../../components';
+import { No_Data, Result_Item, Select } from '../../components';
 import { useRouter } from 'next/router';
-import {
-    get_an_election,
-    get_electors,
-    get_posts_of_election,
-    get_rounds_for_a_post,
-} from '../../requests';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { route_for_get_candidates_for_the_round } from '../../public/routes';
+import { get_an_election } from '../../requests';
+import { useContext, useEffect, useState } from 'react';
+import { applicationContext } from '../_app';
 
 export default function Result_Page() {
+    const { fake_token } = useContext(applicationContext);
     const { query } = useRouter();
     const { election_id } = query;
+    const [election, set_election] = useState([]);
+    const [post_index, set_post_index] = useState(0);
+    const [round_index, set_round_index] = useState(0);
+    const [show_result, set_show_result] = useState(false);
 
-    const [current_post_selected, set_current_post_selected] = useState([]);
-    const [round_selected, set_round_selected] = useState({});
-    const [rounds_of_the_post_selected, set_rounds_of_the_post_selected] =
-        useState([]);
-    const [current_election, set_current_election] = useState({});
-    const [candidates, set_candidates] = useState([]);
-    const [election_post_and_rounds, set_election_post_and_rounds] = useState(
-        []
-    );
-    const [electors, set_electors] = useState([]);
-    async function get_electors_of_election() {
-        set_electors(await get_electors(election_id));
-    }
-
-    async function get_candidates_for_the_round(id) {
-        return await axios
-            .get(`${route_for_get_candidates_for_the_round}/${id}`)
-            .then((response) => response.data.candidates)
+    useEffect(() => {
+        get_an_election(election_id, fake_token)
+            .then((response) => {
+                set_election(response.data.election);
+            })
             .catch((error) => {
                 console.log(error);
             });
-    }
-
-    async function get_candidates() {
-        const posts = await get_posts_of_election(election_id);
-
-        // GET THE ROUNDS FOR ALL POST
-        let post_and_rounds = [];
-        for (let i = 0; i < posts?.length; i++) {
-            const rounds = await get_rounds_for_a_post(posts[i]._id);
-            post_and_rounds.push({
-                post: posts[i],
-                ...rounds,
-            });
-        }
-
-        set_election_post_and_rounds(post_and_rounds);
-        if (round_selected != undefined) {
-            const candidates_for_the_round = await get_candidates_for_the_round(
-                round_selected._id
-            );
-            set_candidates(
-                candidates_for_the_round?.map((item) => {
-                    return {
-                        ...item.candidate_id,
-                        voices: item.voices,
-                    };
-                })
-            );
-        }
-
-        set_current_election(await get_an_election(election_id));
-    }
-
+    }, [query]);
+    console.log('election', election);
     useEffect(() => {
-        const found = election_post_and_rounds.find(
-            (element) => element.post.name == current_post_selected
+        if (election?.two_rounds) {
+            if (
+                election?.posts[0].rounds[0].status === 'Completed' &&
+                election?.posts[0].rounds[1].status === 'Completed'
+            ) {
+                set_show_result(true);
+            }
+        }
+    }, [election]);
+
+    function change_post(e) {
+        const index = election.posts.findIndex(
+            (item) => item._id === e.target.value
         );
-        set_rounds_of_the_post_selected(found?.rounds);
-    }, [election_post_and_rounds, current_post_selected]);
 
-    useEffect(() => {
-        get_electors_of_election();
-        get_candidates();
-    }, [election_id, round_selected]);
+        set_post_index(index);
+    }
+
+    function change_round(e) {
+        const index = election.posts[post_index].rounds.findIndex(
+            (item) => item._id === e.target.value
+        );
+
+        set_round_index(index);
+    }
 
     return (
         <Layout>
-            <h1>Résultat pour : {current_election?.name}</h1>
+            {show_result ? (
+                <>
+                    <h1>Résultat pour : {election?.name}</h1>
 
-            <div className={styles.filters}>
-                <label className={styles.filter}>
-                    <span>Poste</span>
-                    <div className="input_group">
-                        <Icon
-                            icon="material-symbols:confirmation-number"
-                            className="icon"
-                        />
-
-                        <select
-                            onChange={(e) =>
-                                set_current_post_selected(e.target.value)
-                            }
-                            name="poste"
+                    <div className={styles.filters}>
+                        <Select
                             id="poste"
-                        >
-                            <option value=""></option>
-                            {election_post_and_rounds.map((item, index) => {
-                                return (
-                                    <option key={index} value={item.post.name}>
-                                        {item.post.name}{' '}
-                                    </option>
-                                );
-                            })}{' '}
-                        </select>
-                    </div>
-                </label>
-
-                <label className={styles.filter}>
-                    <span>Tours</span>
-                    <div className="input_group">
-                        <Icon
+                            name="poste"
+                            label="Poste"
                             icon="material-symbols:confirmation-number"
-                            className="icon"
+                            options={election?.posts}
+                            onChange={change_post}
                         />
-                        <select
-                            value={round_selected?.number}
-                            onChange={(e) =>
-                                set_round_selected(
-                                    rounds_of_the_post_selected.find(
-                                        (element) =>
-                                            element.number == e.target.value
-                                    )
+
+                        <Select
+                            id="tours"
+                            name="tours"
+                            label="Tours"
+                            icon="material-symbols:confirmation-number"
+                            options={
+                                election?.posts &&
+                                election?.posts[post_index]?.rounds.map(
+                                    (round) => ({
+                                        ...round,
+                                        name: round?.number,
+                                    })
                                 )
                             }
-                            name="rounds"
-                            id="rounds"
-                        >
-                            <option value=""></option>
-                            {rounds_of_the_post_selected?.map((item, index) => {
-                                return (
-                                    <option key={index} value={item.number}>
-                                        {' '}
-                                        {item.number}
-                                    </option>
-                                );
-                            })}
-                        </select>
+                            onChange={change_round}
+                        />
                     </div>
-                </label>
-            </div>
 
-            {/* TO DO RESULT PAGE RESPONSIVE */}
-            <div className={styles.result}>
-                <div className={styles.thead}>
-                    <div>N°</div>
-                    <div>Photo</div>
-                    <div>Prénom</div>
-                    <div>Nom</div>
-                    <div>Nombre de voix</div>
-                    <div>Pourcentage de voix</div>
-                </div>
-                {candidates?.map((candidate, index) => (
-                    <Result_Item
-                        key={index}
-                        index={index}
-                        candidate={candidate}
-                        percentage={(
-                            (candidate.voices * 100) /
-                            electors.length
-                        ).toFixed(2)}
-                    />
-                ))}
-            </div>
+                    {/* TODOS: RESULT PAGE RESPONSIVE */}
+                    <div className={styles.result}>
+                        <div className={styles.thead}>
+                            <div>N°</div>
+                            <div>Photo</div>
+                            <div>Prénom</div>
+                            <div>Nom</div>
+                            <div>Nombre de voix</div>
+                            <div>Pourcentage de voix</div>
+                        </div>
+                        {election?.posts &&
+                            election?.posts[post_index]?.rounds[
+                                round_index
+                            ]?.candidates?.map((candidate, index) => (
+                                <Result_Item
+                                    key={index}
+                                    index={index}
+                                    candidate={candidate}
+                                    percentage={(
+                                        (candidate.voices * 100) /
+                                        election?.electors.length
+                                    ).toFixed(2)}
+                                />
+                            ))}
+                    </div>
+                </>
+            ) : (
+                <No_Data label="Vous ne pouvez pas voir les résultats pour l'instant." />
+            )}
         </Layout>
     );
 }

@@ -1,14 +1,15 @@
 import Head from 'next/head';
 import styles from '../styles/register.module.css';
 import { Icon } from '@iconify/react';
-import { Quality_Item } from '../components/index';
+import { Button, Quality_Item } from '../components/index';
 import Link from 'next/link';
 import axios from 'axios';
-import { useState } from 'react';
-import { route_for_register } from '../public/routes';
+import { useEffect, useState } from 'react';
+import { route_for_register } from '../routes';
 import { useRouter } from 'next/router';
 import { applicationContext } from './_app';
 import { useContext } from 'react';
+import { decode_token } from '../helpers';
 
 export default function Register() {
     const [user, set_user] = useState({});
@@ -33,16 +34,11 @@ export default function Register() {
                         'vote_app_token',
                         response.data.user.token
                     );
-                    localStorage.setItem(
-                        'vote_app_user_id',
-                        response.data.user._id
-                    );
                     setConnectedUser({ ...response.data.user });
                     push(`/dashboard/my_projects`);
                 })
                 .catch((error) => {
-                    // eslint-disable-next-line no-console
-                    console.log('error--->>>', error);
+                    console.log(error);
                 });
         }
     }
@@ -51,6 +47,19 @@ export default function Register() {
         const { name, value } = e.target;
         set_user({ ...user, [name]: value });
     }
+
+    useEffect(() => {
+        const token = localStorage.getItem('vote_app_token');
+        if (token) {
+            const user_local_data = decode_token(token);
+
+            if (user_local_data.exp * 1000 < Date.now()) {
+                localStorage.removeItem('vote_app_token');
+            } else {
+                push(`/dashboard/my_projects`);
+            }
+        }
+    }, []);
 
     return (
         <div className={styles.page}>
@@ -122,12 +131,10 @@ export default function Register() {
                     </label>
 
                     <div className={styles.other}>
-                        <button
+                        <Button
+                            label="S'inscrire"
                             onClick={(e) => register(e)}
-                            className="button_primary"
-                        >
-                            S'inscrire
-                        </button>
+                        />
                         <Link href="/login" className="link">
                             <p>Vous avez déjà un compte ?</p>
                         </Link>

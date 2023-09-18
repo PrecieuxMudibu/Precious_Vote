@@ -1,0 +1,11 @@
+.no_data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.no_data > h2 {
+    width: "100%";
+    margin: 0 0;
+    text-align: center;
+}

@@ -1,0 +1,33 @@
+.row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 7% 30% 30% 29%);
+    gap: 1%;
+    margin: 10px 0;
+    padding: auto 0;
+}
+
+.row > div {
+    margin: auto 0;
+}
+
+.row img {
+    border-radius: 5px;
+    width:65px;
+    height:65px
+}
+
+@media screen and (max-width: 900px) {
+   .row img {
+        display: none;
+        border-radius: 5px;
+        width:65px;
+        height:65px
+    }
+
+    .row > :last-child {
+        display: none;
+        background: #ff0000;
+      }
+}
+

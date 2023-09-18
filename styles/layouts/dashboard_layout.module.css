@@ -15,4 +15,8 @@
     .main {
       flex-direction: column;
     }
+
+    .main > section {
+        width: 100%;
+    }
 }

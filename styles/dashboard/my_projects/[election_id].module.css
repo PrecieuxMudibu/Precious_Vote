@@ -1,7 +1,4 @@
-.header{
-    border: 1px solid rgba(255, 85, 89,.4);
-    background-color: var(--white);
-    padding: 20px;
+.header {
     border-radius: 15px;
     display: flex;
     justify-content: space-between;
@@ -11,47 +8,64 @@
 .header >div{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.header >div >h1{
-    margin: auto 0;
+.header h1, .header p{
+    margin: 0;
+    padding: 0;
+}
+
+.play_icon {
+    width: 25px;
+    height: 25px;
+    width: 60px;
+    height: 60px;
+    font-size: 50px;
+}
+
+.play_icon:hover {
+    transform: scale(1.2);
+    transition-timing-function: ease-in-out;
+    transition-duration: 400ms;
+    cursor: pointer;
 }
 
 .cards {
-    display: grid;
-    grid-template-columns: repeat(3, 31.2%);
-    gap: 3%;
+    display: flex;
+    justify-content: space-between;
+   
     margin-top: 30px;
 }
 
-.card {
-    border: 1px solid rgba(255, 85, 89,.4);
-    background-color: var(--white);
+.details {
+    margin-top: 30px;
     padding: 20px;
+    background-color: var(--white);
+    border: 1px solid rgba(255, 85, 89,.4);
     border-radius: 15px;
-    cursor: pointer;
-
+    height: 48vh;
+    overflow: scroll;
 }
 
-.card_title {
-    font-size: 16px;
+.thead {
+    position: relative;
+    top: 0;
+    color: var(--primary_color);
+    display: grid;
+    grid-template-columns: repeat(4, 7% 30% 30% 29%);
+    gap: 1%;
 }
 
-.card_paragraph {
-    font-size: 30px;
+.thead  div {
     font-weight: var(--bold_weight);
-
+    text-align: left;
+    width: 100%;
 }
 
 
 @media screen and (max-width: 900px) {
-   
-
     .cards {
         display: block;
-    }
-
-    .card {
-        margin: 30px 0;
     }
 }

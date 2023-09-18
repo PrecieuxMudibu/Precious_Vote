@@ -1,10 +1,15 @@
 /* eslint-disable no-unused-vars */
 import logo from '../../../public/images/test.png';
-import { Dashboard_Layout } from '../../../components';
+import {
+    Dashboard_Layout,
+    Details_Item,
+    Election_Property_Card,
+    Select,
+} from '../../../components';
 import { useRouter } from 'next/router';
 import styles from '../../../styles/dashboard/my_projects/[election_id].module.css';
-import { useEffect, useState } from 'react';
-import Modal_Layout from '../../../components/layouts/modal_layout';
+import { useContext, useEffect, useState } from 'react';
+import Modal_Layout from '../../../layouts/modal_layout';
 import Image from 'next/image';
 import { Small_Loader } from '../../../components/index';
 
@@ -15,118 +20,154 @@ import {
     get_posts_of_election,
     get_rounds_for_a_post,
     send_email,
+    send_email_to_all_electors,
     start_a_round,
 } from '../../../requests';
 import Link from 'next/link';
+import { applicationContext } from '../../_app';
+import { Icon } from '@iconify/react';
 
 export default function Election() {
+    const { token } = useContext(applicationContext);
     const { query } = useRouter();
     const { election_id } = query;
     const [show_loader, set_show_loader] = useState(false);
-
-    const [open_post, set_open_post] = useState(false);
-    const open_modal_post = () => set_open_post(true);
-    const close_modal_post = () => set_open_post(false);
-
-    const [open_electors, set_open_electors] = useState(false);
-    const open_modal_electors = () => set_open_electors(true);
-    const close_modal_electors = () => set_open_electors(false);
-
-    const [open_rounds, set_open_rounds] = useState(false);
-    const open_modal_rounds = () => set_open_rounds(true);
-    const close_modal_rounds = () => set_open_rounds(false);
+    const [tooltip_text, set_tooltip_text] = useState('');
+    const [correct_button, set_correct_button] = useState('');
 
     const [election, set_election] = useState([]);
     async function get_election_info() {
-        set_election(await get_an_election(election_id));
+        // const data = await get_an_election(election_id, token);
+        // // const candidates_number = data.map(())
+        // let candidates_number = 0;
+        // for (let i = 0; i < data?.posts.length; i++) {
+        //     candidates_number =
+        //         candidates_number + data.posts[i].candidates.length;
+        // }
+        // set_election({ ...data, candidates_number });
     }
+
     useEffect(() => {
-        get_election_info();
-    }, []);
+        get_an_election(election_id, token)
+            .then((response) => {
+                let candidates_number = 0;
+                console.log('heloo', response);
+                for (
+                    let i = 0;
+                    i < response?.data?.election?.posts.length;
+                    i++
+                ) {
+                    candidates_number =
+                        candidates_number +
+                        response.data.election.posts[i].candidates.length;
+                }
 
-    const [posts, set_posts] = useState([]);
-    async function get_posts() {
-        set_posts(await get_posts_of_election(election_id));
-    }
-
-    const [electors, set_electors] = useState([]);
-    async function get_electors_of_election() {
-        set_electors(await get_electors(election_id));
-    }
-    useEffect(() => {
-        get_posts();
-        get_electors_of_election();
-    }, [election]);
-
-    const [election_posts_and_rounds, set_election_posts_and_rounds] = useState(
-        []
-    );
-    async function get_post_and_rounds() {
-        let post_and_rounds = [];
-        // GET THE ROUNDS FOR ALL POST
-        for (let i = 0; i < posts?.length; i++) {
-            const rounds = await get_rounds_for_a_post(posts[i]._id);
-            post_and_rounds.push({
-                post: posts[i],
-                ...rounds,
+                set_election({ ...response.data.election, candidates_number });
+            })
+            .catch((error) => {
+                console.log(error);
             });
-        }
-        set_election_posts_and_rounds([...post_and_rounds]);
-    }
-    useEffect(() => {
-        get_post_and_rounds();
-    }, [posts, electors]);
+    }, [query]);
 
     useEffect(() => {
-        console.log('election_posts_and_rounds>>', election_posts_and_rounds);
-    }, [election_posts_and_rounds]);
+        set_correct_button(return_correct_button());
+    }, [election]);
+    console.log('response', election);
 
     async function begin_round() {
-        // START THE FIRST ROUNDS OF ALL POSTS
-        set_show_loader(true);
-        for (let i = 0; i < election_posts_and_rounds.length; i++) {
-            const round_id = election_posts_and_rounds[i].rounds[0]._id;
-            let response = await start_a_round(round_id);
-            console.log('response>>>' + i, response);
+        console.log('START');
+        for (let i = 0; i < election?.posts.length; i++) {
+            const current_post = election.posts[i];
+
+            for (let j = 0; j < current_post.rounds.length; j++) {
+                const current_round = current_post.rounds[j];
+
+                if (current_round.status === 'Not started') {
+                    const response = await start_a_round(
+                        current_round._id,
+                        token
+                    );
+                }
+            }
         }
 
-        // SEND NOTIFICATION MAIL TO ALL ELECTORS OF THE ELECTION
-        for (let i = 0; i < electors.length; i++) {
-            const current_elector = {
-                first_name: electors[i].first_name,
-                name: electors[i].name,
-                email: electors[i].email,
-                token_for_vote: electors[i].token_for_vote,
-            };
-            // eslint-disable-next-line no-unused-vars
-            let response = await send_email({
-                election_id: election_id,
-                elector: current_elector,
-            });
-        }
-
-        // If the rounds are closed , display "Terminé"
-        get_post_and_rounds();
-        set_show_loader(false);
+        send_email_to_all_electors(election.electors, election_id, token).then(
+            (response) => {
+                console.log('response HERE', response.data.message);
+            }
+        );
+        get_election_info();
     }
 
     async function close_round() {
-        set_show_loader(true);
+        for (let i = 0; i < election?.posts.length; i++) {
+            const current_post = election.posts[i];
 
-        // START THE FIRST ROUNDS OF ALL POSTS
-        for (let i = 0; i < election_posts_and_rounds.length; i++) {
-            const round_id = election_posts_and_rounds[i].rounds[0]._id;
-            let response = await close_a_round(round_id);
-            console.log('response>>>' + i, response);
+            for (let j = 0; j < current_post.rounds.length; j++) {
+                const current_round = current_post.rounds[j];
+
+                if (current_round.status === 'In progress') {
+                    const response = await close_a_round(
+                        current_round._id,
+                        token
+                    );
+                }
+            }
         }
-        // If the rounds are closed , display "Terminé"
-        get_post_and_rounds();
-        set_show_loader(false);
+        get_election_info();
     }
 
-    useEffect(() => {
-        console.log('election_posts_and_rounds>>>', election_posts_and_rounds);
-    }, [election_posts_and_rounds]);
+    function return_correct_button() {
+        if (election.posts) {
+            if (election.posts[0].rounds[0].status === 'Not started') {
+                set_tooltip_text('Commencer le round 1');
+                return (
+                    <Icon
+                        icon="carbon:play-filled"
+                        className={styles.play_icon}
+                        onClick={begin_round}
+                    />
+                );
+            } else if (election.posts[0].rounds[0].status === 'In progress') {
+                set_tooltip_text('Arrêter le round 1');
+                return (
+                    <Icon
+                        icon="carbon:stop-filled"
+                        className={styles.play_icon}
+                        onClick={close_round}
+                    />
+                );
+            } else if (election.posts[0].rounds[0].status === 'Completed') {
+                if (election.posts[0].rounds[1]?.status === 'Not started') {
+                    set_tooltip_text('Commencer le round 2');
+                    return (
+                        <Icon
+                            icon="carbon:play-filled"
+                            className={styles.play_icon}
+                            onClick={begin_round}
+                        />
+                    );
+                } else if (
+                    election.posts[0].rounds[1]?.status === 'In progress'
+                ) {
+                    set_tooltip_text('Arrêter le round 2');
+                    return (
+                        <Icon
+                            icon="carbon:stop-filled"
+                            className={styles.play_icon}
+                            onClick={close_round}
+                        />
+                    );
+                } else {
+                    return (
+                        <Link href={`../../result_page/${election_id}`}>
+                            <p className="pointer">Résultats</p>
+                        </Link>
+                    );
+                }
+            }
+        }
+    }
 
     return (
         <Dashboard_Layout page_title="Mes projets">
@@ -142,8 +183,8 @@ export default function Election() {
                         />
                         <div>
                             <h1>{election?.name}</h1>
-
-                            {election_posts_and_rounds[0]?.rounds[0].status ==
+                            <p>Statut: En cours</p>
+                            {/* {election_posts_and_rounds[0]?.rounds[0].status ==
                             'Not started' ? (
                                 <p> Commencer </p>
                             ) : election_posts_and_rounds[0]?.rounds[0]
@@ -151,88 +192,52 @@ export default function Election() {
                                 <p> En cours </p>
                             ) : (
                                 <p>Terminé </p>
-                            )}
+                            )} */}
                         </div>
                     </div>
 
-                    {election_posts_and_rounds[0]?.rounds[0].status ==
-                    'Not started' ? (
-                        show_loader ? (
-                            <button className="button_primary">
-                                <Small_Loader color="white" />
-                            </button>
-                        ) : (
-                            <button
-                                className="button_primary"
-                                onClick={() => begin_round()}
-                            >
-                                Commencer
-                            </button>
-                        )
-                    ) : election_posts_and_rounds[0]?.rounds[0].status ==
-                      'In progress' ? (
-                        show_loader ? (
-                            <button className="button_primary">
-                                <Small_Loader color="white" />
-                            </button>
-                        ) : (
-                            <button
-                                className="button_primary"
-                                onClick={() => close_round()}
-                            >
-                                Arrêter
-                            </button>
-                        )
-                    ) : (
-                        <Link href={`../../result_page/${election_id}`}>
-                            <p className="pointer">Résultats </p>
-                        </Link>
-                    )}
+                    {/* <Icon icon="carbon:play-filled" className="icon"  /> */}
+                    <div title="Test">{correct_button}</div>
+                    {tooltip_text}
                 </div>
                 <div className={styles.cards}>
-                    <div
-                        className={styles.card}
-                        onClick={() => open_modal_post()}
-                    >
-                        <h3 className={styles.card_title}>Poste à pourvoir</h3>
-                        <p className={styles.card_paragraph}>{posts?.length}</p>
-                    </div>
-
-                    <div
-                        className={styles.card}
-                        onClick={() => open_modal_electors()}
-                    >
-                        <h3 className={styles.card_title}>Electeurs</h3>
-                        <p className={styles.card_paragraph}>
-                            {electors?.length}
-                        </p>
-                    </div>
-
-                    {/* <div
-                        className={styles.card}
-                        onClick={() => open_modal_rounds()}
-                    >
-                        <h3 className={styles.card_title}>Poste à pourvoir</h3>
-                        <p className={styles.card_paragraph}>
-                            {election_posts_and_rounds.length}
-                        </p>
-                    </div> */}
+                    <Election_Property_Card
+                        label={election?.electors?.length}
+                        title="Electeurs"
+                        icon="fluent:vote-24-filled"
+                    />
+                    <Election_Property_Card
+                        label={election?.candidates_number}
+                        title="Candidats"
+                        icon="fluent:vote-24-filled"
+                    />
+                    <Election_Property_Card
+                        label={election?.posts?.length}
+                        title="Poste à pourvoir"
+                        icon="fluent:vote-24-filled"
+                    />
+                    <Election_Property_Card
+                        label={election?.two_rounds ? '2' : '1'}
+                        title="Tour(s)"
+                        icon="fluent:vote-24-filled"
+                    />
                 </div>
-                {/* <Modal_Layout open={open_post} close_modal={close_modal_post}>
-                    <h1>Post 1</h1>
-                </Modal_Layout>
-                <Modal_Layout
-                    open={open_electors}
-                    close_modal={close_modal_electors}
-                >
-                    <h1>Electeurs</h1>
-                </Modal_Layout>
-                <Modal_Layout
-                    open={open_rounds}
-                    close_modal={close_modal_rounds}
-                >
-                    <h1>Nombre de tours</h1>
-                </Modal_Layout> */}
+
+                <div className={styles.details}>
+                    <div className={styles.thead}>
+                        <div>N°</div>
+                        <div>Prénom</div>
+                        <div>Nom</div>
+                        <div>Acctions</div>
+                    </div>
+                    {election?.electors?.map((elector, index) => (
+                        <Details_Item
+                            key={index}
+                            index={index}
+                            item={elector}
+                        />
+                    ))}
+                </div>
             </section>
         </Dashboard_Layout>
     );

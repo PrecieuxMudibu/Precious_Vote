@@ -1,19 +1,18 @@
+import { Icon } from '@iconify/react';
 import styles from '../styles/create_election_card.module.css';
 import Link from 'next/link';
+import { useContext, useEffect } from 'react';
+import { applicationContext } from '../pages/_app';
 
 export default function Create_Election_Card() {
-    return (
-        <Link href="/dashboard/general_parameters" className="link">
-            <div className={styles.create_election_card}>
-                <div className={styles.plus_sign}>
-                    <div className={styles.vertical_bar}></div>
-                    <div className={styles.horizontal_bar}></div>
-                </div>
+    const { set_indice_stepper } = useContext(applicationContext);
+    useEffect(() => {
+        set_indice_stepper(0);
+    }, []);
 
-                <div className={styles.election_card__details}>
-                    <h2>Créez un nouveau projet</h2>
-                </div>
-            </div>
+    return (
+        <Link href="/dashboard/create_election" className="link">
+            <Icon icon="ph:plus-fill" className={styles.create_election_card} />
         </Link>
     );
 }
