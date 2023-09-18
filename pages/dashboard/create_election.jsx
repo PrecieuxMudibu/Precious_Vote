@@ -13,11 +13,11 @@ import {
 import { Icon } from '@iconify/react';
 import { useContext, useState } from 'react';
 import { applicationContext } from '../_app';
-import General_Parameters from './general_parameters';
-import Position_To_Be_Filled from './position_to_be_filled';
-import Add_Candidates from './add_candidates';
-import Add_Electors from './add_electors';
-import Round_Parameters from './round_parameters';
+import General_Parameters from '../../components/create_election/general_parameters';
+import Position_To_Be_Filled from '../../components/create_election/position_to_be_filled';
+import Add_Candidates from '../../components/create_election/add_candidates';
+import Add_Electors from '../../components/create_election/add_electors';
+import Round_Parameters from '../../components/create_election/round_parameters';
 import axios from 'axios';
 import Modal_Layout from '../../layouts/modal_layout';
 
@@ -27,54 +27,29 @@ export default function Create_Election() {
         set_election_to_create,
         indice_stepper,
         set_indice_stepper,
-        token
+        token,
     } = useContext(applicationContext);
 
     const [links] = useState([
         {
             label: 'Paramètres généraux',
-            icon: (
-                <Icon
-                    icon="ic:round-settings"
-                    className="iconLinks"
-                />
-            ),
+            icon: <Icon icon="ic:round-settings" className="iconLinks" />,
         },
         {
             label: ' Postes à pourvoir',
-            icon: (
-                <Icon
-                    icon="eos-icons:role-binding"
-                    className="iconLinks"
-                />
-            ),
+            icon: <Icon icon="eos-icons:role-binding" className="iconLinks" />,
         },
         {
             label: ' Candidats',
-            icon: (
-                <Icon
-                    icon="mdi:podium-first"
-                    className="iconLinks"
-                />
-            ),
+            icon: <Icon icon="mdi:podium-first" className="iconLinks" />,
         },
         {
             label: ' Electeurs',
-            icon: (
-                <Icon
-                    icon="bi:people-fill"
-                    className="iconLinks"
-                />
-            ),
+            icon: <Icon icon="bi:people-fill" className="iconLinks" />,
         },
         {
             label: ' Tours',
-            icon: (
-                <Icon
-                    icon="ic:round-360"
-                    className="iconLinks"
-                />
-            ),
+            icon: <Icon icon="ic:round-360" className="iconLinks" />,
         },
     ]);
     const [response_after_query, set_response_after_query] = useState('');
