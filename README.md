@@ -18,6 +18,9 @@ Vote is an online voting application that allows any registered user to organize
 
 ## Installation
 
+There are four branches.  
+The current branch are **<ins>develop</ins>** and **<ins>main</ins>**.
+
 First clone this repo. Open your terminal and type :
 
 ```bash
@@ -30,7 +33,7 @@ Once done, go to the project folder by typing :
 cd Precious_Vote
 ```
 
-Once on the root of the project, type this command to install dependacies :
+Once on the root of the project, type this command to install dependencies :
 
 ```bash
 npm install
