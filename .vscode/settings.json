@@ -1,9 +1,12 @@
 {
-  "editor.formatOnSave": true,
-  "[javascript]": {
-    "editor.formatOnSave": false
-  },
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true
-  }
+    "editor.formatOnSave": true,
+    "[javascript]": {
+        "editor.formatOnSave": false
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    },
+    "files.associations": {
+        "plyconfig.json": "jsonc"
+    }
 }
